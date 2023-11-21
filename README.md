@@ -1,5 +1,5 @@
 # INGSW-DietiDials24
-## Progetto universitario di Ingegneria del Software
+### Progetto universitario di Ingegneria del Software
 DietiDeals24 è una piattaforma per la gestione di aste online. Il sistema consiste in un’applicazione mobile, desktop o web-based, performante e affidabile, attraverso cui gli utenti possono fruire delle funzionalità del sistema in modo intuitivo, rapido e piacevole.<br><br>
 1.
 Un utente può registrare un nuovo account ed utilizzarlo per accedere al sistema. Un account può essere di due tipi: venditore o acquirente. La stessa e-mail può essere utilizzata per al più un account venditore e un account compratore. È apprezzata la possibilità di effettuare la registrazione utilizzando credenziali di terze parti (e.g.: Google, Facebook, GitHub, etc…). Gli utenti possono personalizzare il proprio profilo con una short bio, link al proprio sito web / ai propri social, area geografica, etc. <br><br>
