@@ -36,7 +36,7 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
   - b. Specifica dei Requisiti.
     - [ ] i. Classi, oggetti e relazioni di analisi.
     - [ ] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
-    - [ ] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.ii;
+    - [ ] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
 2. <ins>Documento di Design del sistema.</ins>
   - [ ] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
   - [ ] b. Descrizione/motivazione delle scelte tecnologiche adottate.
