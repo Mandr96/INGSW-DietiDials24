@@ -30,7 +30,7 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
 1. <ins>Documento dei Requisiti Software</ins>
   - a. Analisi dei Requisiti
     - [ ] i. Modellazione di tutti i casi d’uso richiesti.
-    - [ ] ii. Individuazione del target degli utenti
+    - [x] ii. Individuazione del target degli utenti
     - [ ] iii. Descrizioni Testuali Strutturate per almeno quattro **(due, se si consegna prima del 15/04/2024)** casi d’uso significativi (autenticazione esclusa) a scelta dei contraenti tra quelli richiesti.
     - [ ] iv. Prototipazione visuale via Mock-up dell’interfaccia utente per tutti i casi d’uso assegnati attraverso strumenti di rapid prototyping, come “Figma”.
     - [ ] v. Valutazione dell’usabilità a priori.
