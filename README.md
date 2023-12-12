@@ -3,7 +3,7 @@
 #### DietiDeals24 è una piattaforma per la gestione di aste online. Il sistema consiste in un’applicazione mobile, desktop o web-based, performante e affidabile, attraverso cui gli utenti possono fruire delle funzionalità del sistema in modo intuitivo, rapido e piacevole.
 - [Documentazione](https://docs.google.com/document/d/1RsQidtjSTPhYe3Ey9_Cw3eW2-G1b8wFRj1dlncF0adk/edit?usp=sharing)<br><br>
 - [Visual Mock-up](https://www.figma.com/file/iimReJ74pR4pt6gtbAfBEX/Untitled?type=design&node-id=0-1&mode=design&t=WJEIZAHNa4xHd86D-0)
-- [Richiesta Committente]([https://www.figma.com/file/iimReJ74pR4pt6gtbAfBEX/Untitled?type=design&node-id=0-1&mode=design&t=WJEIZAHNa4xHd86D-0](https://drive.google.com/file/d/18-4Ei41kSqKNXnX6328ErXayJdJWP5qW/view?usp=sharing))
+- [Richiesta Committente](https://drive.google.com/file/d/18-4Ei41kSqKNXnX6328ErXayJdJWP5qW/view?usp=sharing)
 ****
 ### Funzionalità assegnate
 1. Un utente può registrare un nuovo account ed utilizzarlo per accedere al sistema. Un account può essere di due tipi: venditore o acquirente. La stessa e-mail può essere utilizzata per al più un account venditore e un account compratore. È apprezzata la possibilità di effettuare la registrazione utilizzando credenziali di terze parti (e.g.: Google, Facebook, GitHub, etc…). Gli utenti possono personalizzare il proprio profilo con una short bio, link al proprio sito web / ai propri social, area geografica, etc. <br>
