@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class AstaSilenziosa extends Asta{
 
-    public AstaSilenziosa(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, File img, Boolean scaduta, Utente creatore, List<Offerta> offerte) {
-        super(id, scadenza, nomeProdotto, descrizione, img, scaduta, creatore, offerte);
+    public AstaSilenziosa(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String cat, File img, Boolean scaduta, Utente creatore, List<Offerta> offerte) {
+        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore, offerte);
     }
 }
