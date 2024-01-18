@@ -1,22 +1,27 @@
 package com.example.demo.model;
 
+import com.example.demo.authService.token.Token;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
+@Data
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Entity
-public class Utente {
+public class Utente implements UserDetails {
     @Id
     private String email;
     private String nome;
@@ -34,6 +39,9 @@ public class Utente {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     @JsonManagedReference
     private List<Offerta> offerte;
+
+    @OneToMany(mappedBy = "utente")
+    private List<Token> tokens;
 
     @JsonCreator
     public Utente(@JsonProperty("email") String email,
@@ -54,5 +62,40 @@ public class Utente {
         this.notifiche = notifiche;
         this.aste = aste;
         this.offerte = offerte;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
