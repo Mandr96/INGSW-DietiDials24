@@ -3,10 +3,12 @@ package com.example.demo;
 import com.example.demo.data_access.AsteRepository;
 import com.example.demo.data_access.UtentiRepository;
 import com.example.demo.model.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -14,13 +16,22 @@ import java.time.Instant;
 import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) {
+
+	//QUESTO PEZZO DI CODICE SERVE TEMPORANEAMENTE PER CREARE UN UTENTE CON PASSWORD CODIFICATA
+	private final PasswordEncoder passwordEncoder;
+    public DemoApplication(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
 
 	@Bean
 	CommandLineRunner commandLineRunner(UtentiRepository userRep, AsteRepository asteRep) {
@@ -29,7 +40,8 @@ public class DemoApplication {
 					"prova",
 					"mario",
 					"rossi",
-					"1234",
+					//necessario per rendere possibile il login (dato che fa la decodifica)
+					passwordEncoder.encode("1234"),
 					"...",
 					"Napoli",
 					new ArrayList<Notifica>(),

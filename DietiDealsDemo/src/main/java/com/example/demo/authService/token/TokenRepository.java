@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 
+  // Query personalizzata per ottenere tutti i token validi
   @Query(value = """
       select t from Token t inner join Utente u\s
       on t.utente.email = u.email\s
@@ -15,5 +16,6 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
       """)
   List<Token> findAllValidTokenByUser(String email);
 
+  //query per ottenere il token specifico tramite tokenID
   Optional<Token> findByToken(String token);
 }

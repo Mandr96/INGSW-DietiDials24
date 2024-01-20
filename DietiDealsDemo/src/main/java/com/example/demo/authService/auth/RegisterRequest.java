@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+/* Classe base per RegisterRequest (necessaria per jpa) */
 public class RegisterRequest {
 
   private String nome;

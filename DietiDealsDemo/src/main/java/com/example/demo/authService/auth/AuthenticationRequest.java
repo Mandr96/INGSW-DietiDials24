@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+/* Classe base per AuthenticationRequest (necessaria per jpa) */
 public class AuthenticationRequest {
 
   private String email;

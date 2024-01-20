@@ -27,6 +27,9 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
+  /** Crea l ogetto utente prendendo i dati dalla richiesta
+   * codifica la password, salva l utente nel database
+   * crea e salva il token e lo invia al client */
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Utente.builder()
         .nome(request.getNome())
@@ -44,6 +47,7 @@ public class AuthenticationService {
         .build();
   }
 
+  /** Chiama l authenticationManager passandogli email e password dalla richiesta */
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
@@ -63,6 +67,7 @@ public class AuthenticationService {
         .build();
   }
 
+  /** Crea un ogetto Token e lo inserisce nel database */
   private void saveUserToken(Utente utente, String jwtToken) {
     var token = Token.builder()
         .utente(utente)
@@ -74,6 +79,7 @@ public class AuthenticationService {
     tokenRepository.save(token);
   }
 
+  /** Revoca tutti i token di un determinato utente (probabilmente inutile per il progetto) */
   private void revokeAllUserTokens(Utente utente) {
     var validUserTokens = tokenRepository.findAllValidTokenByUser(utente.getEmail());
     if (validUserTokens.isEmpty())
@@ -85,6 +91,7 @@ public class AuthenticationService {
     tokenRepository.saveAll(validUserTokens);
   }
 
+  /** Usa il refreshToken per ottenere un token (mantiene il login dopo le 24h di scadenza del token !!Serve il logout?!! ) */
   public void refreshToken(
           HttpServletRequest request,
           HttpServletResponse response
