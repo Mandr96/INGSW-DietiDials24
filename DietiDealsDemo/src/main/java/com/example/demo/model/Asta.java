@@ -47,6 +47,8 @@ public abstract class Asta {
     @JsonManagedReference
     protected List<Offerta> offerte;
 
+    public abstract Offerta chiudi();
+
     public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta, Utente creatore, List<Offerta> offerte) {
         this.id = id;
         this.scadenza = scadenza;
@@ -61,15 +63,6 @@ public abstract class Asta {
 
     @Override
     public String toString() {
-        return "Asta{" +
-                "id=" + id +
-                ", scadenza=" + scadenza +
-                ", nomeProdotto='" + nomeProdotto + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", img=" + img +
-                ", scaduta=" + scaduta +
-                ", creatore=" + creatore +
-                ", offerte=" + offerte +
-                '}';
+        return nomeProdotto;
     }
 }

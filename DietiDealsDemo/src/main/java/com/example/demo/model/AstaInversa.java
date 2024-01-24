@@ -20,4 +20,13 @@ public class AstaInversa extends Asta {
         super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore, offerte);
         this.minOffer = minOffer;
     }
+
+    public Offerta chiudi() {
+        Offerta bestOffer = offerte.get(0);
+        for(Offerta offer : offerte) {
+            if(offer.getValore().compareTo(bestOffer.getValore()) < 0)
+                bestOffer = offer;
+        }
+        return bestOffer;
+    }
 }

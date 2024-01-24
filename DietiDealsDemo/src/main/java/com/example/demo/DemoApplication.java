@@ -49,10 +49,11 @@ public class DemoApplication {
 					new ArrayList<Offerta>()
 			);
 			userRep.save(user);
-			Asta classica = new AstaClassica(1L, Timestamp.from(Instant.now()), "cosa1", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
-			Asta silenziosa = new AstaSilenziosa(2L, Timestamp.from(Instant.now()), "cosa2", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>());
+			Asta classica = new AstaClassica(1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
+			Asta silenziosa = new AstaSilenziosa(2L, Timestamp.from(Instant.now()), "cosa prova", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>());
 			asteRep.save(classica);
 			asteRep.save(silenziosa);
+			//System.out.println(asteRep.searchAste("AstaClassica", "cat1", "cosa", 0));
 		};
 	}
 }

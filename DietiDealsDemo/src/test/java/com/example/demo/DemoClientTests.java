@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URI;
@@ -48,12 +50,36 @@ public class DemoClientTests {
         );
         var mapper = new ObjectMapper();
         var json = mapper.writeValueAsString(user);
-
+/*
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "utente/create"))
-                .headers("Content-Type","application/json")
+                .uri(URI.create(baseUrl + "auth/register"))
+                .headers("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json)).build();
         HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("Response status code: "+response.statusCode());
+        System.out.println("Response body       : "+response.body());
+
+        */
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "auth/authenticate"))
+                .headers("Content-Type","application/json")
+                .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"prova\",\"password\":\"1234\"}")).build();
+        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("Response status code: "+response.statusCode());
+        System.out.println("Response body       : "+response.body());
+
+        String token = "cazz";
+        String js = response.body();
+        try {
+            JSONObject jsonObject = new JSONObject(js);
+            token = jsonObject.getString("access_token");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("ok");
+        System.out.println(token);
 
         Offerta offer = new Offerta(
                 0L,
@@ -68,6 +94,7 @@ public class DemoClientTests {
 
         request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "offerta/nuova"))
+                .headers("Authorization","Bearer "+token)
                 .headers("Content-Type","application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json)).build();
         response = http.send(request, HttpResponse.BodyHandlers.ofString());
@@ -75,6 +102,12 @@ public class DemoClientTests {
         System.out.println("Response status code: "+response.statusCode());
         System.out.println("Response body       : "+response.body());
 
-
+        /*
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "asta/checkScadenza/2"))
+                .headers("Content-Type","application/json")
+                .GET().build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+        */
     }
 }

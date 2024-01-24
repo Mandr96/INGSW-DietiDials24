@@ -1,9 +1,11 @@
 package com.example.demo.RestController;
 
 import com.example.demo.data_access.AsteRepository;
+import com.example.demo.data_access.NotificheRepository;
 import com.example.demo.data_access.OfferteRepository;
 import com.example.demo.data_access.UtentiRepository;
 import com.example.demo.model.Asta;
+import com.example.demo.model.Notifica;
 import com.example.demo.model.Offerta;
 import com.example.demo.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,13 @@ import java.util.Optional;
 public class RestAsteController {
     private final AsteRepository asteRep;
     private final OfferteRepository offerteRep;
+    private final NotificheRepository notificheRep;
 
     @Autowired
-    public RestAsteController(AsteRepository asteRep, OfferteRepository offerteRep) {
+    public RestAsteController(AsteRepository asteRep, OfferteRepository offerteRep, NotificheRepository notRep) {
         this.asteRep = asteRep;
         this.offerteRep = offerteRep;
+        this.notificheRep = notRep;
     }
 
     @GetMapping(value = "asta/{id}")
@@ -43,6 +47,31 @@ public class RestAsteController {
     @GetMapping(value = "offerta/byAsta/{id}")
     public List<Offerta> getOfferteByAsta(@PathVariable("id") Long astaID) {
         return offerteRep.findByAsta(astaID);
+    }
+
+    @GetMapping(value = "asta/cerca/{tipo}/{categoria}/{keyword}/{pag}")
+    public List<Asta> cercaAste(@PathVariable("tipo") String tipo,
+                                @PathVariable("categoria") String categoria,
+                                @PathVariable("keyword") String kw,
+                                @PathVariable("pag") int pag) {
+        String cat = categoria;
+        if(categoria.equalsIgnoreCase("tutte") || categoria.equalsIgnoreCase("any")) cat = "%";
+        int offset = pag*10;
+        return asteRep.searchAste(tipo, cat, kw, offset);
+    }
+
+    @GetMapping(value = "asta/checkScadenza/{id}")
+    public Boolean checkScadenza(@PathVariable("id")Long astaID) {
+        Asta asta = asteRep.findById(astaID).get();
+        if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
+            asteRep.setAstaScaduta(astaID);
+            for(Offerta offer : asta.getOfferte()) {
+                notificheRep.save(new Notifica("Asta scaduta!", "L'asta per "+asta.getNomeProdotto()+
+                        "a cui partecipi è scaduta.", false, offer.getOwner()));
+            }
+            return true;
+        }
+        return false;
     }
 
     @PostMapping(path = "asta/nuova",

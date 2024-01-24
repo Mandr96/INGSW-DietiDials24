@@ -22,18 +22,12 @@ public class AstaClassica extends Asta{
         this.minPrice = minPrice;
     }
 
-    @Override
-    public String toString() {
-        return "AstaClassica{" +
-                "id=" + id +
-                ", scadenza=" + scadenza +
-                ", nomeProdotto='" + nomeProdotto + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", img=" + img +
-                ", scaduta=" + scaduta +
-                ", creatore=" + creatore +
-                ", offerte=" + offerte +
-                ", minPrice=" + minPrice +
-                '}';
+    public Offerta chiudi() {
+        Offerta bestOffer = offerte.get(0);
+        for(Offerta offer : offerte) {
+            if(offer.getValore().compareTo(bestOffer.getValore()) > 0)
+                bestOffer = offer;
+        }
+        return bestOffer;
     }
 }

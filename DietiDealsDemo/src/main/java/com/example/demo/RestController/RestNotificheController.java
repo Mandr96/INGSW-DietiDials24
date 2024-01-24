@@ -38,4 +38,6 @@ public class RestNotificheController {
     public void setNotificaLetta(@PathVariable("id") Long id) {
         notificheRep.setRead(id);
     }
+
+    public void addNotifica(Notifica not) { notificheRep.save(not); }
 }
