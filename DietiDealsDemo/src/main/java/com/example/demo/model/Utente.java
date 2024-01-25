@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
+@JsonIgnoreProperties({"authorities", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked", "username"})
 @Entity
 public class Utente implements UserDetails {
     @Id
@@ -31,15 +32,15 @@ public class Utente implements UserDetails {
     private String city;
     private File profilePic;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Notifica> notifiche;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "creatore")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Asta> aste;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Offerta> offerte;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "utente")
     private List<Token> tokens;
 

@@ -35,7 +35,6 @@ public class DemoClientTests {
         JSONObject json = new JSONObject(response.body());
         String token = json.getString("jwt");
         System.out.println("JWT Token: "+token);
-        */
 
         Utente user = new Utente(
                 "gianm",
@@ -50,7 +49,8 @@ public class DemoClientTests {
         );
         var mapper = new ObjectMapper();
         var json = mapper.writeValueAsString(user);
-/*
+        */
+        /*
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "auth/register"))
                 .headers("Content-Type", "application/json")
@@ -67,10 +67,7 @@ public class DemoClientTests {
                 .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"prova\",\"password\":\"1234\"}")).build();
         HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println("Response status code: "+response.statusCode());
-        System.out.println("Response body       : "+response.body());
-
-        String token = "cazz";
+        String token;
         String js = response.body();
         try {
             JSONObject jsonObject = new JSONObject(js);
@@ -78,8 +75,18 @@ public class DemoClientTests {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("ok");
-        System.out.println(token);
+        System.out.println("Token: "+token);
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "utente/prova"))
+                .headers("Authorization","Bearer "+token)
+                .headers("Content-Type","application/json")
+                .GET().build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+        Utente user = new ObjectMapper().readValue(response.body(), Utente.class);
+
+        System.out.println("Response status code: "+response.statusCode());
+        System.out.println("Response body       : "+response.body());
 
         Offerta offer = new Offerta(
                 0L,
@@ -89,8 +96,8 @@ public class DemoClientTests {
                 user,
                 null
         );
-        mapper = new ObjectMapper();
-        json = mapper.writeValueAsString(offer);
+        var mapper = new ObjectMapper();
+        var json = mapper.writeValueAsString(offer);
 
         request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "offerta/nuova"))
@@ -109,5 +116,15 @@ public class DemoClientTests {
                 .GET().build();
         response = http.send(request, HttpResponse.BodyHandlers.ofString());
         */
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "asta/cerca/AstaClassica/any/cosa/0"))
+                .headers("Authorization","Bearer "+token)
+                .headers("Content-Type","application/json")
+                .GET().build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("Response status code: "+response.statusCode());
+        System.out.println("Response body       : "+response.body());
     }
 }

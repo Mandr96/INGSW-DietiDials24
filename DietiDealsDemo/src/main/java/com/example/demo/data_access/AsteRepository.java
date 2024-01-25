@@ -3,7 +3,9 @@ package com.example.demo.data_access;
 import com.example.demo.model.Asta;
 import com.example.demo.model.Offerta;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ public interface AsteRepository extends JpaRepository<Asta, Long> {
             nativeQuery = true)
     public List<Asta> searchAste(String tipo, String categoria, String kw, int rowOffset);
 
+    @Transactional
+    @Modifying
     @Query(value = "UPDATE asta SET scaduta = true WHERE id = ?1",
             nativeQuery = true)
     public void setAstaScaduta(Long astaID);

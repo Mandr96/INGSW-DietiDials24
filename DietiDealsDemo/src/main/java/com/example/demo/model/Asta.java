@@ -41,13 +41,13 @@ public abstract class Asta {
     protected File img;
     protected Boolean scaduta;
     @ManyToOne
-    //@JsonBackReference(value = "user-asta_reference") only for server
+    @JsonIgnore
     protected Utente creatore;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "asta")
-    @JsonManagedReference
+    @JsonIgnore
     protected List<Offerta> offerte;
 
-    public abstract Offerta chiudi();
+    public abstract List<Notifica> chiudi();
 
     public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta, Utente creatore, List<Offerta> offerte) {
         this.id = id;

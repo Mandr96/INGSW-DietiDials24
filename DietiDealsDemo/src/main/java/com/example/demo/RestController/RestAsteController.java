@@ -65,10 +65,8 @@ public class RestAsteController {
         Asta asta = asteRep.findById(astaID).get();
         if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
             asteRep.setAstaScaduta(astaID);
-            for(Offerta offer : asta.getOfferte()) {
-                notificheRep.save(new Notifica("Asta scaduta!", "L'asta per "+asta.getNomeProdotto()+
-                        "a cui partecipi è scaduta.", false, offer.getOwner()));
-            }
+            List<Notifica> notifiche = asta.chiudi();
+            notificheRep.saveAll(notifiche);
             return true;
         }
         return false;

@@ -30,7 +30,7 @@ public class Notifica {
     private String testo;
     private Boolean letto;
     @ManyToOne
-    //@JsonBackReference(value = "user-notifica_reference") only for server
+    @JsonIgnore
     private Utente user;
 
     public Notifica(String oggetto, String testo, Boolean letto, Utente utente) {

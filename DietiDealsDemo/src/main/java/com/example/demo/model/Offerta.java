@@ -33,9 +33,9 @@ public class Offerta {
     private Timestamp data;
     private Boolean attiva;
     @ManyToOne
-    //@JsonBackReference(value = "user-offer_reference") only for server
+    @JsonIgnore
     private Utente owner;
     @ManyToOne
-    //@JsonBackReference(value = "asta-offer_reference") only for server
+    @JsonIgnore
     private Asta asta;
 }

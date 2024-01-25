@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class AstaSilenziosa extends Asta{
         super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore, offerte);
     }
 
-    public Offerta chiudi() {
-        return null;
+    public List<Notifica> chiudi() {
+        return new ArrayList<Notifica>();
     }
 }
