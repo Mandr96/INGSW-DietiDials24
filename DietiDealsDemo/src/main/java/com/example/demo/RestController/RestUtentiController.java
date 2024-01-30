@@ -1,5 +1,6 @@
 package com.example.demo.RestController;
 
+import com.example.demo.authService.auth.RegisterRequest;
 import com.example.demo.data_access.UtentiRepository;
 import com.example.demo.model.Asta;
 import com.example.demo.model.Utente;
@@ -24,6 +25,22 @@ public class RestUtentiController {
     public Utente getUser(@PathVariable("email") String email) {
         Optional<Utente> result = userRep.findById(email);
         return result.orElse(null);
+    }
+
+    @PostMapping(path = "/update")
+    public boolean updateUser(@RequestBody Utente requestBody){
+        Optional<Utente> result = userRep.findById(requestBody.getEmail());
+        if(result.isPresent()){
+            Utente user = result.get();
+            user.setCity(requestBody.getCity());
+            user.setNome(requestBody.getNome());
+            user.setCognome(requestBody.getCognome());
+            user.setProfilePic(requestBody.getProfilePic());
+            user.setShortbio(requestBody.getShortbio());
+            userRep.save(user);
+            return true;
+        }
+        return false;
     }
 
     @PostMapping(path = "/create",

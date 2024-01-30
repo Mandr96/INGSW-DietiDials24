@@ -44,6 +44,8 @@ public class Utente implements UserDetails {
     @OneToMany(mappedBy = "utente")
     private List<Token> tokens;
 
+
+
     @JsonCreator
     public Utente(@JsonProperty("email") String email,
                   @JsonProperty("nome") String nome,

@@ -23,7 +23,8 @@ public class AuthenticationController {
   public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
-    return ResponseEntity.ok(service.register(request));
+      return ResponseEntity.ok(service.register(request));
+
   }
 
   /** Riceve richiesta di autentificazione tramite il path /authenticate e la passa al servizio authenticate */
@@ -33,15 +34,5 @@ public class AuthenticationController {
   ) {
     return ResponseEntity.ok(service.authenticate(request));
   }
-
-  /** Path per aggiornare il token */
-  @PostMapping("/refresh-token")
-  public void refreshToken(
-      HttpServletRequest request,
-      HttpServletResponse response
-  ) throws IOException {
-    service.refreshToken(request, response);
-  }
-
 
 }

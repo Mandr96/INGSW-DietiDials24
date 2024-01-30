@@ -1,5 +1,6 @@
 package com.example.demo.authService.token;
 
+import com.example.demo.model.Offerta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

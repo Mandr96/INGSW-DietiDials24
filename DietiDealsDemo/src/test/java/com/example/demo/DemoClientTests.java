@@ -10,72 +10,26 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 
 public class DemoClientTests {
     private static String baseUrl = "http://localhost:8080/";
+    static String token = "";
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        HttpRequest request;
+        HttpResponse<String> response;
         HttpClient http = HttpClient.newHttpClient();
-        /*
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "authenticate"))
-                .headers("Content-Type","application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(
-                        "{\"username\":\"test\", \"password\":\"test\"}"
-                )).build();
-        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println("Response status code: "+response.statusCode());
-        System.out.println("Response body       : "+response.body());
-
-        JSONObject json = new JSONObject(response.body());
-        String token = json.getString("jwt");
-        System.out.println("JWT Token: "+token);
 
         Utente user = new Utente(
-                "gianm",
-                "gianmarco",
-                "lembo",
-                "password",
-                "...",
-                "Capri",
-                new ArrayList<Notifica>(),
-                new ArrayList<Asta>(),
-                new ArrayList<Offerta>()
+                "gianm","gianmarco", "lembo", "password", "...", "Capri",
+                new ArrayList<Notifica>(), new ArrayList<Asta>(), new ArrayList<Offerta>()
         );
-        var mapper = new ObjectMapper();
-        var json = mapper.writeValueAsString(user);
-        */
+        RegistraUtente(user);
+        LoginUtente("gianm" , "password");
+
         /*
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "auth/register"))
-                .headers("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json)).build();
-        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println("Response status code: "+response.statusCode());
-        System.out.println("Response body       : "+response.body());
-
-        */
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "auth/authenticate"))
-                .headers("Content-Type","application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"prova\",\"password\":\"1234\"}")).build();
-        HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
-
-        String token;
-        String js = response.body();
-        try {
-            JSONObject jsonObject = new JSONObject(js);
-            token = jsonObject.getString("access_token");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Token: "+token);
 
         request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "utente/prova"))
@@ -124,7 +78,79 @@ public class DemoClientTests {
                 .GET().build();
         response = http.send(request, HttpResponse.BodyHandlers.ofString());
 
+        DebugResponse(response);
+    }
+
+    private static void LoginUtente(String email, String password) throws IOException, InterruptedException {
+        HttpRequest request;
+        HttpResponse<String> response;
+        HttpClient http = HttpClient.newHttpClient();
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "auth/authenticate"))
+                .headers("Content-Type","application/json")
+                .POST(HttpRequest.BodyPublishers.ofString("{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}")).build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        SetToken(response);
+
+        DebugResponse(response);
+    }
+
+    private static void RegistraUtente(Utente user) throws IOException, InterruptedException {
+        var mapper = new ObjectMapper();
+        var json = mapper.writeValueAsString(user);
+
+        HttpRequest request;
+        HttpResponse<String> response;
+        HttpClient http = HttpClient.newHttpClient();
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "auth/register"))
+                .headers("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json)).build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        SetToken(response);
+
+        DebugResponse(response);
+
+    }
+
+    public static void DebugResponse(HttpResponse<String> response){
         System.out.println("Response status code: "+response.statusCode());
-        System.out.println("Response body       : "+response.body());
+        if(response.statusCode() != 403){
+            System.out.println("Response body       : "+response.body());
+        }
+    }
+
+    private static void UpdateUtente(Utente user) throws IOException, InterruptedException {
+        var mapper = new ObjectMapper();
+        var json = mapper.writeValueAsString(user);
+
+        HttpRequest request;
+        HttpResponse<String> response;
+        HttpClient http = HttpClient.newHttpClient();
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "utente/update"))
+                .headers("Authorization","Bearer "+token)
+                .headers("Content-Type","application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json)).build();
+        response = http.send(request, HttpResponse.BodyHandlers.ofString());
+
+        DebugResponse(response);
+
+    }
+
+    private static void SetToken(HttpResponse<String> response) {
+        String js = response.body();
+        try {
+            JSONObject jsonObject = new JSONObject(js);
+            token = jsonObject.getString("access_token");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("THIS IS THE TOKEN : " + token);
     }
 }
