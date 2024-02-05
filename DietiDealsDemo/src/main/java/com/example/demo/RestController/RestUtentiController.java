@@ -21,8 +21,9 @@ public class RestUtentiController {
         this.userRep = repository;
     }
 
-    @GetMapping(value = "{email}")
+    @GetMapping(value = "/get/{email}")
     public Utente getUser(@PathVariable("email") String email) {
+        System.out.println("Richiesta getUserByEmail("+email+") ricevuta");
         Optional<Utente> result = userRep.findById(email);
         return result.orElse(null);
     }

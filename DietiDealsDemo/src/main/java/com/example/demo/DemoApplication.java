@@ -45,6 +45,7 @@ public class DemoApplication {
 					passwordEncoder.encode("1234"),
 					"...",
 					"Napoli",
+					null,
 					new ArrayList<Notifica>(),
 					new ArrayList<Asta>(),
 					new ArrayList<Offerta>()

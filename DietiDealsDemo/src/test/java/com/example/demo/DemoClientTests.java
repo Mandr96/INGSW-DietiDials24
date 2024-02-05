@@ -23,7 +23,7 @@ public class DemoClientTests {
         HttpClient http = HttpClient.newHttpClient();
 
         Utente user = new Utente(
-                "gianm","gianmarco", "lembo", "password", "...", "Capri",
+                "gianm","gianmarco", "lembo", "password", "...", "Capri", null,
                 new ArrayList<Notifica>(), new ArrayList<Asta>(), new ArrayList<Offerta>()
         );
         RegistraUtente(user);

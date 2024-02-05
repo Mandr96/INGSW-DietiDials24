@@ -53,6 +53,7 @@ public class Utente implements UserDetails {
                   @JsonProperty("password") String password,
                   @JsonProperty("shortbio") String shortbio,
                   @JsonProperty("city") String city,
+                  @JsonProperty("profilepic") File profilePic,
                   @JsonProperty("notifiche") List<Notifica> notifiche,
                   @JsonProperty("aste") List<Asta> aste,
                   @JsonProperty("offerte") List<Offerta> offerte) {
@@ -62,6 +63,7 @@ public class Utente implements UserDetails {
         this.password = password;
         this.shortbio = shortbio;
         this.city = city;
+        this.profilePic = profilePic;
         this.notifiche = notifiche;
         this.aste = aste;
         this.offerte = offerte;
