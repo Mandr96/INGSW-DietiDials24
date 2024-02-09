@@ -11,7 +11,8 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class AstaClassica extends Asta{

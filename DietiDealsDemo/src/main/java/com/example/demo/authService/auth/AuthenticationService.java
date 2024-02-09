@@ -34,14 +34,17 @@ public class AuthenticationService {
    * crea e salva il token e lo invia al client */
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Utente.builder()
-        .nome(request.getNome())
-        .cognome(request.getCognome())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .build();
     if(repository.findByEmail(user.getEmail()).isPresent()){
       return AuthenticationResponse.builder().accessToken("error").build();
     }
+    user.setNome(request.getNome());
+    user.setCognome(request.getCognome());
+    user.setCity(request.getCity());
+    user.setShortbio(request.getShortbio());
+    user.setProfilePic(request.getProfilePic());
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);
     saveUserToken(savedUser, jwtToken);

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.File;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,4 +18,7 @@ public class RegisterRequest {
   private String cognome;
   private String email;
   private String password;
+  private String shortbio;
+  private String city;
+  private File profilePic;
 }

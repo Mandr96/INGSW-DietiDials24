@@ -3,13 +3,16 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class AstaInversa extends Asta {
