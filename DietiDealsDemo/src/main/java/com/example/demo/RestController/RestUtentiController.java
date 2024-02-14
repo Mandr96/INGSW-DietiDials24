@@ -1,6 +1,10 @@
 package com.example.demo.RestController;
 
+import com.example.demo.authService.auth.ChangePasswordRequest;
 import com.example.demo.authService.auth.RegisterRequest;
+import com.example.demo.authService.auth.UserServices;
+import com.example.demo.authService.token.Token;
+import com.example.demo.authService.token.TokenRepository;
 import com.example.demo.data_access.UtentiRepository;
 import com.example.demo.model.Asta;
 import com.example.demo.model.Utente;
@@ -15,10 +19,12 @@ import java.util.Optional;
 public class RestUtentiController {
 
     private final UtentiRepository userRep;
+    private final UserServices userServices;
 
     @Autowired
-    public RestUtentiController(UtentiRepository repository) {
+    public RestUtentiController(UtentiRepository repository, UserServices userServices, TokenRepository tokenRepository) {
         this.userRep = repository;
+        this.userServices = userServices;
     }
 
     @GetMapping(value = "/get/{email}")
@@ -42,6 +48,12 @@ public class RestUtentiController {
             return true;
         }
         return false;
+    }
+
+    @PostMapping(path = "/newpassword")
+    public boolean setNewPassword(@RequestBody ChangePasswordRequest request, @RequestHeader(name = "Authorization") String authHeader){
+        return userServices.changePassword(request,authHeader.replace("Bearer " , ""));
+
     }
 
     @PostMapping(path = "/create",

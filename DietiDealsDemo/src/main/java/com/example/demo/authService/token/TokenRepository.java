@@ -1,6 +1,8 @@
 package com.example.demo.authService.token;
 
 import com.example.demo.model.Offerta;
+import com.example.demo.model.Utente;
+import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,4 +21,5 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
 
   //query per ottenere il token specifico tramite tokenID
   Optional<Token> findByToken(String token);
+
 }
