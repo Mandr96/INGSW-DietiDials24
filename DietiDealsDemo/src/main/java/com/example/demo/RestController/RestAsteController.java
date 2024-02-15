@@ -33,7 +33,7 @@ public class RestAsteController {
         this.notificheRep = notRep;
     }
 
-    @GetMapping(value = "asta/{id}")
+    @GetMapping(value = "asta/get/{id}")
     public Asta getAsta(@PathVariable("id") Long id) {
         Optional<Asta> result = asteRep.findById(id);
         return result.orElse(null);
