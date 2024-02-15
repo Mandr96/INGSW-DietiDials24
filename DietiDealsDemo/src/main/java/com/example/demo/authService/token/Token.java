@@ -31,4 +31,5 @@ public class Token {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "utente_email")
   public Utente utente;
+  
 }
