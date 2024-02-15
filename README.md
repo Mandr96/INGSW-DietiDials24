@@ -33,17 +33,17 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
     - [x] i. Modellazione di tutti i casi d’uso richiesti.
     - [x] ii. Individuazione del target degli utenti
     - [x] iii. Descrizioni Testuali Strutturate per almeno quattro **(due, se si consegna prima del 15/04/2024)** casi d’uso significativi (autenticazione esclusa) a scelta dei contraenti tra quelli richiesti.
-    - [ ] iv. Prototipazione visuale via Mock-up dell’interfaccia utente per tutti i casi d’uso assegnati attraverso strumenti di rapid prototyping, come “Figma”.
+    - [x] iv. Prototipazione visuale via Mock-up dell’interfaccia utente per tutti i casi d’uso assegnati attraverso strumenti di rapid prototyping, come “Figma”.
     - [ ] v. Valutazione dell’usabilità a priori.
-    - [ ] vi. Glossario.
+    - [x] vi. Glossario.
   - b. Specifica dei Requisiti.
-    - [ ] i. Classi, oggetti e relazioni di analisi.
-    - [ ] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
+    - [x] i. Classi, oggetti e relazioni di analisi.
+    - [x] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
     - [ ] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
 2. <ins>Documento di Design del sistema.</ins>
   - [ ] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
   - [ ] b. Descrizione/motivazione delle scelte tecnologiche adottate.
-  - [ ] c. Diagramma delle classi di design.
+  - [x] c. Diagramma delle classi di design.
   - [ ] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
 3. <ins>Codice Sorgente sviluppato, comprensivo di eventuale Dockerfile.</ins>
   - [ ] a. File di build automatica
