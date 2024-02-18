@@ -24,17 +24,17 @@ public class RestNotificheController {
         this.notificheRep = repository;
     }
 
-    @GetMapping(value = "all/{email}")
+    @GetMapping(value = "/all/{email}")
     public List<Notifica> getByUser(@PathVariable("email") String email) {
         return notificheRep.findByUser(email);
     }
 
-    @GetMapping(value = "unread/{email}")
+    @GetMapping(value = "/unread/{email}")
     public List<Notifica> getUnread(@PathVariable("email") String email) {
         return notificheRep.findUnread(email);
     }
 
-    @GetMapping(value = "setRead/{id}")
+    @GetMapping(value = "/setRead/{id}")
     public void setNotificaLetta(@PathVariable("id") Long id) {
         notificheRep.setRead(id);
     }

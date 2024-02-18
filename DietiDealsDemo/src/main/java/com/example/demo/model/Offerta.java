@@ -38,4 +38,16 @@ public class Offerta {
     @ManyToOne
     @JsonIgnore
     private Asta asta;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
 }

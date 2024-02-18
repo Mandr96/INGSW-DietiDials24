@@ -2,10 +2,14 @@ package com.main.dietidealsclient.Requesters;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Model.Utente;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,5 +75,72 @@ public class AsteRequester {
         t.start();
         t.join();
         return offerte.get();
+    }
+
+    //TODO da testare
+    public List<Asta> cercaAsta(String tipo, String categoria, String kw, Integer pag) throws InterruptedException {
+        AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();
+        result.set(new ArrayList<>());
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+"categoria"+"/"+kw+"/"+pag,true);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received: " + jsBody);
+                result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return result.get();
+    }
+
+    //TODO da testare
+    public Integer inserisciAsta(Asta asta) throws InterruptedException {
+        AtomicReference<Integer> astaID = new AtomicReference<>();
+        astaID.set(-1);
+        Thread t = new Thread(() -> {
+            try {
+                var mapper = new ObjectMapper();
+                String json = mapper.writeValueAsString(asta);
+                Log.d("myDebug", "JSON asta encoding sent: " + json);
+                Response response = RequestUtility.sendPostRequest("asta/nuova", true, json);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received: " + jsBody);
+                astaID.set(new JSONObject(jsBody).getInt("id"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return astaID.get();
+    }
+
+    //TODO da testare
+    public Integer inviaOfferta(Offerta offer) throws InterruptedException {
+        AtomicReference<Integer> offerID = new AtomicReference<>();
+        offerID.set(-1);
+        Thread t = new Thread(() -> {
+            try {
+                var mapper = new ObjectMapper();
+                String json = mapper.writeValueAsString(offer);
+                Log.d("myDebug", "JSON offerta encoding sent: " + json);
+                Response response = RequestUtility.sendPostRequest("offerta/nuova", true, json);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received: " + jsBody);
+                offerID.set(new JSONObject(jsBody).getInt("id"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return offerID.get();
     }
 }

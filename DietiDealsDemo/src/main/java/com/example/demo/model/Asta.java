@@ -65,4 +65,12 @@ public abstract class Asta {
     public String toString() {
         return nomeProdotto;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Timestamp getScadenza() {
+        return scadenza;
+    }
 }

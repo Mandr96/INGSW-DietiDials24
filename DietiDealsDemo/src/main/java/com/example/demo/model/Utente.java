@@ -16,8 +16,6 @@ import java.util.Collection;
 import java.util.List;
 @Data
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
@@ -103,5 +101,57 @@ public class Utente implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setShortbio(String shortbio) {
+        this.shortbio = shortbio;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setProfilePic(File profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public String getShortbio() {
+        return shortbio;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public File getProfilePic() {
+        return profilePic;
     }
 }
