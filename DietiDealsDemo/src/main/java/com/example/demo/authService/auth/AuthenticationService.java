@@ -37,7 +37,7 @@ public class AuthenticationService {
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .build();
-    if(repository.findByEmail(user.getEmail()).isPresent()){
+    if(repository.findById(user.getEmail()).isPresent()){
       return AuthenticationResponse.builder().accessToken("error").build();
     }
     user.setNome(request.getNome());
@@ -61,7 +61,7 @@ public class AuthenticationService {
             request.getPassword()
         )
     );
-    var user = repository.findByEmail(request.getEmail())
+    var user = repository.findById(request.getEmail())
         .orElseThrow();
     var jwtToken = jwtService.generateToken(user);
     revokeAllUserTokens(user);

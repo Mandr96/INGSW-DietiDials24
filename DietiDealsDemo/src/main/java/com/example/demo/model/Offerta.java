@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity(name = "Offerta")
 public class Offerta {
+    @Getter
     @Id
     @SequenceGenerator(
             name = "offerta_sequence",
@@ -30,6 +31,8 @@ public class Offerta {
     )
     private Long id;
     private Float valore;
+    @Setter
+    @Getter
     private Timestamp data;
     private Boolean attiva;
     @ManyToOne
@@ -39,15 +42,4 @@ public class Offerta {
     @JsonIgnore
     private Asta asta;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Timestamp getData() {
-        return data;
-    }
-
-    public void setData(Timestamp data) {
-        this.data = data;
-    }
 }

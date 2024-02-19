@@ -16,7 +16,7 @@ import okhttp3.Response;
 public class NotificheRequester {
 
     //TODO da testare
-    public List<Notifica> getNotificheByUser(String email) throws InterruptedException{
+    public List<Notifica> getAll(String email) throws InterruptedException{
         AtomicReference<ArrayList<Notifica>> notifiche = new AtomicReference<>();
         notifiche.set(new ArrayList<>());
         Thread t = new Thread(() -> {

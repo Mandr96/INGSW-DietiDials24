@@ -26,8 +26,9 @@ public class AstaSilenziosa extends Asta{
                           @JsonProperty("descrizione") String descrizione,
                           @JsonProperty("categoria") String cat,
                           @JsonProperty("img") File img,
-                          @JsonProperty("scaduta") Boolean scaduta) {
-        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta);
+                          @JsonProperty("scaduta") Boolean scaduta,
+                          @JsonProperty("creatore") Utente creatore) {
+        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
     }
 
     public List<Notifica> chiudi() {

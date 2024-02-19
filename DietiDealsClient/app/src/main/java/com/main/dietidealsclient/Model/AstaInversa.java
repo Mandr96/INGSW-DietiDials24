@@ -28,8 +28,9 @@ public class AstaInversa extends Asta {
                        @JsonProperty("categoria") String cat,
                        @JsonProperty("img") File img,
                        @JsonProperty("scaduta") Boolean scaduta,
+                       @JsonProperty("creatore") Utente creatore,
                        @JsonProperty("minOffer") Float minOffer) {
-        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta);
+        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
         this.minOffer = minOffer;
     }
 }

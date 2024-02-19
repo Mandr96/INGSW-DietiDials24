@@ -8,6 +8,10 @@ import com.example.demo.model.Asta;
 import com.example.demo.model.Notifica;
 import com.example.demo.model.Offerta;
 import com.example.demo.model.Utente;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +29,14 @@ public class RestAsteController {
     private final AsteRepository asteRep;
     private final OfferteRepository offerteRep;
     private final NotificheRepository notificheRep;
+    private final UtentiRepository userRep;
 
     @Autowired
-    public RestAsteController(AsteRepository asteRep, OfferteRepository offerteRep, NotificheRepository notRep) {
+    public RestAsteController(AsteRepository asteRep, OfferteRepository offerteRep, NotificheRepository notRep, UtentiRepository userRep) {
         this.asteRep = asteRep;
         this.offerteRep = offerteRep;
         this.notificheRep = notRep;
+        this.userRep = userRep;
     }
 
     @GetMapping(value = "asta/get/{id}")
@@ -41,7 +47,10 @@ public class RestAsteController {
 
     @GetMapping(value = "offerta/byUser/{email}")
     public List<Offerta> getOfferteByUser(@PathVariable("email") String email) {
-        return offerteRep.findByUser(email);
+        System.out.println("getOfferteByuser request received. Argument: "+email);
+        List<Offerta> list = offerteRep.findByUser(email);
+        System.out.println("retrieved: "+list);
+        return list;
     }
 
     @GetMapping(value = "offerta/byAsta/{id}")
@@ -75,7 +84,9 @@ public class RestAsteController {
     @PostMapping(path = "asta/nuova",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Long creaAsta(@RequestBody Asta newAsta) {
+    public Long creaAsta(@RequestBody String body) throws JsonProcessingException, JSONException {
+        Asta newAsta = new ObjectMapper().readValue(body, Asta.class);
+        newAsta.setCreatore(userRep.findById(new JSONObject(body).getString("creatore")).get());
         asteRep.save(newAsta);
         return newAsta.getId();
     }
@@ -83,7 +94,10 @@ public class RestAsteController {
     @PostMapping(path = "offerta/nuova",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Long insertOfferta(@RequestBody Offerta newOffer) {
+    public Long insertOfferta(@RequestBody String body) throws JsonProcessingException, JSONException {
+        Offerta newOffer = new ObjectMapper().readValue(body, Offerta.class);
+        newOffer.setOwner(userRep.findById(new JSONObject(body).getString("owner")).get());
+        newOffer.setAsta(asteRep.findById(new JSONObject(body).getLong("asta")).get());
         newOffer.setData(Timestamp.from(Instant.now().truncatedTo(ChronoUnit.MINUTES)));
         offerteRep.save(newOffer);
         return newOffer.getId();

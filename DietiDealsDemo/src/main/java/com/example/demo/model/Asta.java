@@ -23,6 +23,7 @@ import java.util.List;
 })
 @Entity
 public abstract class Asta {
+    @Getter
     @Id
     @SequenceGenerator(
             name = "asta_sequence",
@@ -34,6 +35,7 @@ public abstract class Asta {
             generator = "asta_sequence"
     )
     protected Long id;
+    @Getter
     protected Timestamp scadenza;
     protected String categoria;
     protected String nomeProdotto;
@@ -64,13 +66,5 @@ public abstract class Asta {
     @Override
     public String toString() {
         return nomeProdotto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Timestamp getScadenza() {
-        return scadenza;
     }
 }

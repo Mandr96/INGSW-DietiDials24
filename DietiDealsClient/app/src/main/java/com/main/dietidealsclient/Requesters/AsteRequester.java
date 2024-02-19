@@ -20,7 +20,6 @@ import okhttp3.Response;
 
 public class AsteRequester {
 
-    //TODO da testare
     public Asta getAstaById(Long id) throws InterruptedException {
         AtomicReference<Asta> asta = new AtomicReference<>();
         asta.set(null);
@@ -39,13 +38,12 @@ public class AsteRequester {
         return asta.get();
     }
 
-    //TODO da testare
     public List<Offerta> getOfferteByUser(String email) throws InterruptedException{
         AtomicReference<ArrayList<Offerta>> offerte = new AtomicReference<>();
         offerte.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("offerta/getByUser/"+email, true);
+                Response response = RequestUtility.sendGetRequest("offerta/byUser/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
                 offerte.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
@@ -58,13 +56,12 @@ public class AsteRequester {
         return offerte.get();
     }
 
-    //TODO da testare
     public List<Offerta> getOfferteByAsta(Long astaID) throws InterruptedException {
         AtomicReference<ArrayList<Offerta>> offerte = new AtomicReference<>();
         offerte.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("offerta/getByAsta/" + astaID, true);
+                Response response = RequestUtility.sendGetRequest("offerta/byAsta/" + astaID, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
                 offerte.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
@@ -77,13 +74,12 @@ public class AsteRequester {
         return offerte.get();
     }
 
-    //TODO da testare
     public List<Asta> cercaAsta(String tipo, String categoria, String kw, Integer pag) throws InterruptedException {
         AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();
         result.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+"categoria"+"/"+kw+"/"+pag,true);
+                Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+categoria+"/"+kw+"/"+pag,true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
                 result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
@@ -96,7 +92,6 @@ public class AsteRequester {
         return result.get();
     }
 
-    //TODO da testare
     public Integer inserisciAsta(Asta asta) throws InterruptedException {
         AtomicReference<Integer> astaID = new AtomicReference<>();
         astaID.set(-1);
@@ -108,10 +103,8 @@ public class AsteRequester {
                 Response response = RequestUtility.sendPostRequest("asta/nuova", true, json);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                astaID.set(new JSONObject(jsBody).getInt("id"));
+                astaID.set(Integer.valueOf(jsBody));
             } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -132,10 +125,8 @@ public class AsteRequester {
                 Response response = RequestUtility.sendPostRequest("offerta/nuova", true, json);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                offerID.set(new JSONObject(jsBody).getInt("id"));
+                offerID.set(Integer.valueOf(jsBody));
             } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         });

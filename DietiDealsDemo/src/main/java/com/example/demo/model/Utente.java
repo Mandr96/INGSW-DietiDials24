@@ -22,13 +22,26 @@ import java.util.List;
 @JsonIgnoreProperties({"authorities", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked", "username"})
 @Entity
 public class Utente implements UserDetails {
+    @Getter
+    @Setter
     @Id
     private String email;
+    @Getter
+    @Setter
     private String nome;
+    @Getter
+    @Setter
     private String cognome;
+    @Setter
     private String password;
+    @Getter
+    @Setter
     private String shortbio;
+    @Getter
+    @Setter
     private String city;
+    @Getter
+    @Setter
     private File profilePic;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
@@ -103,55 +116,4 @@ public class Utente implements UserDetails {
         return true;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setShortbio(String shortbio) {
-        this.shortbio = shortbio;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setProfilePic(File profilePic) {
-        this.profilePic = profilePic;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public String getShortbio() {
-        return shortbio;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public File getProfilePic() {
-        return profilePic;
-    }
 }

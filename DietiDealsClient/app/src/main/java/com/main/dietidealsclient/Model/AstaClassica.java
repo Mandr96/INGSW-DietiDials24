@@ -29,8 +29,9 @@ public class AstaClassica extends Asta {
                         @JsonProperty("categoria") String cat,
                         @JsonProperty("img") File img,
                         @JsonProperty("scaduta") Boolean scaduta,
+                        @JsonProperty("creatore") Utente creatore,
                         @JsonProperty("minPrice") Float minPrice) {
-        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta);
+        super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
         this.minPrice = minPrice;
     }
 }

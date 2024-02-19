@@ -32,14 +32,12 @@ public abstract class Asta {
     protected String descrizione;
     protected File img;
     protected Boolean scaduta;
-
-    @JsonIgnore
     protected Utente creatore;
 
     @JsonIgnore
     protected List<Offerta> offerte;
 
-    public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta) {
+    public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta, Utente creatore) {
         this.id = id;
         this.scadenza = scadenza;
         this.categoria = categoria;
@@ -47,6 +45,7 @@ public abstract class Asta {
         this.descrizione = descrizione;
         this.img = img;
         this.scaduta = scaduta;
+        this.creatore = creatore;
     }
 
     @Override
@@ -56,5 +55,34 @@ public abstract class Asta {
 
     public String getNomeProdotto() {
         return nomeProdotto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Timestamp getScadenza() {
+        return scadenza;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public File getImg() {
+        return img;
+    }
+
+    public Boolean getScaduta() {
+        return scaduta;
+    }
+
+    @JsonGetter("creatore")
+    public String getCreatore() {
+        return creatore.getEmail();
     }
 }
