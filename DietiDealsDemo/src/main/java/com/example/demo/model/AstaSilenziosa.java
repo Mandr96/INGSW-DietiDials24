@@ -18,6 +18,15 @@ public class AstaSilenziosa extends Asta{
     }
 
     public List<Notifica> chiudi() {
-        return new ArrayList<Notifica>();
+        List<Notifica> notifiche = new ArrayList<Notifica>();
+        if(!offerte.isEmpty()){
+            notifiche.add(new Notifica("La tua asta è terminata","Vieni a scegliere chi si aggiudicherà " + getNomeProdotto(), false , getCreatore()));
+        }else {
+            notifiche.add(new Notifica("La tua asta è terminata","Non hai ricevuto nessun offerta per " + getNomeProdotto(), false , getCreatore()));
+
+        }
+        return notifiche;
     }
+
+    public List<Notifica> accetta() { return new ArrayList<Notifica>(); }
 }

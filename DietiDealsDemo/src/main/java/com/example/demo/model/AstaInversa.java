@@ -27,15 +27,17 @@ public class AstaInversa extends Asta {
 
     public List<Notifica> chiudi() {
         List<Notifica> notifiche = new ArrayList<Notifica>();
-        Offerta bestOffer = offerte.get(0);
-        for(Offerta offer : offerte) {
-            if (offer.getValore().compareTo(bestOffer.getValore()) < 0) {
-                bestOffer = offer;
-                notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
-                        " a cui partecipi è scaduta, ti sei aggiudicato l'articolo!", false, offer.getOwner()));
-            } else {
-                notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
-                        " a cui partecipi è scaduta. La tua offerta non è stata la migliore!", false, offer.getOwner()));
+        if(!offerte.isEmpty()){
+            Offerta bestOffer = offerte.get(0);
+            for(Offerta offer : offerte) {
+                if (offer.getValore().compareTo(bestOffer.getValore()) < 0) {
+                    bestOffer = offer;
+                    notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
+                            " a cui partecipi è scaduta, ti sei aggiudicato l'articolo!", false, offer.getOwner()));
+                } else {
+                    notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
+                            " a cui partecipi è scaduta. La tua offerta non è stata la migliore!", false, offer.getOwner()));
+                }
             }
         }
         return notifiche;

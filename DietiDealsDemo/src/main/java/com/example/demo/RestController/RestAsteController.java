@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/get/{id}")
     public Asta getAsta(@PathVariable("id") Long id) {
+        checkScadenza(id);
         Optional<Asta> result = asteRep.findById(id);
         return result.orElse(null);
     }
@@ -54,9 +56,7 @@ public class RestAsteController {
     }
 
     @GetMapping(value = "offerta/byAsta/{id}")
-    public List<Offerta> getOfferteByAsta(@PathVariable("id") Long astaID) {
-        return offerteRep.findByAsta(astaID);
-    }
+    public List<Offerta> getOfferteByAsta(@PathVariable("id") Long astaID) { return offerteRep.findByAsta(astaID); }
 
     @GetMapping(value = "asta/cerca/{tipo}/{categoria}/{keyword}/{pag}")
     public List<Asta> cercaAste(@PathVariable("tipo") String tipo,
@@ -66,17 +66,25 @@ public class RestAsteController {
         String cat = categoria;
         if(categoria.equalsIgnoreCase("tutte") || categoria.equalsIgnoreCase("any")) cat = "%";
         int offset = pag*10;
-        return asteRep.searchAste(tipo, cat, kw, offset);
+        return CheckAsteScaduteAndRm(asteRep.searchAste(tipo, cat, kw, offset));
+    }
+
+    private List<Asta> CheckAsteScaduteAndRm(List<Asta> aste) {
+        aste.removeIf(asta -> checkScadenza(asta.getId()));
+        return aste;
     }
 
     @GetMapping(value = "asta/checkScadenza/{id}")
     public Boolean checkScadenza(@PathVariable("id")Long astaID) {
-        Asta asta = asteRep.findById(astaID).get();
-        if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
-            asteRep.setAstaScaduta(astaID);
-            List<Notifica> notifiche = asta.chiudi();
-            notificheRep.saveAll(notifiche);
-            return true;
+        //TODO ha senso così? o meglio un exeption / true
+        if(asteRep.findById(astaID).isPresent()){
+            Asta asta = asteRep.findById(astaID).get();
+            if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
+                asteRep.setAstaScaduta(astaID);
+                List<Notifica> notifiche = asta.chiudi();
+                notificheRep.saveAll(notifiche);
+                return true;
+            }
         }
         return false;
     }
@@ -101,5 +109,11 @@ public class RestAsteController {
         newOffer.setData(Timestamp.from(Instant.now().truncatedTo(ChronoUnit.MINUTES)));
         offerteRep.save(newOffer);
         return newOffer.getId();
+    }
+
+    @GetMapping(path = "offerta/accettazione/{id}")
+    public boolean accettaOfferta(@PathVariable("id")Long offertaId){
+
+        return true;
     }
 }
