@@ -83,7 +83,7 @@ public class AuthenticationService {
     tokenRepository.save(token);
   }
 
-  /** Revoca tutti i token di un determinato utente (probabilmente inutile per il progetto) */
+  /** Revoca tutti i token di un determinato utente */
   private void revokeAllUserTokens(Utente utente) {
     var validUserTokens = tokenRepository.findAllValidTokenByUser(utente.getEmail());
     if (validUserTokens.isEmpty())
