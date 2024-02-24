@@ -28,5 +28,6 @@
         <activity android:name=".Activity.RegisterActivity"></activity>
         <activity android:name=".Activity.HomeCompratoreActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Activity.EditProfileActivity"></activity>
     </application>
 </manifest>

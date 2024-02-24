@@ -70,28 +70,28 @@ public class UtentiRequester {
         RequestUtility.setToken(newToken.get());
     }
 
-//    //TODO unire con jwtLogin? //Si pensa di far fare la registrazione e mandare alla pagina MODIFICA PROFILO
-//    public void jwtRegister(String email, String password) throws InterruptedException {
-//        AtomicReference<String> newToken = new AtomicReference<>("error");
-//        Thread t = new Thread(() -> {
-//            try {
-//                Response response = RequestUtility.sendPostRequest("auth/register", false, "{\"email\":\""+email+"\",\"password\":\""+password+"\"}");
-//                String jsBody = response.body().string();
-//                JSONObject jsonObject = new JSONObject(jsBody);
-//                newToken.set(jsonObject.getString("access_token"));
-//                if(newToken.equals("error")){
-//                    throw new RuntimeException("no token");
-//                }
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            } catch (JSONException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//        t.start();
-//        t.join();
-//        RequestUtility.setToken(newToken.get());
-//    }
+    //TODO unire con jwtLogin? //Si pensa di far fare la registrazione e mandare alla pagina MODIFICA PROFILO
+    public void jwtRegister(String email, String password) throws InterruptedException {
+        AtomicReference<String> newToken = new AtomicReference<>("error");
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendPostRequest("auth/register", false, "{\"email\":\""+email+"\",\"password\":\""+password+"\"}");
+                String jsBody = response.body().string();
+                JSONObject jsonObject = new JSONObject(jsBody);
+                newToken.set(jsonObject.getString("access_token"));
+                if(newToken.equals("error")){
+                    throw new RuntimeException("no token");
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        RequestUtility.setToken(newToken.get());
+    }
 
     //TODO Da vedere se funziona HAHAAHAHAHAHAH
     public void updateUtente(Utente user) throws JsonProcessingException, InterruptedException {

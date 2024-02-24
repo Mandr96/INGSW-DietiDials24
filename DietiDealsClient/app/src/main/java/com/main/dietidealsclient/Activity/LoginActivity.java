@@ -16,7 +16,6 @@ import com.main.dietidealsclient.R;
 public class LoginActivity extends ComponentActivity {
 
     UserProfileController userProfileController;
-    EditText textEmail, textPassword;
     Button buttonLogin, buttonRegister;
     TextView errorText;
 
@@ -50,8 +49,6 @@ public class LoginActivity extends ComponentActivity {
 
         buttonLogin.setOnClickListener(loginOnclickListener);
         buttonRegister.setOnClickListener(registerOnClickListener);
-
-
     }
 
     private boolean TryLogin() {
@@ -65,7 +62,8 @@ public class LoginActivity extends ComponentActivity {
             } catch (InterruptedException e) {
                 errorText.setText("Email o Password sbagliata");
 //                errorText.setTextColor();
-                throw new RuntimeException(e);
+                //TODO per ora facciamo così
+//                throw new RuntimeException(e);
             }
         }
         return false;
@@ -74,7 +72,7 @@ public class LoginActivity extends ComponentActivity {
 
     private void goToHomeActivity(){
         //TODO attualmente va alla main act che sarebbero i test di @gianmarco
-        Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent myIntent = new Intent(LoginActivity.this, HomeCompratoreActivity.class);
         LoginActivity.this.startActivity(myIntent);
         finish();
     }
