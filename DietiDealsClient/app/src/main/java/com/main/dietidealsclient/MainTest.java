@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
+
 import okhttp3.Response;
 
 
@@ -38,7 +40,7 @@ public class MainTest {
             offerte = asteRequester.getOfferteByAsta(retrievedAsta.getId());
             Log.d("myDebug", "ID nuova asta: "+asteRequester.inserisciAsta(new AstaInversa(-2L, null, "Grandissima cosa", "...", "cat1", null, false, loggedUser, 20.0f)));
             Log.d("myDebug", "ID nuova offerta: "+asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, loggedUser, retrievedAsta)));
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | LoginException e) {
             throw new RuntimeException(e);
         }
     }

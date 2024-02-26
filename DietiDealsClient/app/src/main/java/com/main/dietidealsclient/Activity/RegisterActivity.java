@@ -8,15 +8,19 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
 
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.R;
 
+import javax.security.auth.login.LoginException;
+
 public class RegisterActivity extends ComponentActivity {
     UserProfileController userProfileController;
     Button buttonRegister, buttonCancel;
+    TextView errorTxt;
 
     public RegisterActivity() {
         userProfileController = UserProfileController.getInstance();
@@ -29,6 +33,7 @@ public class RegisterActivity extends ComponentActivity {
         setContentView(R.layout.activity_register);
         buttonRegister = findViewById(R.id.register_button);
         buttonCancel = findViewById(R.id.login_cancelButton);
+        errorTxt = findViewById(R.id.register_errorTxt);
 //        textEmail = findViewById(R.id.register_editTextEmail);
 //        textPassword = findViewById(R.id.register_editTextPassword);
 //        textPasswordRe = findViewById(R.id.register_editTextPasswordRe);
@@ -36,11 +41,8 @@ public class RegisterActivity extends ComponentActivity {
         View.OnClickListener registerOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TryRegistration()){
+                if(TryRegistration())
                     goToHomeActivity();
-                }else {
-
-                }
             }
         };
 
@@ -65,9 +67,11 @@ public class RegisterActivity extends ComponentActivity {
             try {
                 userProfileController.Register(email,passw);
                 return true;
-            } catch (InterruptedException e) {
-                //TODO per ora facciamo così
-//                throw new RuntimeException(e);
+            } catch (LoginException e) {
+                errorTxt.setText("Errore E-Mail già registrata");
+            }
+            catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
         return false;

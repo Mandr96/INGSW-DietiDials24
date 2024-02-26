@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,20 +56,30 @@ public class AuthenticationService {
 
     /** Chiama l authenticationManager passandogli email e password dalla richiesta */
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            request.getEmail(),
-            request.getPassword()
-        )
-    );
-    var user = repository.findById(request.getEmail())
-        .orElseThrow();
-    var jwtToken = jwtService.generateToken(user);
-    revokeAllUserTokens(user);
-    saveUserToken(user, jwtToken);
-    return AuthenticationResponse.builder()
-        .accessToken(jwtToken)
-        .build();
+    System.out.println("Start Autenticate");
+    String jwtToken;
+    try {
+      var x = authenticationManager.authenticate(
+              new UsernamePasswordAuthenticationToken(
+                      request.getEmail(),
+                      request.getPassword()
+              )
+      );
+      Utente user = repository.findById(request.getEmail()).orElseThrow(() -> new Exception("Error"));
+      jwtToken = jwtService.generateToken(user);
+
+      revokeAllUserTokens(user);
+
+    } catch (Exception e) {
+      jwtToken = "error";
+      System.out.println("Authentication failed: Invalid credentials");
+    }
+
+      System.out.println("jwt token = " + jwtToken);
+      return AuthenticationResponse.builder()
+              .accessToken(jwtToken)
+              .build();
+
   }
 
   /** Crea un ogetto Token e lo inserisce nel database */

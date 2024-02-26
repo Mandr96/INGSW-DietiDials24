@@ -13,6 +13,8 @@ import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.MainActivity;
 import com.main.dietidealsclient.R;
 
+import javax.security.auth.login.LoginException;
+
 public class LoginActivity extends ComponentActivity {
 
     UserProfileController userProfileController;
@@ -60,10 +62,9 @@ public class LoginActivity extends ComponentActivity {
                 userProfileController.Login(email,password);
                 return true;
             } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (LoginException e) {
                 errorText.setText("Email o Password sbagliata");
-//                errorText.setTextColor();
-                //TODO per ora facciamo così
-//                throw new RuntimeException(e);
             }
         }
         return false;

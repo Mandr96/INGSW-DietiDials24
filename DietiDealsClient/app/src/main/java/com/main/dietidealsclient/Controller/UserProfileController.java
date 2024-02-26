@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 
+import javax.security.auth.login.LoginException;
+
 /** Controller per quato riguarda il login e la gestione del profilo
  * ha anche loggedUser */
 public class UserProfileController {
@@ -23,14 +25,14 @@ public class UserProfileController {
         return instance;
     }
 
-    public void Login(String email, String password) throws InterruptedException {
+    public void Login(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtLogin(email,password);
         loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
-    public void Register(String email, String password) throws InterruptedException {
+    public void Register(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtRegister(email,password);
-        loggedUser = utentiRequester.getUtenteByEmail(email);
+//        loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
     //TODO Da aggiungere link e FOTO

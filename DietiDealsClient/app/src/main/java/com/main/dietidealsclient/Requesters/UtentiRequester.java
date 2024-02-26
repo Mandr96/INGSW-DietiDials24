@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
+import javax.security.auth.login.LoginException;
+
 import okhttp3.Response;
 
 public class UtentiRequester {
@@ -48,7 +50,7 @@ public class UtentiRequester {
         t.join();
     }
 
-    public void jwtLogin(String email, String password) throws InterruptedException {
+    public void jwtLogin(String email, String password) throws InterruptedException, LoginException {
         AtomicReference<String> newToken = new AtomicReference<>("error");
         Thread t = new Thread(() -> {
             try {
@@ -56,22 +58,20 @@ public class UtentiRequester {
                 String jsBody = response.body().string();
                 JSONObject jsonObject = new JSONObject(jsBody);
                 newToken.set(jsonObject.getString("access_token"));
-                if(newToken.equals("error")){
-                    throw new RuntimeException("no token");
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 throw new RuntimeException(e);
             }
         });
         t.start();
         t.join();
+        if(newToken.get().equals("error")){
+            throw new LoginException("no token");
+        }
         RequestUtility.setToken(newToken.get());
     }
 
     //TODO unire con jwtLogin? //Si pensa di far fare la registrazione e mandare alla pagina MODIFICA PROFILO
-    public void jwtRegister(String email, String password) throws InterruptedException {
+    public void jwtRegister(String email, String password) throws InterruptedException, LoginException {
         AtomicReference<String> newToken = new AtomicReference<>("error");
         Thread t = new Thread(() -> {
             try {
@@ -79,17 +79,15 @@ public class UtentiRequester {
                 String jsBody = response.body().string();
                 JSONObject jsonObject = new JSONObject(jsBody);
                 newToken.set(jsonObject.getString("access_token"));
-                if(newToken.equals("error")){
-                    throw new RuntimeException("no token");
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 throw new RuntimeException(e);
             }
         });
         t.start();
         t.join();
+        if(newToken.get().equals("error")){
+            throw new LoginException("no token");
+        }
         RequestUtility.setToken(newToken.get());
     }
 
