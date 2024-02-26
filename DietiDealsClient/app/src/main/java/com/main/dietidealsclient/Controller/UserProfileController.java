@@ -32,7 +32,7 @@ public class UserProfileController {
 
     public void Register(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtRegister(email,password);
-//        loggedUser = utentiRequester.getUtenteByEmail(email);
+        loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
     //TODO Da aggiungere link e FOTO

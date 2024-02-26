@@ -59,7 +59,7 @@ public class AuthenticationService {
     System.out.println("Start Autenticate");
     String jwtToken;
     try {
-      var x = authenticationManager.authenticate(
+      authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(
                       request.getEmail(),
                       request.getPassword()
@@ -69,16 +69,17 @@ public class AuthenticationService {
       jwtToken = jwtService.generateToken(user);
 
       revokeAllUserTokens(user);
+      saveUserToken(user, jwtToken);
 
     } catch (Exception e) {
       jwtToken = "error";
       System.out.println("Authentication failed: Invalid credentials");
     }
 
-      System.out.println("jwt token = " + jwtToken);
-      return AuthenticationResponse.builder()
-              .accessToken(jwtToken)
-              .build();
+    System.out.println("jwt token = " + jwtToken);
+    return AuthenticationResponse.builder()
+            .accessToken(jwtToken)
+            .build();
 
   }
 
