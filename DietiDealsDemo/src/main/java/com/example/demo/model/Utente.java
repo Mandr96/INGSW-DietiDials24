@@ -21,6 +21,7 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @JsonIgnoreProperties({"authorities", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked", "username"})
 @Entity
+//TODO MANCA IL LINK
 public class Utente implements UserDetails {
     @Getter
     @Setter

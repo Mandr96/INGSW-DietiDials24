@@ -1,7 +1,6 @@
 package com.main.dietidealsclient.Activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -9,12 +8,11 @@ import androidx.activity.ComponentActivity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Controller.UserProfileController;
-import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 
 public class EditProfileActivity extends ComponentActivity {
 
-    private UserProfileController userProfileController;
+    private final UserProfileController userProfileController;
 
     Button updateButton;
 
@@ -30,18 +28,13 @@ public class EditProfileActivity extends ComponentActivity {
 
         LoadProfile();
 
-        View.OnClickListener updateOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    UpdateProfile();
-                } catch (JsonProcessingException | InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+        updateButton.setOnClickListener(view -> {
+            try {
+                UpdateProfile();
+            } catch (JsonProcessingException | InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        };
-
-        updateButton.setOnClickListener(updateOnClickListener);
+        });
     }
 
     private void UpdateProfile() throws JsonProcessingException, InterruptedException {

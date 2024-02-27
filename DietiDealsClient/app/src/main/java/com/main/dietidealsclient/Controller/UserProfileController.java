@@ -7,9 +7,8 @@ import com.main.dietidealsclient.Requesters.UtentiRequester;
 import javax.security.auth.login.LoginException;
 
 /** Controller per quato riguarda il login e la gestione del profilo
- * ha anche loggedUser */
+ * ha loggedUser */
 public class UserProfileController {
-
     private Utente loggedUser;
     private static UserProfileController instance;
     UtentiRequester utentiRequester;
@@ -44,7 +43,6 @@ public class UserProfileController {
         utentiRequester.updateUtente(loggedUser);
     }
 
-    //TODO Serve un logged user credo che così potrebbe adare
     public Utente getLoggedUser(){ return loggedUser; }
 //    public void setLoggedUser(Utente loggedUser){ this.loggedUser = loggedUser; }
 

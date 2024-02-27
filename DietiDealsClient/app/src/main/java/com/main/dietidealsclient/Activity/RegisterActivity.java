@@ -2,13 +2,12 @@ package com.main.dietidealsclient.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
 
@@ -26,36 +25,22 @@ public class RegisterActivity extends ComponentActivity {
         userProfileController = UserProfileController.getInstance();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        buttonRegister = findViewById(R.id.register_button);
-        buttonCancel = findViewById(R.id.login_cancelButton);
+
         errorTxt = findViewById(R.id.register_errorTxt);
-//        textEmail = findViewById(R.id.register_editTextEmail);
-//        textPassword = findViewById(R.id.register_editTextPassword);
-//        textPasswordRe = findViewById(R.id.register_editTextPasswordRe);
 
-        View.OnClickListener registerOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TryRegistration())
-                    goToHomeActivity();
+        findViewById(R.id.register_button).setOnClickListener(view -> {
+            if(TryRegistration()){
+                goToHomeActivity();
+            }else {
+                Toast.makeText(RegisterActivity.this, "Registrazione non riuscita",Toast.LENGTH_LONG).show();
             }
-        };
+        });
 
-        View.OnClickListener cancelOnclickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLoginActivity();
-            }
-        };
-
-        buttonRegister.setOnClickListener(registerOnClickListener);
-        buttonCancel.setOnClickListener(cancelOnclickListener);
-
+        findViewById(R.id.login_cancelButton).setOnClickListener(view -> goToLoginActivity());
     }
 
     private boolean TryRegistration() {
@@ -87,7 +72,6 @@ public class RegisterActivity extends ComponentActivity {
         }
         return false;
     }
-
 
     private void goToHomeActivity(){
         Intent myIntent = new Intent(RegisterActivity.this, HomeCompratoreActivity.class);

@@ -91,7 +91,7 @@ public class UtentiRequester {
         RequestUtility.setToken(newToken.get());
     }
 
-    //TODO Da vedere se funziona HAHAAHAHAHAHAH
+    //TODO Funziona (bisogna aggiungere foto e testare)
     public void updateUtente(Utente user) throws JsonProcessingException, InterruptedException {
         ObjectMapper objectMapper = new ObjectMapper();
         AtomicReference<String> json = new AtomicReference<>(objectMapper.writeValueAsString(user));

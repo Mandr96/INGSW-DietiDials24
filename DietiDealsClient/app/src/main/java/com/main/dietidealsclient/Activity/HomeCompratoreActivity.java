@@ -17,6 +17,7 @@ public class HomeCompratoreActivity extends ComponentActivity {
         inizializeProfile();
     }
 
+    /** Se il profilo non contiene Nome manda alla pagina modifica profilo */
     private void inizializeProfile() {
         UserProfileController userProfileController = UserProfileController.getInstance();
         Utente loggedUser = userProfileController.getLoggedUser();
