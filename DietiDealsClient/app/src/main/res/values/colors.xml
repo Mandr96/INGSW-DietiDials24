@@ -11,4 +11,6 @@
     <color name="simpleBtnColor">#FFFFFFFF</color>
     <color name="okBtnColor">#C9DDF2</color>
     <color name="annullaBtnColor">#8DA9A0</color>
+    <color name="textBackgroundColor">#FFFFFFFF</color>
+    <color name="appBackgroundColor">#748DA9A0</color>
 </resources>
