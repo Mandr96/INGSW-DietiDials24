@@ -7,12 +7,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#998da9a0">
 
         <EditText
             android:id="@+id/login_editTextEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/login"
+            android:background="@drawable/login_edit_text"
             android:layout_marginTop="64dp"
             android:ems="10"
             android:inputType="textEmailAddress"
@@ -24,8 +25,8 @@
 
         <EditText
             android:id="@+id/login_editTextPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/login"
+            android:background="@drawable/login_edit_text"
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,8 +38,8 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/basic_button"
+            android:background="@drawable/basic_btn"
             android:text="Accedi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +50,8 @@
 
         <Button
             android:id="@+id/gotoRegisterButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/basic_button"
+            android:background="@drawable/basic_btn"
             android:text="Registrati"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,8 +95,14 @@
             android:id="@+id/login_errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="177dp"
+            android:layout_marginBottom="31dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="529dp" />
+            app:layout_constraintBottom_toTopOf="@+id/gotoRegisterButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_editTextPassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
