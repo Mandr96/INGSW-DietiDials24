@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.activity.ComponentActivity;
 
 import com.main.dietidealsclient.Controller.UserProfileController;
+import com.main.dietidealsclient.MainTest;
 import com.main.dietidealsclient.R;
 
 import javax.security.auth.login.LoginException;
@@ -28,7 +29,7 @@ public class LoginActivity extends ComponentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //MainTest.start();
         buttonLogin = findViewById(R.id.loginButton);
         buttonRegister = findViewById(R.id.gotoRegisterButton);
         errorText = findViewById(R.id.login_errorText);
