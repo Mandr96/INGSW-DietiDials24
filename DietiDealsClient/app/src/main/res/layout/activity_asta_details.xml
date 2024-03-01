@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_articolo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="84dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/name_articolo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Articolo in vendita"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/venditore_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enrico Fausti"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <TextView
+        android:id="@+id/description_articolo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="312dp" />
+
+    <TextView
+        android:id="@+id/priceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prezzo attuale"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="384dp" />
+
+    <TextView
+        android:id="@+id/priceNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50,00 €"
+        tools:layout_editor_absoluteX="294dp"
+        tools:layout_editor_absoluteY="384dp" />
+
+    <TextView
+        android:id="@+id/offertText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="La tua ultima offerta"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="455dp" />
+
+    <TextView
+        android:id="@+id/offerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="45,00 €"
+        tools:layout_editor_absoluteX="294dp"
+        tools:layout_editor_absoluteY="455dp" />
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Indietro"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="556dp" />
+
+    <Button
+        android:id="@+id/confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fai un offerta"
+        tools:layout_editor_absoluteX="212dp"
+        tools:layout_editor_absoluteY="556dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">DietiDealsClient</string>
+    <string-array name="aste_types">
+        <item>Tutte</item>
+        <item>Classica</item>
+        <item>Silenziosa</item>
+    </string-array>
+    <string-array name="categories">
+        <item>Tutte</item>
+        <item>Libri</item>
+        <item>Musica e Film</item>
+        <item>Elettronica</item>
+        <item>Videogiochi</item>
+        <item>Casa e Fai da te</item>
+        <item>Bellezza e salute</item>
+        <item>Vestiti e scarpe</item>
+        <item>Sport</item>
+        <item>Auto e moto</item>
+        <item>Collezionismo</item>
+    </string-array>
+
 </resources>
