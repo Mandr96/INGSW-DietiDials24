@@ -3,47 +3,46 @@ package com.main.dietidealsclient.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
+import com.main.dietidealsclient.Utility.LoggedUser;
 
 import javax.security.auth.login.LoginException;
 
 /** Controller per quato riguarda il login e la gestione del profilo
  * ha loggedUser */
 public class UserProfileController {
-    private Utente loggedUser;
-    private static UserProfileController instance;
     UtentiRequester utentiRequester;
 
-    private UserProfileController(){
+    public UserProfileController(){
         utentiRequester = new UtentiRequester();
     }
 
-    public static UserProfileController getInstance(){
-        if (instance == null){
-            instance = new UserProfileController();
-        }
-        return instance;
-    }
 
     public void Login(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtLogin(email,password);
-        loggedUser = utentiRequester.getUtenteByEmail(email);
+        LoggedUser.getInstance().setLoggedUser(utentiRequester.getUtenteByEmail(email));
+//        loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
     public void Register(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtRegister(email,password);
-        loggedUser = utentiRequester.getUtenteByEmail(email);
+        LoggedUser.getInstance().setLoggedUser(utentiRequester.getUtenteByEmail(email));
+//        loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
     //TODO Da aggiungere link e FOTO
     public void UpdateUserProfile(String name, String surname, String bio) throws JsonProcessingException, InterruptedException {
-        loggedUser.setNome(name);
-        loggedUser.setCognome(surname);
-        loggedUser.setShortbio(bio);
+        Utente utente = LoggedUser.getInstance().getLoggedUser();
 
-        utentiRequester.updateUtente(loggedUser);
+        utente.setNome(name);
+        utente.setCognome(surname);
+        utente.setShortbio(bio);
+
+        utentiRequester.updateUtente(utente);
+        LoggedUser.getInstance().setLoggedUser(utente);
     }
 
-    public Utente getLoggedUser(){ return loggedUser; }
-//    public void setLoggedUser(Utente loggedUser){ this.loggedUser = loggedUser; }
 
+    public Utente getLoggedUser() {
+        return LoggedUser.getInstance().getLoggedUser();
+    }
 }

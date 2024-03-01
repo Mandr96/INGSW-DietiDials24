@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/asta_full"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/asta_image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/asta_nome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.52"
@@ -19,19 +23,23 @@
 
     <TextView
         android:id="@+id/asta_nome"
-        android:layout_width="186dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="185dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/asta_image"
         app:layout_constraintTop_toTopOf="@+id/asta_image" />
 
     <TextView
         android:id="@+id/asta_descrizione"
-        android:layout_width="186dp"
-        android:layout_height="29dp"
+        android:layout_width="185dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/asta_image"
+        app:layout_constraintEnd_toStartOf="@+id/asta_det2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/asta_nome" />
 
     <TextView
@@ -41,6 +49,7 @@
         android:layout_marginStart="24dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/asta_nome"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/asta_nome"
         app:layout_constraintTop_toTopOf="@+id/asta_nome" />
 
@@ -50,6 +59,10 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/asta_descrizione"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/asta_det1"
-        app:layout_constraintTop_toTopOf="@+id/asta_descrizione" />
+        app:layout_constraintTop_toTopOf="@+id/asta_descrizione"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

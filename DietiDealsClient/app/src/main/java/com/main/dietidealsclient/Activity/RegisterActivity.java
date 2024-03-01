@@ -18,11 +18,10 @@ import javax.security.auth.login.LoginException;
 
 public class RegisterActivity extends ComponentActivity {
     UserProfileController userProfileController;
-    Button buttonRegister, buttonCancel;
     TextView errorTxt;
 
     public RegisterActivity() {
-        userProfileController = UserProfileController.getInstance();
+        userProfileController = new UserProfileController();
     }
 
     @Override
@@ -63,7 +62,7 @@ public class RegisterActivity extends ComponentActivity {
     }
 
     /** Controlla se il pattern dell email inserita è quello di un email*/
-    public static boolean isValidCred(String email,String passw,String passwR) {
+    public boolean isValidCred(String email,String passw,String passwR) {
         if(!email.isEmpty() && !passw.isEmpty() && !passwR.isEmpty()) {
             if (passw.equals(passwR)) {
                 Log.e("EMAIL","matchers dice = " + Patterns.EMAIL_ADDRESS.matcher(email).matches());

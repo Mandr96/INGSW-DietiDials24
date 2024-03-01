@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.LoggedUser;
 
 public class EditProfileActivity extends ComponentActivity {
 
@@ -17,7 +18,7 @@ public class EditProfileActivity extends ComponentActivity {
     Button updateButton;
 
     public EditProfileActivity(){
-        userProfileController = UserProfileController.getInstance();
+        userProfileController = new UserProfileController();
     }
 
     @Override
@@ -47,6 +48,7 @@ public class EditProfileActivity extends ComponentActivity {
     }
 
     private void LoadProfile(){
+
         EditText name = findViewById(R.id.profileEdit_name);
         name.setText(userProfileController.getLoggedUser().getNome());
 

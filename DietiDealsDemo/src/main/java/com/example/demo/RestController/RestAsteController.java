@@ -113,7 +113,7 @@ public class RestAsteController {
 
     @GetMapping(path = "offerta/accettazione/{id}")
     public boolean accettaOfferta(@PathVariable("id")Long offertaId){
-
+        //TODO Da fare
         return true;
     }
 }
