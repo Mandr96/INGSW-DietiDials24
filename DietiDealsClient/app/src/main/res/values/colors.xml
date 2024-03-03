@@ -13,4 +13,6 @@
     <color name="annullaBtnColor">#8DA9A0</color>
     <color name="textBackgroundColor">#FFFFFFFF</color>
     <color name="appBackgroundColor">#748DA9A0</color>
+    <color name="mainTextColor">#252525</color>
+    <color name="smallTextColor">#767676</color>
 </resources>

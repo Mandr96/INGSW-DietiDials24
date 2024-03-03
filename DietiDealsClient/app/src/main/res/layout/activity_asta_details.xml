@@ -3,85 +3,130 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/appBackgroundColor">
 
     <ImageView
         android:id="@+id/image_articolo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="84dp"
+        android:layout_width="214dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/name_articolo"
+        tools:layout_editor_absoluteX="98dp"
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/name_articolo"
+        android:id="@+id/venditore_name"
+        style="@style/midText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Articolo in vendita"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="41dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Enrico Fausti"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_articolo" />
 
     <TextView
-        android:id="@+id/venditore_name"
+        android:id="@+id/scadenza"
+        style="@style/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enrico Fausti"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="241dp" />
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Scade tra: 1g 4h"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offertText" />
 
     <TextView
         android:id="@+id/description_articolo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/smallText"
+        android:layout_width="364dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/textBackgroundColor"
+        android:padding="5dp"
         android:text="Description"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="312dp" />
-
-    <TextView
-        android:id="@+id/priceText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prezzo attuale"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="384dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_articolo" />
 
     <TextView
         android:id="@+id/priceNumber"
+        style="@style/subTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="50,00 €"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/venditore_name" />
+
+    <TextView
+        android:id="@+id/priceText"
+        style="@style/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="50,00 €"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="384dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Prezzo attuale"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/venditore_name" />
 
     <TextView
         android:id="@+id/offertText"
+        style="@style/smallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="La tua ultima offerta"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="455dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
     <TextView
         android:id="@+id/offerNumber"
-        android:layout_width="wrap_content"
+        style="@style/smallText"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="45,00 €"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="455dp" />
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toBottomOf="@+id/priceNumber"
+        tools:layout_editor_absoluteX="180dp" />
 
-    <Button
-        android:id="@+id/back_btn"
+    <TextView
+        android:id="@+id/name_articolo"
+        style="@style/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Indietro"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="556dp" />
+        android:layout_marginStart="24dp"
+        android:text="Articolo in vendita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/confirm_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/btn_confirm"
         android:text="Fai un offerta"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="556dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="105dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

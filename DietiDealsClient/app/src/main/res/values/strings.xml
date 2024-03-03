@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">DietiDealsClient</string>
     <string-array name="aste_types">
-        <item>Tutte</item>
         <item>Classica</item>
         <item>Silenziosa</item>
     </string-array>
     <string-array name="categories">
-        <item>Tutte</item>
         <item>Libri</item>
         <item>Musica e Film</item>
         <item>Elettronica</item>

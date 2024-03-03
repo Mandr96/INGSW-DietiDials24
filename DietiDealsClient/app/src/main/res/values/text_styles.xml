@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title">
+        <item name="android:textColor">@color/mainTextColor</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="subTitle">
+        <item name="android:textColor">@color/mainTextColor</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="midText">
+        <item name="android:textColor">@color/mainTextColor</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="smallText">
+        <item name="android:textColor">@color/smallTextColor</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+</resources>
