@@ -98,7 +98,7 @@ public class AsteRequester {
         result.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("asta/asta/"+ LoggedUser.getInstance().getLoggedUser().getEmail(),true);
+                Response response = RequestUtility.sendGetRequest("asta/partecipate/"+ LoggedUser.getInstance().getLoggedUser().getEmail(),true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
                 result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));

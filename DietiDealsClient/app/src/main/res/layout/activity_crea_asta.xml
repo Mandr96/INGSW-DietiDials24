@@ -15,14 +15,38 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/appBackgroundColor">
+            android:background="@color/appBackgroundColor"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="35dp">
+
+            <ImageView
+                android:id="@+id/hour_up_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleY="-1"
+                android:src="@drawable/icon_caret_down"
+                app:layout_constraintEnd_toEndOf="@+id/new_articolo_hours"
+                app:layout_constraintStart_toStartOf="@+id/new_articolo_hours"
+                app:layout_constraintTop_toTopOf="@+id/day_up_btn" />
+
+            <ImageView
+                android:id="@+id/hour_down_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_caret_down"
+                app:layout_constraintStart_toStartOf="@+id/hour_up_btn"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_hours" />
 
             <ImageView
                 android:id="@+id/new_articolo_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="141dp"
-                tools:layout_editor_absoluteY="71dp"
+                android:layout_width="186dp"
+                android:layout_height="168dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
 
             <EditText
@@ -30,153 +54,212 @@
                 style="@style/midText"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/profile_edit_text"
                 android:ems="10"
                 android:hint="Articolo"
                 android:inputType="text"
                 android:padding="5dp"
-                tools:layout_editor_absoluteX="23dp"
-                tools:layout_editor_absoluteY="227dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_image" />
 
             <EditText
                 android:id="@+id/new_articolo_description"
                 style="@style/midText"
                 android:layout_width="364dp"
                 android:layout_height="100dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/profile_edit_text"
                 android:ems="10"
                 android:gravity="start"
                 android:hint="Descrizione"
                 android:inputType="text"
                 android:padding="5dp"
-                tools:layout_editor_absoluteX="23dp"
-                tools:layout_editor_absoluteY="279dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_name" />
 
             <Spinner
-                android:id="@+id/new_articolo_cat"
+                android:id="@+id/new_articolo_categoria"
                 style="@style/midText"
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/spinner_bg"
                 android:entries="@array/categories"
                 android:padding="5dp"
-                tools:layout_editor_absoluteX="68dp"
-                tools:layout_editor_absoluteY="478dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_type" />
 
             <TextView
                 android:id="@+id/textView_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Tipo di asta"
-                tools:layout_editor_absoluteX="68dp"
-                tools:layout_editor_absoluteY="459dp" />
+                app:layout_constraintStart_toStartOf="@+id/new_articolo_categoria"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_type" />
 
             <Spinner
                 android:id="@+id/new_articolo_type"
                 style="@style/midText"
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/login_edit_text"
                 android:entries="@array/aste_types"
                 android:padding="5dp"
-                tools:layout_editor_absoluteX="68dp"
-                tools:layout_editor_absoluteY="410dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_cat" />
 
             <TextView
                 android:id="@+id/textView_cat"
                 style="@style/smallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Categoria"
-                tools:layout_editor_absoluteX="68dp"
-                tools:layout_editor_absoluteY="391dp" />
+                app:layout_constraintStart_toStartOf="@+id/new_articolo_type"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_description" />
 
             <TextView
                 android:id="@+id/textView_scadenza"
-                style="@style/smallText"
+                style="@style/midText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:text="Durata"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="545dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_categoria" />
 
-            <TimePicker
-                android:layout_width=""
-                android:layout_height=""
 
             <EditText
                 android:id="@+id/new_articolo_minPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/profile_edit_text"
+                android:padding="5dp"
+                android:textAlignment="textEnd"
                 android:ems="10"
+                android:hint="0,00"
                 android:inputType="numberDecimal"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="690dp" />
+                app:layout_constraintStart_toEndOf="@+id/textView_minPrice"
+                app:layout_constraintTop_toBottomOf="@+id/hour_down_btn" />
 
             <TextView
                 android:id="@+id/textView_minPrice"
-                style="@style/smallText"
+                style="@style/midText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:text="Prezzo di partenza"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="670dp" />
+                app:layout_constraintBottom_toBottomOf="@+id/new_articolo_minPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/new_articolo_minPrice" />
 
             <Button
                 android:id="@+id/crea_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btn_confirm"
                 android:text="Crea"
-                tools:layout_editor_absoluteX="255dp"
-                tools:layout_editor_absoluteY="761dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_minPrice" />
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:id="@+id/cancel_btn"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btn_annulla"
                 android:text="Annulla"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="762dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_minPrice" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/new_articolo_hours"
+                android:layout_width="75dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="32dp"
+                android:background="@drawable/profile_edit_text"
+                android:ems="10"
+                android:hint="00"
+                android:inputType="number"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/textView_days"
+                app:layout_constraintTop_toBottomOf="@+id/hour_up_btn" />
+
+            <EditText
+                android:id="@+id/new_articolo_days"
                 android:layout_width="75dp"
                 android:layout_height="35dp"
                 android:background="@drawable/profile_edit_text"
                 android:ems="10"
+                android:hint="7"
                 android:inputType="number"
                 android:textAlignment="center"
-                tools:layout_editor_absoluteX="231dp"
-                tools:layout_editor_absoluteY="591dp" />
-
-            <EditText
-                android:id="@+id/editTextNumber"
-                android:layout_width="75dp"
-                android:layout_height="35dp"
-                android:background="@drawable/profile_edit_text"
-                android:ems="10"
-                android:inputType="number"
-                android:textAlignment="center"
-                tools:layout_editor_absoluteX="48dp"
-                tools:layout_editor_absoluteY="588dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/day_up_btn" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView_hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="Hours"
                 android:textSize="24sp"
-                tools:layout_editor_absoluteX="309dp"
-                tools:layout_editor_absoluteY="593dp" />
+                app:layout_constraintBottom_toBottomOf="@+id/new_articolo_hours"
+                app:layout_constraintStart_toEndOf="@+id/new_articolo_hours"
+                app:layout_constraintTop_toTopOf="@+id/new_articolo_hours" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="Days"
                 android:textSize="24sp"
-                tools:layout_editor_absoluteX="123dp"
-                tools:layout_editor_absoluteY="591dp" />
+                app:layout_constraintBottom_toBottomOf="@+id/new_articolo_days"
+                app:layout_constraintStart_toEndOf="@+id/new_articolo_days"
+                app:layout_constraintTop_toTopOf="@+id/new_articolo_days" />
+
+            <ImageView
+                android:id="@+id/day_down_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_caret_down"
+                app:layout_constraintStart_toStartOf="@+id/day_up_btn"
+                app:layout_constraintTop_toBottomOf="@+id/new_articolo_days" />
+
+            <ImageView
+                android:id="@+id/day_up_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scaleY="-1"
+                android:src="@drawable/icon_caret_down"
+                app:layout_constraintEnd_toEndOf="@+id/new_articolo_days"
+                app:layout_constraintStart_toStartOf="@+id/new_articolo_days"
+                app:layout_constraintTop_toBottomOf="@+id/textView_scadenza" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
