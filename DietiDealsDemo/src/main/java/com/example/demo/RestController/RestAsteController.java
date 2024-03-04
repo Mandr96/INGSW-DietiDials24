@@ -118,12 +118,14 @@ public class RestAsteController {
     }
 
     @GetMapping(path = "asta/partecipate/{email}")
-    public List<Asta> getAstePartecipate(@PathVariable("id") String email) {
+    public List<Asta> getAstePartecipate(@PathVariable("email") String email) {
         List<Asta> result = new ArrayList<>();
         List<Offerta> userOffers = offerteRep.findByUser(email);
         for (Offerta offerta : userOffers) {
+            System.out.println("offerta" + offerta + " id " + offerta);
             result.add(asteRep.getAstaByOffer(offerta.getId()));
         }
+        System.out.println("ret" + result );
         return result;
     }
 }

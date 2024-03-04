@@ -34,4 +34,19 @@ public class AstaClassica extends Asta {
         super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
         this.minPrice = minPrice;
     }
+
+    public AstaClassica(Timestamp scadenza,
+                        String nomeProdotto,
+                        String descrizione,
+                        String cat,
+                        File img,
+                        Utente creatore,
+                        Float minPrice) {
+        super(scadenza, nomeProdotto, descrizione, cat, img, creatore);
+        this.minPrice = minPrice;
+    }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(true);
+    }
 }

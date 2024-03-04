@@ -35,6 +35,34 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.331" />
 
+        <Button
+            android:id="@+id/home_compratore_cerca_aste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="53dp"
+            android:text="Cerca Aste"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_compratore_crea_asta_inversa"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.854" />
+
+        <Button
+            android:id="@+id/home_compratore_crea_asta_inversa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="62dp"
+            android:text="Crea asta inversa"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/home_compratore_cerca_aste"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

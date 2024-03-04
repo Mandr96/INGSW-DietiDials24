@@ -111,9 +111,9 @@ public class AsteRequester {
         return result.get();
     }
 
-    public Integer inserisciAsta(Asta asta) throws InterruptedException {
-        AtomicReference<Integer> astaID = new AtomicReference<>();
-        astaID.set(-1);
+    public Long inserisciAsta(Asta asta) throws InterruptedException {
+        AtomicReference<Long> astaID = new AtomicReference<>();
+        astaID.set(-1L);
         Thread t = new Thread(() -> {
             try {
                 var mapper = new ObjectMapper();
@@ -122,7 +122,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendPostRequest("asta/nuova", true, json);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                astaID.set(Integer.valueOf(jsBody));
+                astaID.set(Long.valueOf(jsBody));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

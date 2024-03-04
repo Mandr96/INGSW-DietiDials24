@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.dietidealsclient.AsteAdapterList;
+import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
@@ -22,6 +23,11 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private RecyclerView recyclerView;
     private AsteAdapterList adapter;
+    private AsteController asteController;
+
+    public HomeCompratoreActivity(){
+        asteController = new AsteController();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -29,23 +35,30 @@ public class HomeCompratoreActivity extends ComponentActivity {
         setContentView(R.layout.activity_home_compratore);
         inizializeProfile();
         updateAsteList();
+
+
+
+        findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
+            try {
+                asteController.getAstePartecipateDaUtente();
+            } catch (InterruptedException e) {
+                Log.e("AsteController - getAstePartecipateDaUtente()","gg");
+            }
+//            gotoCercaAsteActivity();
+        });
+
+        findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
+            gotoCercaCreaAstaActivity();
+        });
     }
+
+
 
     private void updateAsteList() {
         recyclerView = findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Asta> data = LoggedUser.getInstance().getLoggedUser().getAste();
-        //TEST  TEST  TEST  TEST  TEST  TEST
-//        AsteRequester astReq = new AsteRequester();
-//        Asta tmp;
-//        try {
-//            tmp = astReq.getAstaById(1L);
-//            data.add(tmp);
-//            tmp = astReq.getAstaById(2L);
-//            data.add(tmp);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        } //TEST  TEST  TEST  TEST  TEST  TEST  TEST
+        List<Asta> data = asteController.getAsteUtente(AsteController.tipoHomepage.VENDITORE);
+
         adapter = new AsteAdapterList(data);
         recyclerView.setAdapter(adapter);
     }
@@ -60,6 +73,19 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private void goToEditProfileActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, EditProfileActivity.class);
+        HomeCompratoreActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    private void gotoCercaAsteActivity() {
+        Intent myIntent = new Intent(HomeCompratoreActivity.this, CercaAsteActivity.class);
+        myIntent.putExtra("TIPO","COMPRATORE");
+        HomeCompratoreActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    private void gotoCercaCreaAstaActivity() {
+        Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
         HomeCompratoreActivity.this.startActivity(myIntent);
         finish();
     }
