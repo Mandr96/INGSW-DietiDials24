@@ -86,6 +86,7 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private void gotoCercaCreaAstaActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
+        myIntent.putExtra("TIPO","COMPRATORE");
         HomeCompratoreActivity.this.startActivity(myIntent);
         finish();
     }

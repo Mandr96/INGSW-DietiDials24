@@ -21,6 +21,9 @@ public class LoginActivity extends ComponentActivity {
     Button buttonLogin, buttonRegister;
     TextView errorText;
 
+    String email = "prova";
+    String password= "1234";
+
     public LoginActivity() {
         userProfileController = new UserProfileController();
     }
@@ -48,10 +51,12 @@ public class LoginActivity extends ComponentActivity {
     }
 
     private boolean TryLogin() {
-        String email = ((EditText)findViewById(R.id.login_editTextEmail)).getText().toString();
-        String password = ((EditText)findViewById(R.id.login_editTextPassword)).getText().toString();
+        String tmpEmail = ((EditText)findViewById(R.id.login_editTextEmail)).getText().toString();
+        String tmpPassword = ((EditText)findViewById(R.id.login_editTextPassword)).getText().toString();
 
-        if(!password.isEmpty() || !email.isEmpty()){
+        if(!tmpPassword.isEmpty() || !tmpEmail.isEmpty()){
+            email = tmpEmail;
+            password = tmpPassword;
             try {
                 userProfileController.Login(email,password);
                 return true;

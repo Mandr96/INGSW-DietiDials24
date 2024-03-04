@@ -13,7 +13,7 @@ public class CercaAsteActivity extends ComponentActivity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         Bundle datipassati = getIntent().getExtras();
-        String tipo = datipassati.getString("tipo");
-        Log.e("TIPO PASSATO",tipo);
+        String tipoUtente = datipassati.getString("tipo");
+        Log.e("TIPO PASSATO",tipoUtente);
     }
 }

@@ -1,18 +1,46 @@
 package com.main.dietidealsclient.Activity;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresExtension;
 
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.R;
 
-public class CreaAstaActivity extends ComponentActivity {
+import java.io.File;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.TemporalUnit;
+import java.util.Date;
 
+import kotlin.time.TimedValue;
+
+public class CreaAstaActivity extends ComponentActivity {
+    String type = "AstaClassica";
+    String name = null;
+    String description = null;
+    String cat = null;
+    Float minPrice = null;
+    Date scadenza = null;
+    File imageFile = null;
+    ImageView imagePreview;
+    ActivityResultLauncher<Intent> resultLauncher;
     AsteController asteController;
 
     public CreaAstaActivity(){
@@ -22,27 +50,98 @@ public class CreaAstaActivity extends ComponentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_crea_asta);
+        setContentView(R.layout.activity_crea_asta);
 
-//        findViewById(R.id.crea_btn).setOnClickListener(view -> {
-//            try {
-//                InserisciAsta();
-//            } catch (InterruptedException e) {
-//                Toast.makeText(this, "Inpossibile inserire asta",Toast.LENGTH_LONG).show();
-//            }
-//        });
+        String userType = getIntent().getExtras().getString("TIPO");
+        imagePreview = findViewById(R.id.new_articolo_image);
+        registerResult();
+
+        if(userType.equals("VENDITORE")) {
+            findViewById(R.id.type).setVisibility(View.INVISIBLE);
+            findViewById(R.id.textView_type).setVisibility(View.INVISIBLE);
+            type = "AstaInversa";
+        }
+
+        findViewById(R.id.crea_btn).setOnClickListener(view -> {
+            try {
+                InserisciAsta();
+            } catch (InterruptedException e) {
+                Toast.makeText(this, "Impossibile inserire asta",Toast.LENGTH_LONG).show();
+            }
+        });
+        imagePreview.setOnClickListener(view -> {
+            imageChooser();
+        });
     }
 
     private void InserisciAsta() throws InterruptedException {
-//        String name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
-//        String description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
-//        String cat = ((Spinner)findViewById(R.id.new_articolo_cat)).getSelectedItem().toString(); //TODO da provare
-//        String type = ((Spinner)findViewById(R.id.new_articolo_type)).getSelectedItem().toString(); //TODO da provare
-//        String tmpStr = ((EditText)findViewById(R.id.new_articolo_minPrice)).getText().toString();
-//        Float minPrice = Float.parseFloat(tmpStr);
-//
-//        //TODO controlli
-//
-//        asteController.createNewAsta(null,name,description,cat,null,type,minPrice);
+        name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
+        description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
+        cat = ((Spinner)findViewById(R.id.categoria)).getSelectedItem().toString().replace(" ", "_");
+        type = ((Spinner)findViewById(R.id.type)).getSelectedItem().toString();
+        //Prezzo minimo
+        String tmpStr = ((EditText)findViewById(R.id.new_articolo_minPrice)).getText().toString();
+        minPrice = Float.parseFloat(tmpStr);
+        //Calcolo scadenza
+        int days = Integer.parseInt(((EditText)findViewById(R.id.new_articolo_days)).getText().toString());
+        int hours = Integer.parseInt(((EditText)findViewById(R.id.new_articolo_hours)).getText().toString());
+        scadenza = Timestamp.from(Instant.now().plusSeconds(days*24*60*60).plusSeconds(hours*60*60));
+        //Image setting
+        imageFile = new File(imagePreview.getTag().toString());
+        //Controlli
+        if(name.isBlank()) {
+            Toast.makeText(this, "Inserisci l'articolo", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(description.isBlank()) {
+            Toast.makeText(this, "Inserisci una descrizione", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(!(minPrice > 0)) {
+            Toast.makeText(this, "Valore offerta minima non valido", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(cat == null) {
+            Toast.makeText(this, "Inserisci una categoria", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(scadenza.before(Timestamp.from(Instant.now()))) {
+            Toast.makeText(this, "Scadenza non valida", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        asteController.createNewAsta(new Timestamp(scadenza.toInstant().getEpochSecond()),name,description,cat,imageFile,type,minPrice);
+        gotoHomeCompratore();
+        Toast.makeText(this, "Asta creata", Toast.LENGTH_SHORT).show();
+    }
+
+    @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
+    void imageChooser() {
+        Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+        resultLauncher.launch(intent);
+    }
+
+    void registerResult() {
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        try {
+                            Uri imageUri = result.getData().getData();
+                            imagePreview.setImageURI(imageUri);
+                            imagePreview.setTag(imageUri.toString());
+                        }
+                        catch (Exception e) {
+                            Toast.makeText(CreaAstaActivity.this, "Nessun immagine selezionata", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void gotoHomeCompratore() {
+        Intent myIntent = new Intent(CreaAstaActivity.this, HomeCompratoreActivity.class);
+        CreaAstaActivity.this.startActivity(myIntent);
+        finish();
     }
 }
