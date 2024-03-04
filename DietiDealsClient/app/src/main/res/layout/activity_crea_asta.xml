@@ -83,7 +83,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/new_articolo_name" />
 
             <Spinner
-                android:id="@+id/new_articolo_categoria"
+                android:id="@+id/categoria"
                 style="@style/midText"
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
@@ -101,11 +101,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Tipo di asta"
-                app:layout_constraintStart_toStartOf="@+id/new_articolo_categoria"
-                app:layout_constraintTop_toBottomOf="@+id/new_articolo_type" />
+                app:layout_constraintStart_toStartOf="@+id/categoria"
+                app:layout_constraintTop_toBottomOf="@+id/type" />
 
             <Spinner
-                android:id="@+id/new_articolo_type"
+                android:id="@+id/type"
                 style="@style/midText"
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Categoria"
-                app:layout_constraintStart_toStartOf="@+id/new_articolo_type"
+                app:layout_constraintStart_toStartOf="@+id/type"
                 app:layout_constraintTop_toBottomOf="@+id/new_articolo_description" />
 
             <TextView
@@ -136,7 +136,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Durata"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_articolo_categoria" />
+                app:layout_constraintTop_toBottomOf="@+id/categoria" />
 
 
             <EditText

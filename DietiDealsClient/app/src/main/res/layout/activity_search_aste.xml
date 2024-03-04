@@ -1,74 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/appBackgroundColor">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/image_back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cercaAsta_title"
+        style="@style/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Cerca un'asta"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="99dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <EditText
         android:id="@+id/keyword_edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/login_edit_text"
+        android:drawableEnd="@drawable/icon_search"
         android:ems="10"
-        android:hint="cerca"
+        android:hint="Cerca..."
         android:inputType="text"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="211dp" />
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cercaAsta_title" />
 
     <Spinner
-        android:id="@+id/categoria_selection"
-        android:layout_width="250dp"
+        android:id="@+id/categoria"
+        style="@style/midText"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/spinner_bg"
         android:entries="@array/categories"
-        android:spinnerMode="dialog"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="320dp" />
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cat_text" />
 
     <Spinner
-        android:id="@+id/type_selection"
-        android:layout_width="250dp"
+        android:id="@+id/type"
+        style="@style/midText"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/login_edit_text"
         android:entries="@array/aste_types"
-        android:spinnerMode="dropdown"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="408dp" />
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_text" />
 
     <Button
         android:id="@+id/search_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_confirm"
         android:text="Cerca"
-        tools:layout_editor_absoluteX="247dp"
-        tools:layout_editor_absoluteY="631dp" />
-
-    <Button
-        android:id="@+id/goBack_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indietro"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="631dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type" />
 
     <TextView
         android:id="@+id/cat_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
         android:text="Categoria"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="294dp" />
+        app:layout_constraintStart_toStartOf="@+id/categoria"
+        app:layout_constraintTop_toBottomOf="@+id/keyword_edit_text" />
 
     <TextView
-        android:id="@+id/cat_text"
+        android:id="@+id/type_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="Tipo di asta"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="379dp" />
+        app:layout_constraintStart_toStartOf="@+id/type"
+        app:layout_constraintTop_toBottomOf="@+id/categoria" />
 </androidx.constraintlayout.widget.ConstraintLayout>
