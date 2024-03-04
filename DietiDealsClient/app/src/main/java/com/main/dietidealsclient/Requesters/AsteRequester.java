@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Model.Utente;
+import com.main.dietidealsclient.Utility.LoggedUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +81,24 @@ public class AsteRequester {
         Thread t = new Thread(() -> {
             try {
                 Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+categoria+"/"+kw+"/"+pag,true);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received: " + jsBody);
+                result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return result.get();
+    }
+
+    public List<Asta> getAstePartecipate() throws InterruptedException {
+        AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();
+        result.set(new ArrayList<>());
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendGetRequest("asta/asta/"+ LoggedUser.getInstance().getLoggedUser().getEmail(),true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
                 result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));

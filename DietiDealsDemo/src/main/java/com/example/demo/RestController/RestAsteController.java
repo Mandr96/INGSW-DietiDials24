@@ -116,4 +116,14 @@ public class RestAsteController {
         //TODO Da fare
         return true;
     }
+
+    @GetMapping(path = "asta/partecipate/{email}")
+    public List<Asta> getAstePartecipate(@PathVariable("id") String email) {
+        List<Asta> result = new ArrayList<>();
+        List<Offerta> userOffers = offerteRep.findByUser(email);
+        for (Offerta offerta : userOffers) {
+            result.add(asteRep.getAstaByOffer(offerta.getId()));
+        }
+        return result;
+    }
 }

@@ -20,6 +20,12 @@ public interface AsteRepository extends JpaRepository<Asta, Long> {
             nativeQuery = true)
     public List<Asta> searchAste(String tipo, String categoria, String kw, int rowOffset);
 
+    @Query(value =
+                    "SELECT a.* FROM Asta a, Offerta o " +
+                    "WHERE a.id = o.asta_id and o.id = ?1",
+            nativeQuery = true)
+    public Asta getAstaByOffer(Long offerID);
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE asta SET scaduta = true WHERE id = ?1",
