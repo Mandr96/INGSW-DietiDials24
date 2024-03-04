@@ -18,15 +18,14 @@
             style="@style/login"
             android:layout_width="175dp"
             android:layout_height="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:background="@drawable/profile_edit_text"
             android:ems="10"
             android:inputType="text"
             android:text="Name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.838"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -34,86 +33,86 @@
             style="@style/login"
             android:layout_width="175dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="89dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/profile_edit_text"
             android:ems="10"
             android:inputType="text"
             android:text="Name"
-            app:layout_constraintBottom_toTopOf="@+id/profileEdit_bio"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.838"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileEdit_name"
-            app:layout_constraintVertical_bias="0.521" />
+            app:layout_constraintTop_toBottomOf="@+id/profileEdit_name" />
 
         <EditText
             android:id="@+id/profileEdit_bio"
             style="@style/login"
             android:layout_width="350dp"
             android:layout_height="100dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/profile_edit_text"
             android:ems="10"
             android:gravity="start|top"
             android:hint="My bio"
             android:inputType="textMultiLine"
-            app:layout_constraintBottom_toTopOf="@+id/profileEdit_link1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/profileEdit_link1"
             style="@style/login"
             android:layout_width="350dp"
             android:layout_height="43dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/profile_edit_text"
             android:drawableStart="@drawable/icon_facebook"
-            android:text="TextView"
-            android:gravity="center_vertical"
             android:drawablePadding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/profileEdit_link2"
+            android:gravity="center_vertical"
+            android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEdit_bio" />
 
         <TextView
             android:id="@+id/profileEdit_link2"
             style="@style/login"
             android:layout_width="350dp"
             android:layout_height="43dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/profile_edit_text"
             android:drawableStart="@drawable/icon_instagram"
-            android:text="TextView"
-            android:gravity="center_vertical"
             android:drawablePadding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/profileEdit_updateBtton"
+            android:gravity="center_vertical"
+            android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/profileEdit_link1" />
 
 
         <Button
             android:id="@+id/profileEdit_updateBtton"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="64dp"
             android:background="@drawable/btn_confirm"
             android:text="Conferma"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEdit_link2" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="34dp"
-            tools:layout_editor_absoluteY="43dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
