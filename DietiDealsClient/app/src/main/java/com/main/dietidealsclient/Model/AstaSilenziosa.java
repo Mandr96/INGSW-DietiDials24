@@ -31,7 +31,21 @@ public class AstaSilenziosa extends Asta{
         super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
     }
 
+
+    public AstaSilenziosa(Timestamp scadenza,
+                          String nomeProdotto,
+                          String descrizione,
+                          String cat,
+                          File img,
+                          Utente creatore) {
+        super(scadenza, nomeProdotto, descrizione, cat, img, creatore);
+    }
+
     public List<Notifica> chiudi() {
         return new ArrayList<Notifica>();
+    }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(true);
     }
 }

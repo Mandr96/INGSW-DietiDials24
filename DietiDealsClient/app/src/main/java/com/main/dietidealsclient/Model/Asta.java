@@ -1,5 +1,7 @@
 package com.main.dietidealsclient.Model;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.annotation.*;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +27,10 @@ import java.util.List;
 
 public abstract class Asta {
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     protected Long id;
     protected Timestamp scadenza;
     protected String categoria;
@@ -45,6 +51,17 @@ public abstract class Asta {
         this.descrizione = descrizione;
         this.img = img;
         this.scaduta = scaduta;
+        this.creatore = creatore;
+    }
+
+    public Asta(Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Utente creatore) {
+        this.id = 0L;
+        this.scadenza = scadenza;
+        this.categoria = categoria;
+        this.nomeProdotto = nomeProdotto;
+        this.descrizione = descrizione;
+        this.img = img;
+        this.scaduta = false;
         this.creatore = creatore;
     }
 
@@ -84,5 +101,32 @@ public abstract class Asta {
     @JsonGetter("creatore")
     public String getCreatore() {
         return creatore.getEmail();
+    }
+
+    public abstract Offerta getBestOffer();
+
+    public List<Offerta> getOfferte(){
+        return offerte;
+    }
+
+    public void setOfferte(List<Offerta> offerte){
+        this.offerte = offerte;
+    }
+
+    protected Offerta getBestOfferIn(boolean maggiore){
+        Log.e("AsteController - getAstePartecipateDaUtente()","Offerte array" + offerte);
+        if(offerte == null || offerte.isEmpty()){
+            return null;
+        }
+        Offerta bestOff = offerte.get(0);
+        Log.e("AsteController - getAstePartecipateDaUtente()","PreFOR" + bestOff);
+        for (Offerta thisOff : offerte){
+            if ( maggiore && (bestOff.getValore() < thisOff.getValore())){
+                bestOff = thisOff;
+            } else if (!maggiore && (bestOff.getValore() < thisOff.getValore())){
+                bestOff = thisOff;
+            }
+        }
+        return bestOff;
     }
 }

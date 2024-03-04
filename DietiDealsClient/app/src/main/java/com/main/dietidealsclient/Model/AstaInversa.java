@@ -33,4 +33,20 @@ public class AstaInversa extends Asta {
         super(id, scadenza, nomeProdotto, descrizione, cat, img, scaduta, creatore);
         this.minOffer = minOffer;
     }
+
+
+    public AstaInversa(Timestamp scadenza,
+                        String nomeProdotto,
+                        String descrizione,
+                        String cat,
+                        File img,
+                        Utente creatore,
+                        Float minOffer) {
+        super(scadenza, nomeProdotto, descrizione, cat, img, creatore);
+        this.minOffer = minOffer;
+    }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(false);
+    }
 }

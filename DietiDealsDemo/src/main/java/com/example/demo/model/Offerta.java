@@ -31,8 +31,6 @@ public class Offerta {
     )
     private Long id;
     private Float valore;
-    @Setter
-    @Getter
     private Timestamp data;
     private Boolean attiva;
     @ManyToOne

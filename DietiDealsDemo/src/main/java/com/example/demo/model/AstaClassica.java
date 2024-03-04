@@ -24,6 +24,7 @@ public class AstaClassica extends Asta{
         this.minPrice = minPrice;
     }
 
+    //TODO Sistemare
     public List<Notifica> chiudi() {
         List<Notifica> notifiche = new ArrayList<Notifica>();
         if(!offerte.isEmpty()){
