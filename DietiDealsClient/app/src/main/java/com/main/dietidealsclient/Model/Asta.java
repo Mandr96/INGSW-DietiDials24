@@ -43,6 +43,7 @@ public abstract class Asta {
     @JsonIgnore
     protected List<Offerta> offerte;
 
+    @JsonCreator
     public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta, Utente creatore) {
         this.id = id;
         this.scadenza = scadenza;
@@ -103,6 +104,7 @@ public abstract class Asta {
         return creatore.getEmail();
     }
 
+    @JsonIgnore
     public abstract Offerta getBestOffer();
 
     public List<Offerta> getOfferte(){

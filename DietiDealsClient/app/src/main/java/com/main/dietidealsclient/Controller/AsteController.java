@@ -29,7 +29,6 @@ public class AsteController {
 
     public Long createNewAsta(Timestamp scadenza, String name, String description, String cat, File img, String type, Float minPrice) throws InterruptedException {
         Asta asta = null;
-        //TODO Da testare
         if(type.equals("Classica")){
             asta = new AstaClassica(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser(), minPrice);
         } else if(type.equals("Silenziosa")){

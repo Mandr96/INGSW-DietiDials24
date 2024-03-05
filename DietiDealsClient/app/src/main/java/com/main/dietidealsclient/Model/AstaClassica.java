@@ -1,6 +1,7 @@
 package com.main.dietidealsclient.Model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +47,12 @@ public class AstaClassica extends Asta {
         this.minPrice = minPrice;
     }
 
+    @JsonIgnore
     public Offerta getBestOffer(){
         return getBestOfferIn(true);
+    }
+
+    public Float getMinPrice() {
+        return minPrice;
     }
 }

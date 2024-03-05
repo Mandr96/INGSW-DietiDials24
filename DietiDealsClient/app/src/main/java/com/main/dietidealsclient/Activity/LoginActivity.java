@@ -33,7 +33,7 @@ public class LoginActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        MainTest.start();
+        //MainTest.start();
 
         buttonLogin = findViewById(R.id.loginButton);
         buttonRegister = findViewById(R.id.gotoRegisterButton);

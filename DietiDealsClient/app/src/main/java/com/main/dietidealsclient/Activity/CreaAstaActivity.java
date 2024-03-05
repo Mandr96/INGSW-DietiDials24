@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ext.SdkExtensions;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,6 +41,7 @@ public class CreaAstaActivity extends ComponentActivity {
     Float minPrice = null;
     Date scadenza = null;
     File imageFile = null;
+    //TODO set default image
     ImageView imagePreview;
     ActivityResultLauncher<Intent> resultLauncher;
     AsteController asteController;
@@ -70,7 +73,7 @@ public class CreaAstaActivity extends ComponentActivity {
             }
         });
         imagePreview.setOnClickListener(view -> {
-            imageChooser();
+                imageChooser();
         });
     }
 
@@ -87,7 +90,9 @@ public class CreaAstaActivity extends ComponentActivity {
         int hours = Integer.parseInt(((EditText)findViewById(R.id.new_articolo_hours)).getText().toString());
         scadenza = Timestamp.from(Instant.now().plusSeconds(days*24*60*60).plusSeconds(hours*60*60));
         //Image setting
-        imageFile = new File(imagePreview.getTag().toString());
+        if(imagePreview.getTag() != null && !imagePreview.getTag().toString().isBlank()) {
+            imageFile = new File(imagePreview.getTag().toString());
+        }
         //Controlli
         if(name.isBlank()) {
             Toast.makeText(this, "Inserisci l'articolo", Toast.LENGTH_LONG).show();
@@ -97,7 +102,7 @@ public class CreaAstaActivity extends ComponentActivity {
             Toast.makeText(this, "Inserisci una descrizione", Toast.LENGTH_LONG).show();
             return;
         }
-        else if(!(minPrice > 0)) {
+        else if(minPrice == null || !(minPrice > 0)) {
             Toast.makeText(this, "Valore offerta minima non valido", Toast.LENGTH_LONG).show();
             return;
         }
@@ -110,14 +115,13 @@ public class CreaAstaActivity extends ComponentActivity {
             return;
         }
 
-        asteController.createNewAsta(new Timestamp(scadenza.toInstant().getEpochSecond()),name,description,cat,imageFile,type,minPrice);
+        asteController.createNewAsta(new Timestamp(scadenza.getTime()),name,description,cat,imageFile,type,minPrice);
         gotoHomeCompratore();
         Toast.makeText(this, "Asta creata", Toast.LENGTH_SHORT).show();
     }
 
-    @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
     void imageChooser() {
-        Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         resultLauncher.launch(intent);
     }
 
