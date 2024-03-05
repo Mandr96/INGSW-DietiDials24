@@ -17,7 +17,6 @@ import com.main.dietidealsclient.Requesters.AsteRequester;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeCompratoreActivity extends ComponentActivity {
@@ -40,7 +39,8 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
 
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
-            gotoCercaAsteActivity();
+            asteController.getAstePartecipateDaCompratore();
+            // gotoCercaAsteActivity();
         });
 
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
@@ -54,8 +54,10 @@ public class HomeCompratoreActivity extends ComponentActivity {
         recyclerView = findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Asta> data = asteController.getAsteUtente(AsteController.tipoHomepage.VENDITORE);
+        List<Asta> astePartecipate = asteController.getAstePartecipateDaCompratore();
 
         adapter = new AsteAdapterList(data);
+        adapter = new AsteAdapterList(astePartecipate);
         recyclerView.setAdapter(adapter);
     }
 

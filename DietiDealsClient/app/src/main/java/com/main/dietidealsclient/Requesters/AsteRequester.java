@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Requesters;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Offerta;
@@ -47,7 +48,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendGetRequest("offerta/byUser/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
-                offerte.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                offerte.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Offerta>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -65,7 +66,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendGetRequest("offerta/byAsta/" + astaID, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                offerte.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                offerte.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Offerta>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -83,7 +84,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+categoria+"/"+kw+"/"+pag,true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                result.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Asta>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -101,7 +102,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendGetRequest("asta/partecipate/"+ LoggedUser.getInstance().getLoggedUser().getEmail(),true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                result.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                result.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Asta>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -132,10 +133,9 @@ public class AsteRequester {
         return astaID.get();
     }
 
-    //TODO da testare
     public Long inviaOfferta(Offerta offer) throws InterruptedException {
         AtomicReference<Long> offerID = new AtomicReference<>();
-        offerID.set(1L);
+        offerID.set(-1L);
         Thread t = new Thread(() -> {
             try {
                 var mapper = new ObjectMapper();

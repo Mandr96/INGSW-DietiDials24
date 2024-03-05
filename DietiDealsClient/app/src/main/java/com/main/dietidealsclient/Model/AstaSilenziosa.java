@@ -48,4 +48,8 @@ public class AstaSilenziosa extends Asta{
     public Offerta getBestOffer(){
         return getBestOfferIn(true);
     }
+
+    public String getTypeAsString() {
+        return "Asta Silenziosa";
+    }
 }

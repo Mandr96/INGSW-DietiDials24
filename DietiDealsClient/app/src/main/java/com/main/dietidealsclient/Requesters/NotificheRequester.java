@@ -2,7 +2,9 @@ package com.main.dietidealsclient.Requesters;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Notifica;
 import com.main.dietidealsclient.Model.Offerta;
 
@@ -24,7 +26,7 @@ public class NotificheRequester {
                 Response response = RequestUtility.sendGetRequest("all/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
-                notifiche.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                notifiche.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Notifica>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -43,7 +45,7 @@ public class NotificheRequester {
                 Response response = RequestUtility.sendGetRequest("unread/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
-                notifiche.set(new ObjectMapper().readValue(jsBody, ArrayList.class));
+                notifiche.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Notifica>>() {}));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

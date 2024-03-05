@@ -49,4 +49,8 @@ public class AstaInversa extends Asta {
     public Offerta getBestOffer(){
         return getBestOfferIn(false);
     }
+
+    public String getTypeAsString() {
+        return "Asta Inversa";
+    }
 }

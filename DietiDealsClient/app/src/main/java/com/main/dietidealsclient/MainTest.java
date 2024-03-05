@@ -5,26 +5,12 @@ import android.util.Log;
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
-import com.main.dietidealsclient.Model.AstaInversa;
-import com.main.dietidealsclient.Model.Notifica;
 import com.main.dietidealsclient.Model.Offerta;
-import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.AsteRequester;
-import com.main.dietidealsclient.Requesters.RequestUtility;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.security.auth.login.LoginException;
-
-import okhttp3.Response;
 
 
 public class MainTest {
@@ -41,17 +27,10 @@ public class MainTest {
 
             Asta asta = new AstaClassica(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
             asta.setId(asteRequester.inserisciAsta(asta));
-            asteRequester.inviaOfferta(new Offerta(2L,40.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
-
-            Log.d("RES TEST" , "asteController.getAstePartecipateDaUtente().toString()");
+            asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
+            Log.d("RES TEST" , "asteController.getAstePartecipateDaCompratore().toString()");
             AsteController asteController = new AsteController();
-//            Log.d("RES TEST" , "asteController.getAstePartecipateDaUtente().toString() " + asteController.getAstePartecipateDaUtente().toString());
-//            Log.d("RES TEST" , "asteController.getAstePartecipateDaUtente().toString()" + asteController.getAstePartecipateDaUtente());
-
-            List<Asta> a = asteRequester.cercaAsta("AstaClassica", "any", "nomeprod", 0);
-//            Asta as = a.get(0);
-            Log.d("TEST",a.toString());
-
+            Log.d("RES TEST" , asteController.getAstePartecipateDaCompratore().toString());
 
 //            Asta retrievedAsta = asteRequester.getAstaById(1L);
 //            List<Asta> aste = asteRequester.cercaAsta("AstaSilenziosa", "any", "cosa", 0);
@@ -64,5 +43,3 @@ public class MainTest {
         }
     }
 }
-
-

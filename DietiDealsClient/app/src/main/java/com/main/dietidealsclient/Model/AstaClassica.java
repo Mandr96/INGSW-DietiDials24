@@ -55,4 +55,8 @@ public class AstaClassica extends Asta {
     public Float getMinPrice() {
         return minPrice;
     }
+
+    public String getTypeAsString() {
+        return "Asta Classica";
+    }
 }
