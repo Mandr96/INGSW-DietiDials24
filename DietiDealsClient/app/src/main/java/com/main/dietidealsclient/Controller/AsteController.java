@@ -1,5 +1,7 @@
 package com.main.dietidealsclient.Controller;
 
+import android.util.Log;
+
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
@@ -38,23 +40,20 @@ public class AsteController {
         return asteRequester.inserisciAsta(asta);
     }
 
-    public enum UserType {
-        VENDITORE,
-        COMPRATORE
-    }
     /** Restituisce le aste dell utente loggato
      * @param tipo (venditore - compratore)
      * @return lista di aste
      */
-    public List<Asta> getAsteUtente(UserType tipo){
+    public List<Asta> getAsteUtente(TipoAccount tipo){
         List<Asta> aste = new ArrayList<Asta>();
         for (Asta asta : LoggedUser.getInstance().getLoggedUser().getAste()){
-            if(tipo.equals(UserType.VENDITORE) && asta.getClass().equals(AstaInversa.class)){
+            if(tipo.equals(TipoAccount.COMPRATORE) && asta instanceof AstaInversa){
                 aste.add(asta);
-            } else if (tipo.equals(UserType.COMPRATORE) && (asta.getClass().equals(AstaClassica.class) || asta.getClass().equals(AstaSilenziosa.class))){
+            } else if (tipo.equals(TipoAccount.VENDITORE) && (asta.getClass().equals(AstaClassica.class) || asta.getClass().equals(AstaSilenziosa.class))){
                 aste.add(asta);
             }
         }
+        Log.d("myDebug getAsteUtente" , aste.toString());
         return aste;
     }
 
@@ -71,10 +70,28 @@ public class AsteController {
         return results;
     }
 
-    public List<Offerta> getOfferteUtente() throws InterruptedException {
-//        asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
-//        LoggedUser.getInstance().getLoggedUser().getOfferte();
-        return asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
+//    public List<Offerta> getOfferteUtente() throws InterruptedException {
+////        asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
+////        LoggedUser.getInstance().getLoggedUser().getOfferte();
+//        return asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
+//    }
+
+    public List<Asta> getAstePartecipate(TipoAccount userType){
+        List<Asta> aste = null;
+        try { aste = asteRequester.getAstePartecipate();} catch (InterruptedException e) {throw new RuntimeException(e);}
+        if (userType.equals(TipoAccount.VENDITORE)){
+            // SOLO ASTE INVERSE
+            aste.removeIf(asta -> !(asta instanceof AstaInversa));
+
+        } else if (userType.equals(TipoAccount.COMPRATORE)){
+            // RIMOZIONE ASTE INVERSE
+            aste.removeIf(asta -> asta instanceof AstaInversa);
+        }
+        // RECUPERO OFFERTE
+        for (Asta asta : aste) {
+            try {asta.setOfferte(asteRequester.getOfferteByAsta(asta.getId()));} catch (InterruptedException e) {throw new RuntimeException(e);}
+        }
+        return aste;
     }
 
     public List<Asta> getAstePartecipateDaCompratore() {

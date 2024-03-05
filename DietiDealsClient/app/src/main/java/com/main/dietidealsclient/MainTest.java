@@ -3,12 +3,19 @@ package com.main.dietidealsclient;
 import android.util.Log;
 
 import com.main.dietidealsclient.Controller.AsteController;
+import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
+import com.main.dietidealsclient.Model.AstaInversa;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Requesters.AsteRequester;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 import javax.security.auth.login.LoginException;
 
@@ -25,12 +32,13 @@ public class MainTest {
             userRequester.jwtLogin("prova", "1234");
             LoggedUser.getInstance().setLoggedUser(userRequester.getUtenteByEmail("prova"));
 
-            Asta asta = new AstaClassica(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
+            Asta asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
+            asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
             asta.setId(asteRequester.inserisciAsta(asta));
             asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
-            Log.d("RES TEST" , "asteController.getAstePartecipateDaCompratore().toString()");
-            AsteController asteController = new AsteController();
-            Log.d("RES TEST" , asteController.getAstePartecipateDaCompratore().toString());
+//            Log.d("RES TEST" , "asteController.getAstePartecipateDaCompratore().toString()");
+//            AsteController asteController = new AsteController();
+//            Log.d("RES TEST" , asteController.getAstePartecipateDaCompratore().toString());
 
 //            Asta retrievedAsta = asteRequester.getAstaById(1L);
 //            List<Asta> aste = asteRequester.cercaAsta("AstaSilenziosa", "any", "cosa", 0);

@@ -1,7 +1,11 @@
 package com.main.dietidealsclient;
 
 
+
 import android.annotation.SuppressLint;
+
+import android.graphics.Color;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
+import com.main.dietidealsclient.Model.AstaInversa;
 import com.main.dietidealsclient.Model.AstaSilenziosa;
 import com.main.dietidealsclient.Model.Offerta;
+import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.time.Instant;
 import java.util.List;
@@ -45,18 +51,39 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         Log.e("list", "onBindViewHolder" + position);
         holder.nome.setText(asta.getNomeProdotto());
         holder.tipo.setText(asta.getTypeAsString());
-        //MIGLIORE OFFERTA
-        //TODO settare colore
-        holder.det1.setText("");
+
+
         if(asta instanceof AstaClassica classica) {
             holder.det1.setText(classica.getMinPrice().toString()+"€");
             if(bestOffer != null)
                 holder.det1.setText(bestOffer.getValore().toString()+"€");
         }
+
+//        if (asta.getScaduta() && asta instanceof AstaInversa){
+//            holder.det1.setText("Da accettare");
+//        } else {
+//            Offerta bestOff = asta.getBestOffer();
+//            if (bestOff != null){
+//                //TODO vari tipi di account e test colori
+//                holder.det1.setText(String.valueOf(bestOff.getValore()));
+//                if(bestOff.getOwnerEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())){
+//                    holder.det1.setTextColor(Color.red(1));
+//                }else {
+//                    holder.det1.setTextColor(Color.green(1));
+//                }
+//            }
+//        }
+
         //CALCOLO DURATA
         long secs = asta.getScadenza().toInstant().minusSeconds(Instant.now().getEpochSecond()).getEpochSecond();
         long hours = secs/3600;
         holder.det2.setText(Math.floorDiv(hours, 24)+"d "+hours%24+"h");
+
+        holder.image.setOnClickListener(view -> {
+            Log.d("MyDebug", "Ho cliccato sull immagine");
+            holder.notify();
+        });
+
         //TODO Gestione immagine
         holder.image.setImageResource(R.drawable.ic_launcher_background);
 //        holder.image.setImageDrawable(asta.getImg());

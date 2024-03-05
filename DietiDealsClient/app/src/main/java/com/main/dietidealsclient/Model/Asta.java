@@ -43,6 +43,7 @@ public abstract class Asta {
     @JsonIgnore
     protected List<Offerta> offerte;
 
+
     @JsonCreator
     public Asta(Long id, Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Boolean scaduta, Utente creatore) {
         this.id = id;
@@ -107,6 +108,12 @@ public abstract class Asta {
     @JsonIgnore
     public abstract Offerta getBestOffer();
     public abstract String getTypeAsString();
+
+//    @JsonIgnore
+//    public Float getBestOfferVal(){
+//        Offerta bestOff = getBestOffer();
+//        return (bestOff == null) ? 0 : bestOff.getValore();
+//    }
 
     public List<Offerta> getOfferte(){
         return offerte;
