@@ -7,7 +7,7 @@
     android:background="@color/appBackgroundColor">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/search_btton_back"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
@@ -25,10 +25,10 @@
         android:text="Cerca un'asta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/search_btton_back" />
 
     <EditText
-        android:id="@+id/keyword_edit_text"
+        android:id="@+id/search_keyword_edit_text"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cercaAsta_title" />
 
     <Spinner
-        android:id="@+id/categoria"
+        android:id="@+id/search_categoria"
         style="@style/midText"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cat_text" />
 
     <Spinner
-        android:id="@+id/type"
+        android:id="@+id/search_type"
         style="@style/midText"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type" />
+        app:layout_constraintTop_toBottomOf="@+id/search_type" />
 
     <TextView
         android:id="@+id/cat_text"
@@ -90,8 +90,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
         android:text="Categoria"
-        app:layout_constraintStart_toStartOf="@+id/categoria"
-        app:layout_constraintTop_toBottomOf="@+id/keyword_edit_text" />
+        app:layout_constraintStart_toStartOf="@+id/search_categoria"
+        app:layout_constraintTop_toBottomOf="@+id/search_keyword_edit_text" />
 
     <TextView
         android:id="@+id/type_text"
@@ -100,6 +100,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:text="Tipo di asta"
-        app:layout_constraintStart_toStartOf="@+id/type"
-        app:layout_constraintTop_toBottomOf="@+id/categoria" />
+        app:layout_constraintStart_toStartOf="@+id/search_type"
+        app:layout_constraintTop_toBottomOf="@+id/search_categoria" />
 </androidx.constraintlayout.widget.ConstraintLayout>

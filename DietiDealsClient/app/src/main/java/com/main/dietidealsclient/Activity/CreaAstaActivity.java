@@ -2,11 +2,8 @@ package com.main.dietidealsclient.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.ext.SdkExtensions;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,19 +16,14 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresExtension;
 
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.R;
 
 import java.io.File;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.temporal.TemporalUnit;
 import java.util.Date;
-
-import kotlin.time.TimedValue;
 
 public class CreaAstaActivity extends ComponentActivity {
     String type = "AstaClassica";
@@ -60,7 +52,7 @@ public class CreaAstaActivity extends ComponentActivity {
         registerResult();
 
         if(userType.equals("VENDITORE")) {
-            findViewById(R.id.type).setVisibility(View.INVISIBLE);
+            findViewById(R.id.search_type).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_type).setVisibility(View.INVISIBLE);
             type = "AstaInversa";
         }
@@ -80,8 +72,8 @@ public class CreaAstaActivity extends ComponentActivity {
     private void InserisciAsta() throws InterruptedException {
         name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
         description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
-        cat = ((Spinner)findViewById(R.id.categoria)).getSelectedItem().toString().replace(" ", "_");
-        type = ((Spinner)findViewById(R.id.type)).getSelectedItem().toString();
+        cat = ((Spinner)findViewById(R.id.search_categoria)).getSelectedItem().toString().replace(" ", "_");
+        type = ((Spinner)findViewById(R.id.search_type)).getSelectedItem().toString();
         //Prezzo minimo
         String tmpStr = ((EditText)findViewById(R.id.new_articolo_minPrice)).getText().toString();
         minPrice = Float.parseFloat(tmpStr);

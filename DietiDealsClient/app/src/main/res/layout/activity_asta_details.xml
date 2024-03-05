@@ -112,10 +112,10 @@
         android:layout_marginStart="24dp"
         android:text="Articolo in vendita"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/search_btton_back" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/search_btton_back"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"

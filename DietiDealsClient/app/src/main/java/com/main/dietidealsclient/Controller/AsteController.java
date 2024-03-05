@@ -83,15 +83,25 @@ public class AsteController {
 //            Asta astaTmp = getAstaById(off.getAstaID());
 //            ret.add(astaTmp);
 //        }
-//        List<Asta> ret = asteRequester.getAstePartecipate();
-        List<Asta> ret = getAsteUtente(tipoHomepage.COMPRATORE);
+
+        List<Asta> ret = asteRequester.getAstePartecipate();
+
+//        List<Asta> ret = getAsteUtente(tipoHomepage.VENDITORE);
+//        List<Asta> ret = new ArrayList<>();
 //        for (Asta asta : ret){
 //            List<Offerta> t = new ArrayList<>();
 //            t.add(asta.getBestOffer());
 //            asta.setOfferte(t);
+//        AstaClassica a = new AstaClassica(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
+//        ret.add(a);
+//        asteRequester.inviaOfferta(new Offerta(2L,40.0f, null, true, LoggedUser.getInstance().getLoggedUser(), a));
 //        }
+        Log.e("AsteController - getAstePartecipateDaUtente()"," size " + ret.size());
+        Log.e("AsteController - getAstePartecipateDaUtente()"," isEmpty " + ret.isEmpty());
+        Log.e("AsteController - getAstePartecipateDaUtente()"," num 0 " + ret.get(0));
+        Log.e("AsteController - getAstePartecipateDaUtente()"," num 1 " + ret.get(1));
         for (Asta asta : ret){
-            Log.e("AsteController - getAstePartecipateDaUtente()","Asta :" + asta);
+            Log.e("AsteController - getAstePartecipateDaUtente()"," Asta asta : ret Asta :" + asta);
             asta.setOfferte(asteRequester.getOfferteByAsta(asta.getId()));
             List<Offerta> offerte = new ArrayList<>();
             if(!(asta.getOfferte() == null)){
@@ -99,6 +109,7 @@ public class AsteController {
             }
             asta.setOfferte(offerte);
         }
+        Log.e("AsteController - getAstePartecipateDaUtente()","FINE COSO RETURN" + ret);
         return ret;
     }
 }

@@ -14,6 +14,7 @@ import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Requesters.AsteRequester;
+import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.ArrayList;
@@ -39,12 +40,7 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
 
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
-            try {
-                asteController.getAstePartecipateDaUtente();
-            } catch (InterruptedException e) {
-                Log.e("AsteController - getAstePartecipateDaUtente()","gg");
-            }
-//            gotoCercaAsteActivity();
+            gotoCercaAsteActivity();
         });
 
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {

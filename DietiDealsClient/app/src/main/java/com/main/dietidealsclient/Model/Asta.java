@@ -116,12 +116,10 @@ public abstract class Asta {
     }
 
     protected Offerta getBestOfferIn(boolean maggiore){
-        Log.e("AsteController - getAstePartecipateDaUtente()","Offerte array" + offerte);
         if(offerte == null || offerte.isEmpty()){
             return null;
         }
         Offerta bestOff = offerte.get(0);
-        Log.e("AsteController - getAstePartecipateDaUtente()","PreFOR" + bestOff);
         for (Offerta thisOff : offerte){
             if ( maggiore && (bestOff.getValore() < thisOff.getValore())){
                 bestOff = thisOff;

@@ -133,9 +133,9 @@ public class AsteRequester {
     }
 
     //TODO da testare
-    public Integer inviaOfferta(Offerta offer) throws InterruptedException {
-        AtomicReference<Integer> offerID = new AtomicReference<>();
-        offerID.set(-1);
+    public Long inviaOfferta(Offerta offer) throws InterruptedException {
+        AtomicReference<Long> offerID = new AtomicReference<>();
+        offerID.set(1L);
         Thread t = new Thread(() -> {
             try {
                 var mapper = new ObjectMapper();
@@ -144,7 +144,7 @@ public class AsteRequester {
                 Response response = RequestUtility.sendPostRequest("offerta/nuova", true, json);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
-                offerID.set(Integer.valueOf(jsBody));
+                offerID.set(Long.valueOf(jsBody));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
