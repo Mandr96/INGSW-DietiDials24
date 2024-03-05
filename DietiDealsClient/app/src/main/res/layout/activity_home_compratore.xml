@@ -3,76 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false">
+    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/aste_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Le tue aste inverse"
-            tools:layout_editor_absoluteX="29dp"
-            tools:layout_editor_absoluteY="529dp" />
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="HOME COMPRATORE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/appBackgroundColor"
+                    android:baselineAligned="false">>
 
-        <Button
-            android:id="@+id/home_compratore_cerca_aste"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="53dp"
-            android:layout_marginBottom="53dp"
-            android:text="Cerca Aste"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/home_compratore_crea_asta_inversa"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="1.0" />
+                        <TextView
+                            android:id="@+id/aste_title_text2"
+                            style="@style/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="32dp"
+                            android:text="Le tue aste inverse"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/recycle_view" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view"
-            android:layout_width="353dp"
-            android:layout_height="378dp"
-            android:background="#CA8181"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.339" />
+                        <Button
+                            android:id="@+id/home_compratore_cerca_aste"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="64dp"
+                            android:layout_marginEnd="24dp"
+                            android:text="Cerca Aste"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/home_compratore_crea_asta_inversa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="53dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="62dp"
-            android:text="Crea asta inversa"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/home_compratore_cerca_aste"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="1.0" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycle_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="380dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/textBackgroundColor"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/aste_title_text1" />
 
-        <TextView
-            android:id="@+id/aste_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Le aste a cui partecipi"
-            tools:layout_editor_absoluteX="29dp"
-            tools:layout_editor_absoluteY="80dp" />
+                        <Button
+                            android:id="@+id/home_compratore_crea_asta_inversa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="24dp"
+                            android:text="Crea asta inversa"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/recycle_view_aste_inverse" />
 
+                        <TextView
+                            android:id="@+id/aste_title_text1"
+                            style="@style/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Le aste a cui partecipi"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_compratore_cerca_aste" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycle_view_aste_inverse"
+                            android:layout_width="match_parent"
+                            android:layout_height="380dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/textBackgroundColor"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/aste_title_text2" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

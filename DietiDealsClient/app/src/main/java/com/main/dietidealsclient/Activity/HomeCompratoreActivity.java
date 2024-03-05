@@ -2,7 +2,6 @@ package com.main.dietidealsclient.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +12,6 @@ import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
-import com.main.dietidealsclient.Requesters.AsteRequester;
-import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.List;
@@ -39,12 +36,11 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
 
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
-            asteController.getAstePartecipateDaCompratore();
-            // gotoCercaAsteActivity();
+            gotoCercaAsteActivity();
         });
 
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
-            gotoCercaCreaAstaActivity();
+            gotoCreaAstaActivity();
         });
     }
 
@@ -52,11 +48,9 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private void updateAsteList() {
         recyclerView = findViewById(R.id.recycle_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Asta> data = asteController.getAsteUtente(AsteController.tipoHomepage.VENDITORE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         List<Asta> astePartecipate = asteController.getAstePartecipateDaCompratore();
 
-        adapter = new AsteAdapterList(data);
         adapter = new AsteAdapterList(astePartecipate);
         recyclerView.setAdapter(adapter);
     }
@@ -82,7 +76,7 @@ public class HomeCompratoreActivity extends ComponentActivity {
         finish();
     }
 
-    private void gotoCercaCreaAstaActivity() {
+    private void gotoCreaAstaActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO","COMPRATORE");
         HomeCompratoreActivity.this.startActivity(myIntent);

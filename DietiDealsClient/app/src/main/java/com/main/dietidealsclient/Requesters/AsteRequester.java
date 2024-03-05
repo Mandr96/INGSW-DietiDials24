@@ -77,11 +77,12 @@ public class AsteRequester {
     }
 
     public List<Asta> cercaAsta(String tipo, String categoria, String kw, Integer pag) throws InterruptedException {
+        Log.d("myDebug", "Ricerca[tipo: "+tipo+", cat: "+categoria+", kw: "+kw+", pag: "+pag+"]");
         AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();
         result.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo+"/"+categoria+"/"+kw+"/"+pag,true);
+                Response response = RequestUtility.sendGetRequest("asta/cerca/"+tipo.toLowerCase()+"/"+categoria.toLowerCase()+"/"+kw+"/"+pag,true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: " + jsBody);
                 result.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Asta>>() {}));

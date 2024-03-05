@@ -1,6 +1,7 @@
 package com.main.dietidealsclient;
 
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.dietidealsclient.Model.Asta;
+import com.main.dietidealsclient.Model.AstaClassica;
+import com.main.dietidealsclient.Model.AstaSilenziosa;
+import com.main.dietidealsclient.Model.Offerta;
 
+import java.time.Instant;
 import java.util.List;
 
 public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHolder> {
@@ -27,19 +32,31 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
     @NonNull
     @Override
     public AsteAdapterList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("list", "onCreateViewHolder " + "viewType " + viewType);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_asta, parent, false);
+        view.getLayoutParams().width = parent.getWidth();
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(AsteAdapterList.ViewHolder holder, int position) {
         Asta asta = data.get(position);
+        Offerta bestOffer = asta.getBestOffer();
         Log.e("list", "onBindViewHolder" + position);
         holder.nome.setText(asta.getNomeProdotto());
-        holder.descrizione.setText(asta.getDescrizione());
-        holder.det1.setText(asta.getCategoria());
-        holder.det2.setText(asta.getScadenza().toString());
+        holder.tipo.setText(asta.getTypeAsString());
+        //MIGLIORE OFFERTA
+        //TODO settare colore
+        holder.det1.setText("");
+        if(asta instanceof AstaClassica classica) {
+            holder.det1.setText(classica.getMinPrice().toString()+"€");
+            if(bestOffer != null)
+                holder.det1.setText(bestOffer.getValore().toString()+"€");
+        }
+        //CALCOLO DURATA
+        long secs = asta.getScadenza().toInstant().minusSeconds(Instant.now().getEpochSecond()).getEpochSecond();
+        long hours = secs/3600;
+        holder.det2.setText(Math.floorDiv(hours, 24)+"d "+hours%24+"h");
         //TODO Gestione immagine
         holder.image.setImageResource(R.drawable.ic_launcher_background);
 //        holder.image.setImageDrawable(asta.getImg());
@@ -53,14 +70,14 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nome;
-        private TextView descrizione;
+        private TextView tipo;
         private  TextView det1, det2;
         private ImageView image;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nome = itemView.findViewById(R.id.asta_nome);
-            descrizione = itemView.findViewById(R.id.asta_descrizione);
+            tipo = itemView.findViewById(R.id.asta_tipo);
             det1 = itemView.findViewById(R.id.asta_det1);
             det2 = itemView.findViewById(R.id.asta_det2);
             image = itemView.findViewById(R.id.asta_image);

@@ -64,7 +64,8 @@ public class RestAsteController {
                                 @PathVariable("keyword") String kw,
                                 @PathVariable("pag") int pag) {
         String cat = categoria;
-        if(categoria.equalsIgnoreCase("tutte") || categoria.equalsIgnoreCase("any")) cat = "%";
+        if(tipo.toLowerCase().contains("tutte")) tipo = "%";
+        if(categoria.toLowerCase().contains("tutte")) cat = "%";
         int offset = pag*10;
         return CheckAsteScaduteAndRm(asteRep.searchAste(tipo, cat, kw, offset));
     }

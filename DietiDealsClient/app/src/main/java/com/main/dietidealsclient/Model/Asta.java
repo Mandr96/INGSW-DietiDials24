@@ -106,6 +106,7 @@ public abstract class Asta {
 
     @JsonIgnore
     public abstract Offerta getBestOffer();
+    public abstract String getTypeAsString();
 
     public List<Offerta> getOfferte(){
         return offerte;

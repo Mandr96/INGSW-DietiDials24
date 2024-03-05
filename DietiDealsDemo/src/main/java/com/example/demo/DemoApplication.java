@@ -52,11 +52,11 @@ public class DemoApplication {
 			);
 			userRep.save(user);
 //
-//			Asta classica = new AstaClassica(1L, Timestamp.from(Instant.now()), "cosa", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
-//			asteRep.save(classica);
-//
-//			Asta silenziosa = new AstaSilenziosa(2L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa prova", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>());
-//			asteRep.save(silenziosa);
+			Asta classica = new AstaClassica(1L, Timestamp.from(Instant.now()), "cosa", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
+			asteRep.save(classica);
+
+			Asta silenziosa = new AstaSilenziosa(2L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa prova", "una cosa", "cat1", null, false, user, new ArrayList<Offerta>());
+			asteRep.save(silenziosa);
 //
 //			classica = new AstaInversa(1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa 2", "una cosa 2", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
 //			asteRep.save(classica);
@@ -64,7 +64,8 @@ public class DemoApplication {
 //			classica = new AstaClassica(1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa 2", "una cosa 2", "cat1", null, false, user, new ArrayList<Offerta>(), 0f);
 //			asteRep.save(classica);
 //
-//			offerteRep.save(new Offerta(1L,10f,null,true,user,classica));
+			offerteRep.save(new Offerta(-1L,10f,null,true, user,classica));
+			offerteRep.save(new Offerta(-1L,20f,null,true, user,silenziosa));
 //			//System.out.println(asteRep.searchAste("AstaClassica", "cat1", "cosa", 0));
 		};
 	}

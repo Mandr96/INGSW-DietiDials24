@@ -1,7 +1,5 @@
 package com.main.dietidealsclient.Controller;
 
-import android.util.Log;
-
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
@@ -40,7 +38,7 @@ public class AsteController {
         return asteRequester.inserisciAsta(asta);
     }
 
-    public enum tipoHomepage{
+    public enum UserType {
         VENDITORE,
         COMPRATORE
     }
@@ -48,12 +46,12 @@ public class AsteController {
      * @param tipo (venditore - compratore)
      * @return lista di aste
      */
-    public List<Asta> getAsteUtente(tipoHomepage tipo){
+    public List<Asta> getAsteUtente(UserType tipo){
         List<Asta> aste = new ArrayList<Asta>();
         for (Asta asta : LoggedUser.getInstance().getLoggedUser().getAste()){
-            if(tipo.equals(tipoHomepage.VENDITORE) && asta.getClass().equals(AstaInversa.class)){
+            if(tipo.equals(UserType.VENDITORE) && asta.getClass().equals(AstaInversa.class)){
                 aste.add(asta);
-            } else if (tipo.equals(tipoHomepage.COMPRATORE) && (asta.getClass().equals(AstaClassica.class) || asta.getClass().equals(AstaSilenziosa.class))){
+            } else if (tipo.equals(UserType.COMPRATORE) && (asta.getClass().equals(AstaClassica.class) || asta.getClass().equals(AstaSilenziosa.class))){
                 aste.add(asta);
             }
         }
@@ -63,9 +61,14 @@ public class AsteController {
     //TODO Da sistemare (page)
     //Senno possiamo fare che tipo dici da che id mandare? e tipo ne manda 15? (brutto)
     //PU♫O fare due richieste e mettrle insieme
-    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page) throws InterruptedException {
-        return asteRequester.cercaAsta(tipoAsta,categoria,keyword,page);
-
+    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, String userType)
+    {
+        List<Asta> results = null;
+        try {results = asteRequester.cercaAsta(tipoAsta,categoria,keyword,page);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        if(userType.equals("COMPRATORE")){
+            results.removeIf(asta -> asta instanceof AstaInversa);
+        }
+        return results;
     }
 
     public List<Offerta> getOfferteUtente() throws InterruptedException {
@@ -88,6 +91,4 @@ public class AsteController {
         }
         return aste;
     }
-
-
 }
