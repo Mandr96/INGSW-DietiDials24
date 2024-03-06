@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,6 +28,8 @@ import java.time.Instant;
 import java.util.Date;
 
 public class CreaAstaActivity extends ComponentActivity {
+
+    Button btnCancel;
     String type = "AstaClassica";
     String name = null;
     String description = null;
@@ -51,6 +54,7 @@ public class CreaAstaActivity extends ComponentActivity {
 
         userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
         imagePreview = findViewById(R.id.new_articolo_image);
+        btnCancel = findViewById(R.id.cancel_btn);
         registerResult();
 
         if(userType.equals(TipoAccount.VENDITORE)) {
@@ -68,6 +72,9 @@ public class CreaAstaActivity extends ComponentActivity {
         });
         imagePreview.setOnClickListener(view -> {
                 imageChooser();
+        });
+        btnCancel.setOnClickListener(view -> {
+            goBack();
         });
     }
 
@@ -138,6 +145,12 @@ public class CreaAstaActivity extends ComponentActivity {
     }
 
     private void gotoHomeCompratore() {
+        Intent myIntent = new Intent(CreaAstaActivity.this, HomeCompratoreActivity.class);
+        CreaAstaActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    private void goBack() {
         Intent myIntent = new Intent(CreaAstaActivity.this, HomeCompratoreActivity.class);
         CreaAstaActivity.this.startActivity(myIntent);
         finish();

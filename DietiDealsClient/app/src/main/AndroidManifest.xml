@@ -33,5 +33,6 @@
         <activity android:name=".Activity.CercaAsteActivity"></activity>
         <activity android:name=".Activity.RisultatiRicercaActivity"></activity>
         <activity android:name=".Activity.AstaDetailsActivity"></activity>
+        <activity android:name=".Activity.UserDetailsActivity"></activity>
     </application>
 </manifest>

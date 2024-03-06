@@ -1,5 +1,7 @@
 package com.main.dietidealsclient.Activity;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ public class AstaDetailsActivity extends ComponentActivity {
 
     Utente owner;
     Asta selectedAsta;
+    ImageView btnBack;
     TextView viewNomeArticolo;
     ImageView viewArticoloImg;
     TextView viewDescription;
@@ -36,6 +39,7 @@ public class AstaDetailsActivity extends ComponentActivity {
 
         viewNomeArticolo = findViewById(R.id.name_articolo);
         viewArticoloImg = findViewById(R.id.image_articolo);
+        btnBack = findViewById(R.id.search_btton_back);
         viewDescription  = findViewById(R.id.description_articolo);
         viewNomeVenditore = findViewById(R.id.venditore_name);
         viewBestOffer = findViewById(R.id.priceNumber);
@@ -49,7 +53,10 @@ public class AstaDetailsActivity extends ComponentActivity {
 
         });
         viewNomeVenditore.setOnClickListener(view -> {
-            
+            goToUserDetails();
+        });
+        btnBack.setOnClickListener(view -> {
+            goBack();
         });
     }
 
@@ -76,5 +83,22 @@ public class AstaDetailsActivity extends ComponentActivity {
         if(owner.getEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())) {
             btnSendOffer.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void goToUserDetails() {
+        Intent myIntent = new Intent(AstaDetailsActivity.this, UserDetailsActivity.class);
+        //TODO IMG
+        myIntent.putExtra("NAME", viewNomeVenditore.getText().toString());
+        myIntent.putExtra("EMAIL", owner.getEmail());
+        myIntent.putExtra("BIO", owner.getShortbio());
+        myIntent.putExtra("IG", "@its.enricoo");
+        myIntent.putExtra("FB", "Enrico Fausti Fanpage");
+        AstaDetailsActivity.this.startActivity(myIntent);
+    }
+
+    private void goBack() {
+        Intent myIntent = new Intent(AstaDetailsActivity.this, HomeCompratoreActivity.class);
+        AstaDetailsActivity.this.startActivity(myIntent);
+        finish();
     }
 }

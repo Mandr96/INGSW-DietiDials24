@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import java.util.Objects;
 
 public class CercaAsteActivity extends ComponentActivity {
 
+    ImageView btnBack;
     EditText editTextKw;
     Spinner spinnerCat;
     Spinner spinnerType;
@@ -43,6 +45,7 @@ public class CercaAsteActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_aste);
 
+        btnBack = findViewById(R.id.search_btton_back);
         editTextKw = findViewById(R.id.search_keyword_edit_text);
         spinnerCat = findViewById(R.id.search_categoria);
         spinnerType = findViewById(R.id.search_type);
@@ -60,9 +63,8 @@ public class CercaAsteActivity extends ComponentActivity {
         findViewById(R.id.search_btn).setOnClickListener(view -> {
             search();
         });
-
         findViewById(R.id.search_btton_back).setOnClickListener(view -> {
-            //TODO
+            goBack();
         });
     }
 
@@ -99,5 +101,11 @@ public class CercaAsteActivity extends ComponentActivity {
         spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, entries);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(spinnerArrayAdapter);
+    }
+
+    private void goBack() {
+        Intent myIntent = new Intent(CercaAsteActivity.this, HomeCompratoreActivity.class);
+        CercaAsteActivity.this.startActivity(myIntent);
+        finish();
     }
 }
