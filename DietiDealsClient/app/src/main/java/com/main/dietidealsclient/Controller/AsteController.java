@@ -60,11 +60,11 @@ public class AsteController {
     //TODO Da sistemare (page)
     //Senno possiamo fare che tipo dici da che id mandare? e tipo ne manda 15? (brutto)
     //PU♫O fare due richieste e mettrle insieme
-    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, String userType)
+    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, TipoAccount userType)
     {
         List<Asta> results = null;
         try {results = asteRequester.cercaAsta(tipoAsta,categoria,keyword,page);} catch (InterruptedException e) {throw new RuntimeException(e);}
-        if(userType.equals("COMPRATORE")){
+        if(userType.equals(TipoAccount.COMPRATORE)){
             results.removeIf(asta -> asta instanceof AstaInversa);
         }
         return results;
@@ -90,6 +90,7 @@ public class AsteController {
         // RECUPERO OFFERTE
         for (Asta asta : aste) {
             try {asta.setOfferte(asteRequester.getOfferteByAsta(asta.getId()));} catch (InterruptedException e) {throw new RuntimeException(e);}
+            Log.d("MyDebug getAstePartecipate" , "l asta " + asta.getId() + " ha le offerte " + asta.getOfferte().toString());
         }
         return aste;
     }

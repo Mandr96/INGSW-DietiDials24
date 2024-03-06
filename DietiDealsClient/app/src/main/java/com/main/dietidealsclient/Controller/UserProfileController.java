@@ -1,5 +1,7 @@
 package com.main.dietidealsclient.Controller;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.UtentiRequester;

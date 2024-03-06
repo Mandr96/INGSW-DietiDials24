@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 
 import com.main.dietidealsclient.Controller.AsteController;
+import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.R;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class CreaAstaActivity extends ComponentActivity {
     ImageView imagePreview;
     ActivityResultLauncher<Intent> resultLauncher;
     AsteController asteController;
+    TipoAccount userType;
 
     public CreaAstaActivity(){
         asteController = new AsteController();
@@ -47,11 +49,11 @@ public class CreaAstaActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_asta);
 
-        String userType = getIntent().getExtras().getString("TIPO");
+        userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
         imagePreview = findViewById(R.id.new_articolo_image);
         registerResult();
 
-        if(userType.equals("VENDITORE")) {
+        if(userType.equals(TipoAccount.VENDITORE)) {
             findViewById(R.id.search_type).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_type).setVisibility(View.INVISIBLE);
             type = "AstaInversa";

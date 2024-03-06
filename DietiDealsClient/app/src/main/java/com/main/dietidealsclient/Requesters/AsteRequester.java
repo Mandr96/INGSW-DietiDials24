@@ -76,6 +76,7 @@ public class AsteRequester {
         return offerte.get();
     }
 
+    //TODO Può essere vuoto
     public List<Asta> cercaAsta(String tipo, String categoria, String kw, Integer pag) throws InterruptedException {
         Log.d("myDebug", "Ricerca[tipo: "+tipo+", cat: "+categoria+", kw: "+kw+", pag: "+pag+"]");
         AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();

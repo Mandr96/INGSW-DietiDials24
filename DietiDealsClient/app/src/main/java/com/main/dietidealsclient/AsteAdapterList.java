@@ -55,8 +55,21 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 
         if(asta instanceof AstaClassica classica) {
             holder.det1.setText(classica.getMinPrice().toString()+"€");
-            if(bestOffer != null)
-                holder.det1.setText(bestOffer.getValore().toString()+"€");
+            if(bestOffer != null) {
+                holder.det1.setText(bestOffer.getValore().toString() + "€");
+                Log.d("MyDebug", "LOGGED USER pre" );
+                Log.d("MyDebug", "LOGGED USER" + LoggedUser.getInstance().getLoggedUser().getEmail());
+                //TODO bestOffer.getOwnerEmail() É NULL?
+//                if (bestOffer.getOwnerEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())){
+//                    holder.det1.setTextColor(Color.red(1));
+//                } else {
+//                    holder.det1.setTextColor(Color.red(1));
+//                }
+            }
+        }
+
+        if (asta.getScaduta() && asta instanceof AstaInversa){
+            holder.det1.setText("Da accettare");
         }
 
 //        if (asta.getScaduta() && asta instanceof AstaInversa){
