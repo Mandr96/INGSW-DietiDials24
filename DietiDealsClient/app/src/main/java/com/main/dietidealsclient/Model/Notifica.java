@@ -1,7 +1,9 @@
 package com.main.dietidealsclient.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
@@ -23,10 +25,34 @@ public class Notifica {
     @JsonIgnore
     private Utente user;
 
-    public Notifica(String oggetto, String testo, Boolean letto, Utente utente) {
+    @JsonCreator
+    public Notifica(@JsonProperty("id") Long id,
+                    @JsonProperty("oggetto") String oggetto,
+                    @JsonProperty("testo") String testo,
+                    @JsonProperty("letto") Boolean letto) {
+        this.id = id;
         this.oggetto = oggetto;
         this.testo = testo;
         this.letto = letto;
-        this.user = utente;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOggetto(String oggetto) {
+        this.oggetto = oggetto;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+
+    public void setLetto(Boolean letto) {
+        this.letto = letto;
+    }
+
+    public void setUser(Utente user) {
+        this.user = user;
     }
 }

@@ -62,7 +62,7 @@ public class CercaAsteActivity extends ComponentActivity {
         });
 
         findViewById(R.id.search_btton_back).setOnClickListener(view -> {
-
+            //TODO
         });
     }
 
@@ -70,18 +70,18 @@ public class CercaAsteActivity extends ComponentActivity {
     private void search(){
         String keyword = editTextKw.getText().toString();
         String categoria = spinnerCat.getSelectedItem().toString().replace(" ","_");
-        String type = spinnerType.getSelectedItem().toString().replace(" ", "");
+        String type = "Asta"+spinnerType.getSelectedItem().toString();
         ArrayList<Asta> results = (ArrayList<Asta>) asteController.ricerca(keyword, categoria, type, 0, userType);
         if(results.isEmpty()) {
             Toast.makeText(this, "Nessun risultato trovato", Toast.LENGTH_LONG).show();
             return;
         }
         Intent myIntent = new Intent(CercaAsteActivity.this, RisultatiRicercaActivity.class);
-        myIntent.putExtra("TIPO", userType);
-        myIntent.putExtra("KEYWORD", keyword);
-        myIntent.putExtra("CATEGORIA", categoria);
-        myIntent.putExtra("ASTA_TIPO", type);
-        myIntent.putExtra("RESULTS", results);
+        //myIntent.putExtra("TIPO", userType.toString());
+        //myIntent.putExtra("KEYWORD", keyword);
+        //myIntent.putExtra("CATEGORIA", categoria);
+        //myIntent.putExtra("ASTA_TIPO", type);
+        //myIntent.putExtra("RESULTS", results);
         CercaAsteActivity.this.startActivity(myIntent);
         finish();
     }

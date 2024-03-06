@@ -12,12 +12,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Offerta {
+public class Offerta implements Serializable {
 
     private Long id;
     private Float valore;

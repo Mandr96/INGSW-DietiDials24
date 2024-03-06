@@ -1,6 +1,8 @@
 package com.main.dietidealsclient.Controller;
 
-public enum TipoAccount {
+import java.io.Serializable;
+
+public enum TipoAccount implements Serializable {
         VENDITORE,
         COMPRATORE
 

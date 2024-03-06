@@ -14,6 +14,7 @@ import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.List;
@@ -72,35 +73,39 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private void updateAsteLists() {
         if(userType.equals(TipoAccount.COMPRATORE)) {
-            updateAsteListpartecipate(recyclerViewPrimo, adapterPrimo);
-            updateAsteListCreate(recyclerViewSecondo,adapterSecondo);
+            adapterPrimo = updateAsteListpartecipate(recyclerViewPrimo, this::onClickPrimoRecycler);
+            adapterSecondo = updateAsteListCreate(recyclerViewSecondo, this::onClickSecondoRecycler);
         } else if (userType.equals(TipoAccount.VENDITORE)) {
-            updateAsteListCreate(recyclerViewPrimo,adapterPrimo);
-            updateAsteListpartecipate(recyclerViewSecondo, adapterSecondo);
+            adapterPrimo = updateAsteListCreate(recyclerViewPrimo, this::onClickPrimoRecycler);
+            adapterSecondo = updateAsteListpartecipate(recyclerViewSecondo, this::onClickSecondoRecycler);
         }
+        Log.d("myDebug", "Primo: "+adapterPrimo.toString());
+        Log.d("myDebug", "Secondo: "+adapterSecondo.toString());
 
         //TODO findViewById con recycle_view_aste_normali e l altro
     }
 
     //Aste a cui hai partecipato
-    private void updateAsteListCreate(RecyclerView recyclerView, AsteAdapterList adapterList) {
+    private AsteAdapterList updateAsteListCreate(RecyclerView recyclerView, RecyclerAsteInterface recyclerAsteInterface) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Asta> data = asteController.getAsteUtente(userType);
         Log.d("MyDebug userType", userType.toString());
         Log.d("MyDebug updateAsteListCreate", data.toString());
 
-        adapterList = new AsteAdapterList(data);
+        AsteAdapterList adapterList = new AsteAdapterList(data, recyclerAsteInterface);
         recyclerView.setAdapter(adapterList);
+        return adapterList;
     }
 
-    private void updateAsteListpartecipate(RecyclerView recyclerView, AsteAdapterList adapterList) {
+    private AsteAdapterList updateAsteListpartecipate(RecyclerView recyclerView, RecyclerAsteInterface recyclerAsteInterface) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Asta> astePartecipate = asteController.getAstePartecipate(userType);
         Log.d("MyDebug userType", userType.toString());
         Log.d("MyDebug updateAsteListpartecipate", astePartecipate.toString());
 
-        adapterList = new AsteAdapterList(astePartecipate);
+        AsteAdapterList adapterList = new AsteAdapterList(astePartecipate, recyclerAsteInterface);
         recyclerView.setAdapter(adapterList);
+        return adapterList;
     }
 
     /** Se il profilo non contiene Nome manda alla pagina modifica profilo */
@@ -127,6 +132,24 @@ public class HomeCompratoreActivity extends ComponentActivity {
     private void gotoCreaAstaActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
+        HomeCompratoreActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    public void onClickPrimoRecycler(int pos){
+        showAstaDetails(adapterPrimo.getData().get(pos));
+    }
+
+    public void onClickSecondoRecycler(int pos){
+        showAstaDetails(adapterSecondo.getData().get(pos));
+    }
+
+    private void showAstaDetails(Asta asta) {
+        Intent myIntent = new Intent(HomeCompratoreActivity.this, AstaDetailsActivity.class);
+        myIntent.putExtra("ASTA", asta);
+        myIntent.putExtra("PRICE", asta.getBestOffer().getValore());
+        //TODO getYourOffer
+        myIntent.putExtra("OFFER", 0);
         HomeCompratoreActivity.this.startActivity(myIntent);
         finish();
     }

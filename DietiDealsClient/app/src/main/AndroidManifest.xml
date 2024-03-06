@@ -32,5 +32,6 @@
         <activity android:name=".Activity.CreaAstaActivity"></activity>
         <activity android:name=".Activity.CercaAsteActivity"></activity>
         <activity android:name=".Activity.RisultatiRicercaActivity"></activity>
+        <activity android:name=".Activity.AstaDetailsActivity"></activity>
     </application>
 </manifest>

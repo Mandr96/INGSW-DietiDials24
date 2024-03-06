@@ -47,4 +47,12 @@ public class UserProfileController {
     public Utente getLoggedUser() {
         return LoggedUser.getInstance().getLoggedUser();
     }
+
+    public Utente getAstaOwner(Long astaID){
+        try {
+            return utentiRequester.getAstaOwner(astaID);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -131,7 +131,7 @@ public class UtentiRequester {
         user.set(null);
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("asta/getOwner/"+astaID, true);
+                Response response = RequestUtility.sendGetRequest("utente/owner/asta/"+astaID, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received [AstaOwner]:"+jsBody);
                 user.set(new ObjectMapper().readValue(jsBody, Utente.class));

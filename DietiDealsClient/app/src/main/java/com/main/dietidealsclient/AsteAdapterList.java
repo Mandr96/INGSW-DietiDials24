@@ -27,12 +27,17 @@ import java.time.Instant;
 import java.util.List;
 
 public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHolder> {
+    private final RecyclerAsteInterface recyclerAsteInterface;
 
+    public List<Asta> getData() {
+        return data;
+    }
 
     private List<Asta> data;
 
-    public AsteAdapterList(List<Asta> data) {
+    public AsteAdapterList(List<Asta> data, RecyclerAsteInterface recyclerAsteInterface) {
         this.data = data;
+        this.recyclerAsteInterface = recyclerAsteInterface;
     }
 
     @NonNull
@@ -40,7 +45,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
     public AsteAdapterList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_asta, parent, false);
         view.getLayoutParams().width = parent.getWidth();
-        return new ViewHolder(view);
+        return new ViewHolder(view, recyclerAsteInterface);
     }
 
     @SuppressLint("SetTextI18n")
@@ -114,13 +119,21 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         private  TextView det1, det2;
         private ImageView image;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, RecyclerAsteInterface recyclerAsteInterface) {
             super(itemView);
             nome = itemView.findViewById(R.id.asta_nome);
             tipo = itemView.findViewById(R.id.asta_tipo);
             det1 = itemView.findViewById(R.id.asta_det1);
             det2 = itemView.findViewById(R.id.asta_det2);
             image = itemView.findViewById(R.id.asta_image);
+
+            itemView.setOnClickListener(view -> {
+                if(recyclerAsteInterface != null) {
+                    int pos = getAbsoluteAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION)
+                        recyclerAsteInterface.onItemClick(pos);
+                }
+            });
         }
     }
 }

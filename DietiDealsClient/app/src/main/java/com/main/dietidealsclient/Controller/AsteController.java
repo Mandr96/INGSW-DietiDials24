@@ -95,6 +95,7 @@ public class AsteController {
         return aste;
     }
 
+    /*
     public List<Asta> getAstePartecipateDaCompratore() {
         List<Asta> aste = null;
         try { aste = asteRequester.getAstePartecipate();} catch (InterruptedException e) {throw new RuntimeException(e);}
@@ -109,4 +110,5 @@ public class AsteController {
         }
         return aste;
     }
+    */
 }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = AstaSilenziosa.class, name = "AstaSilenziosa")
 })
 
-public abstract class Asta {
+public abstract class Asta implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
