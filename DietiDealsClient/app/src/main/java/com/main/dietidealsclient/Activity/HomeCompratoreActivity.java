@@ -55,7 +55,7 @@ public class HomeCompratoreActivity extends ComponentActivity {
         try{
             userType = ((Objects.equals(Objects.requireNonNull(getIntent().getExtras()).getString("TIPO"), "VENDITORE")) ? TipoAccount.VENDITORE : TipoAccount.COMPRATORE);
         } catch (NullPointerException e){
-            userType = TipoAccount.VENDITORE;
+            userType = TipoAccount.COMPRATORE;
         }
         Log.d("setUserType" , userType.toString());
     }
@@ -119,14 +119,14 @@ public class HomeCompratoreActivity extends ComponentActivity {
 
     private void gotoCercaAsteActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, CercaAsteActivity.class);
-        myIntent.putExtra("TIPO",userType.toString());
+        myIntent.putExtra("TIPO",userType);
         HomeCompratoreActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void gotoCreaAstaActivity() {
         Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
-        myIntent.putExtra("TIPO",userType.toString());
+        myIntent.putExtra("TIPO",userType);
         HomeCompratoreActivity.this.startActivity(myIntent);
         finish();
     }

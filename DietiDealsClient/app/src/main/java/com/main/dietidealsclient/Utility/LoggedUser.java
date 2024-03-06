@@ -1,4 +1,6 @@
 package com.main.dietidealsclient.Utility;
+import android.util.Log;
+
 import com.main.dietidealsclient.Model.Utente;
 
 public class LoggedUser {
@@ -11,6 +13,7 @@ public class LoggedUser {
 
     public static LoggedUser getInstance(){
         if(instance == null){
+            Log.d("MyDebug","INSTANZIATO LOGGED USER");
             instance = new LoggedUser();
         }
         return instance;

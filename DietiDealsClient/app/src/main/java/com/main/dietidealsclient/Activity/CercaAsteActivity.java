@@ -15,9 +15,11 @@ import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
 
 import com.main.dietidealsclient.Controller.AsteController;
+import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Requesters.AsteRequester;
+import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class CercaAsteActivity extends ComponentActivity {
     EditText editTextKw;
     Spinner spinnerCat;
     Spinner spinnerType;
-    String userType;
+    TipoAccount userType;
     AsteController asteController;
 
 
@@ -45,9 +47,12 @@ public class CercaAsteActivity extends ComponentActivity {
         spinnerCat = findViewById(R.id.search_categoria);
         spinnerType = findViewById(R.id.search_type);
         inizializeSpinners();
-        userType = Objects.requireNonNull(getIntent().getExtras()).getString("TIPO");
+//        userType = Objects.requireNonNull(getIntent().getExtras()).getString("TIPO");
+        userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
 
-        if(userType.equals("VENDITORE")) {
+        Log.d("MyDebug UserType" , userType.toString() + userType.equals(TipoAccount.VENDITORE));
+
+        if(userType.equals(TipoAccount.VENDITORE)) {
             spinnerType.setVisibility(View.INVISIBLE);
             findViewById(R.id.type_text).setVisibility(View.INVISIBLE);
         }

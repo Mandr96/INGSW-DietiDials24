@@ -31,11 +31,16 @@ public class MainTest {
                     //new ArrayList<Notifica>(), new ArrayList<Asta>(), new ArrayList<Offerta>());
             userRequester.jwtLogin("prova", "1234");
             LoggedUser.getInstance().setLoggedUser(userRequester.getUtenteByEmail("prova"));
-
-            Asta asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
-            asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
-            asta.setId(asteRequester.inserisciAsta(asta));
-            asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
+            Log.d("MyDebug TEST", "Login Fatto");
+            Asta asta = asteRequester.getAstaById(0L);
+            Log.d("MyDebug TEST", "get asta 0");
+            Long id = asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
+            Log.d("MyDebug TEST", "offerta inviata");
+            asteRequester.getOfferteByAsta(asta.getId());
+//            Asta asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
+//            asta = new AstaInversa(null,"nomeprod","desc","cat1",null,LoggedUser.getInstance().getLoggedUser(),5F);
+//            asta.setId(asteRequester.inserisciAsta(asta));
+//            asteRequester.inviaOfferta(new Offerta(-2L,50.0f, null, true, LoggedUser.getInstance().getLoggedUser(), asta));
 //            Log.d("RES TEST" , "asteController.getAstePartecipateDaCompratore().toString()");
 //            AsteController asteController = new AsteController();
 //            Log.d("RES TEST" , asteController.getAstePartecipateDaCompratore().toString());
