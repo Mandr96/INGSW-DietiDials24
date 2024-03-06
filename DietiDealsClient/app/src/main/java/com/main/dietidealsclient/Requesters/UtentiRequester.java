@@ -125,4 +125,40 @@ public class UtentiRequester {
         t.join();
         return user.get();
     }
+
+    public Utente getAstaOwner(Long astaID) throws InterruptedException {
+        AtomicReference<Utente> user = new AtomicReference<>();
+        user.set(null);
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendGetRequest("asta/getOwner/"+astaID, true);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received [AstaOwner]:"+jsBody);
+                user.set(new ObjectMapper().readValue(jsBody, Utente.class));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return user.get();
+    }
+
+    public Utente getOfferOwner(Long offerID) throws InterruptedException {
+        AtomicReference<Utente> user = new AtomicReference<>();
+        user.set(null);
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendGetRequest("offerta/getOwner/"+offerID, true);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received [OffertaOwner]:"+jsBody);
+                user.set(new ObjectMapper().readValue(jsBody, Utente.class));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return user.get();
+    }
 }

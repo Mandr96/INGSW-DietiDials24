@@ -34,6 +34,18 @@ public class RestUtentiController {
         return result.orElse(null);
     }
 
+    @GetMapping(value = "asta/getOwner/{astaID}")
+    public Utente getAstaOwner(@PathVariable("astaID") Long astaID) {
+        System.out.println("Richiesta getAstaOwner("+astaID+") ricevuta");
+        return userRep.getAstaOwner(astaID);
+    }
+
+    @GetMapping(value = "offerta/getOwner/{offerID}")
+    public Utente getOffertaOwner(@PathVariable("offerID") Long offerID) {
+        System.out.println("Richiesta getOffertaOwner("+offerID+") ricevuta");
+        return userRep.getOfferOwner(offerID);
+    }
+
     @PostMapping(path = "/update")
     public boolean updateUser(@RequestBody Utente requestBody){
         Optional<Utente> result = userRep.findById(requestBody.getEmail());
