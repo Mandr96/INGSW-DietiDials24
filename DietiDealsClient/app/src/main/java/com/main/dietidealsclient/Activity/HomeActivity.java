@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
@@ -79,9 +80,11 @@ public class HomeActivity extends ComponentActivity {
         if (userType.equals(TipoAccount.VENDITORE)) {
             ((TextView)findViewById(R.id.aste_title_text1)).setText("Le tue aste");
             ((TextView)findViewById(R.id.aste_title_text2)).setText("Le aste inverse a cui hai partecipato");
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Compra");
         } else {
             ((TextView)findViewById(R.id.aste_title_text1)).setText("Le aste a cui hai partecipato");
             ((TextView)findViewById(R.id.aste_title_text2)).setText("Le tue aste Inverse");
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Vendi");
         }
 
     }
@@ -157,21 +160,18 @@ public class HomeActivity extends ComponentActivity {
     private void goToEditProfileActivity() {
         Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
         HomeActivity.this.startActivity(myIntent);
-        finish();
     }
 
     private void gotoCercaAsteActivity() {
         Intent myIntent = new Intent(HomeActivity.this, CercaAsteActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
-        finish();
     }
 
     private void gotoCreaAstaActivity() {
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
-        finish();
     }
 
     private void gotoChageAccountType() {
@@ -197,6 +197,5 @@ public class HomeActivity extends ComponentActivity {
         //TODO getYourOffer
         myIntent.putExtra("OFFER", 0);
         HomeActivity.this.startActivity(myIntent);
-        finish();
     }
 }
