@@ -150,12 +150,14 @@ public class CreaAstaActivity extends ComponentActivity {
 
     private void gotoHomeCompratore() {
         Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
+        myIntent.putExtra("TIPO",userType);
         CreaAstaActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void goBack() {
         Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
+        myIntent.putExtra("TIPO",userType);
         CreaAstaActivity.this.startActivity(myIntent);
         finish();
     }

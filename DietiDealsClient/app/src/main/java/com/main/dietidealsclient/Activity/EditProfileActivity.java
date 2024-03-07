@@ -1,5 +1,6 @@
 package com.main.dietidealsclient.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.activity.ComponentActivity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Utility.LoggedUser;
@@ -16,6 +18,7 @@ public class EditProfileActivity extends ComponentActivity {
 
     private final UserProfileController userProfileController;
 
+    TipoAccount userType;
     Button updateButton;
 
     public EditProfileActivity(){
@@ -25,14 +28,15 @@ public class EditProfileActivity extends ComponentActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
         setContentView(R.layout.activity_edit_profile);
         updateButton = findViewById(R.id.profileEdit_updateBtton);
-
         LoadProfile();
 
         updateButton.setOnClickListener(view -> {
             try {
                 UpdateProfile();
+                goToHomeActivity();
             } catch (JsonProcessingException | InterruptedException e) {
                 Toast.makeText(this, "Impossible aggiornare il Profilo",Toast.LENGTH_LONG).show();
                 throw new RuntimeException(e);
@@ -42,6 +46,17 @@ public class EditProfileActivity extends ComponentActivity {
         });
     }
 
+    private void goToHomeActivity() {
+        Intent myIntent = new Intent(EditProfileActivity.this, HomeActivity.class);
+        if(userType != null){
+            myIntent.putExtra("TIPO",userType);
+        }
+        EditProfileActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+
+    //TODO c'è il problema nell update json non riesce a convertire l utente
     private void UpdateProfile() throws JsonProcessingException, InterruptedException, NonameException {
         String name = ((EditText)findViewById(R.id.profileEdit_name)).getText().toString();
         String surname = ((EditText)findViewById(R.id.profileEdit_surname)).getText().toString();

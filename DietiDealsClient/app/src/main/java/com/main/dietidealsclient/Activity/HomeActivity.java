@@ -31,6 +31,8 @@ public class HomeActivity extends ComponentActivity {
         asteController = new AsteController();
     }
 
+    //Todo Esplode se accedo a un account che a fatto offerte ad altre aste
+
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -55,25 +57,34 @@ public class HomeActivity extends ComponentActivity {
         findViewById(R.id.home_compratore_cambia_tipo).setOnClickListener(view -> {
             gotoChageAccountType();
         });
+        findViewById(R.id.home_compratore_edit_profile).setOnClickListener(view -> {
+            goToEditProfileActivity();
+        });
 
-
-        RecyclerAsteInterface recyclerAsteInterfacePrimo = new RecyclerAsteInterface() {
+        adapterPrimo.setClickListener(new RecyclerAsteInterface() {
             @Override
             public void onItemClick(int position) {
-
                 Log.d("MyDebug" , "CLICCATO" + adapterPrimo.getData().get(position));
+                showAstaDetails(adapterPrimo.getData().get(position));
             }
-        };
-        adapterPrimo.setClickListener(recyclerAsteInterfacePrimo);
+        });
 
-        RecyclerAsteInterface recyclerAsteInterfaceSecondo = new RecyclerAsteInterface() {
+
+        adapterSecondo.setClickListener(new RecyclerAsteInterface() {
             @Override
             public void onItemClick(int position) {
-
                 Log.d("MyDebug" , "CLICCATO" + adapterSecondo.getData().get(position));
+                showAstaDetails(adapterSecondo.getData().get(position));
             }
-        };
-        adapterSecondo.setClickListener(recyclerAsteInterfaceSecondo);
+        });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setUserType();
+        updateAsteLists();
+        updateTesti();
     }
 
     private void updateTesti() {
@@ -113,6 +124,7 @@ public class HomeActivity extends ComponentActivity {
      */
 
     private void updateAsteLists() {
+        LoggedUser.update();
         if(userType.equals(TipoAccount.COMPRATORE)) {
             adapterPrimo = updateAsteListpartecipate(recyclerViewPrimo, this::onClickPrimoRecycler);
             adapterSecondo = updateAsteListCreate(recyclerViewSecondo, this::onClickSecondoRecycler);
@@ -159,6 +171,7 @@ public class HomeActivity extends ComponentActivity {
 
     private void goToEditProfileActivity() {
         Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
+        myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 

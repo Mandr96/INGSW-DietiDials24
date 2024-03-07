@@ -12,7 +12,7 @@ import okhttp3.Response;
 
 public class RequestUtility {
 
-    private static String baseUrl = "http://192.168.1.37:8080/";
+    private static String baseUrl = "http://192.168.1.101:8080/";
     private static String token = "";
 
     public static  Response sendGetRequest(String path, Boolean authRequired) throws IOException {

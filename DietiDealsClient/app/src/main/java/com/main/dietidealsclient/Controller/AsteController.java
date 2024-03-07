@@ -34,6 +34,7 @@ public class AsteController {
         } else if(type.equals("Silenziosa")){
             asta = new AstaSilenziosa(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser());
         } else if (type.equals("Inversa")){
+            //TODO il server esplode e dice JSONObject text must begin with '{' stranamente solo con l inversa
             asta = new AstaInversa(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser(), minPrice);
         }
 
