@@ -103,7 +103,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         });
 
         //TODO Gestione immagine
-        holder.image.setImageResource(R.drawable.ic_launcher_background);
+        holder.image.setImageResource(R.drawable.add_image);
 //        holder.image.setImageDrawable(asta.getImg());
     }
 

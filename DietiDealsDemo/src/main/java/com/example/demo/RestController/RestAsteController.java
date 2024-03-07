@@ -77,7 +77,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/checkScadenza/{id}")
     public Boolean checkScadenza(@PathVariable("id")Long astaID) {
-        //TODO ha senso così? o meglio un exeption / true
+        //TODO ha senso così? o meglio un exception / true
         if(asteRep.findById(astaID).isPresent()){
             Asta asta = asteRep.findById(astaID).get();
             if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {

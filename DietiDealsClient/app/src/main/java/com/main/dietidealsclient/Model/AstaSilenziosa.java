@@ -41,10 +41,6 @@ public class AstaSilenziosa extends Asta{
         super(scadenza, nomeProdotto, descrizione, cat, img, creatore);
     }
 
-    public List<Notifica> chiudi() {
-        return new ArrayList<Notifica>();
-    }
-
     public Offerta getBestOffer(){
         return getBestOfferIn(true);
     }

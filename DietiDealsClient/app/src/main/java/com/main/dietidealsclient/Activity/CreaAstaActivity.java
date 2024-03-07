@@ -56,6 +56,7 @@ public class CreaAstaActivity extends ComponentActivity {
         imagePreview = findViewById(R.id.new_articolo_image);
         btnCancel = findViewById(R.id.cancel_btn);
         registerResult();
+        imagePreview.setImageResource(R.drawable.add_image);
 
         if(userType.equals(TipoAccount.COMPRATORE)) {
             findViewById(R.id.search_type).setVisibility(View.INVISIBLE);
