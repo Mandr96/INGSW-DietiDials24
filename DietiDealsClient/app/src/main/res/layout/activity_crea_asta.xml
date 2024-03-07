@@ -105,7 +105,7 @@
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/login_edit_text"
+                android:background="@drawable/spinner_bg"
                 android:entries="@array/aste_types"
                 android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
