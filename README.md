@@ -39,15 +39,15 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
   - b. Specifica dei Requisiti.
     - [x] i. Classi, oggetti e relazioni di analisi.
     - [x] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
-    - [ ] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
+    - [x] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
 2. <ins>Documento di Design del sistema.</ins>
   - [ ] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
-  - [ ] b. Descrizione/motivazione delle scelte tecnologiche adottate.
+  - [x] b. Descrizione/motivazione delle scelte tecnologiche adottate.
   - [x] c. Diagramma delle classi di design.
   - [ ] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
 3. <ins>Codice Sorgente sviluppato, comprensivo di eventuale Dockerfile.</ins>
   - [ ] a. File di build automatica
-  - [ ] b. Evidenza dell’uso di strumenti di versioning
+  - [x] b. Evidenza dell’uso di strumenti di versioning
   - [ ] c. Report di qualità del codice, generati da SonarQube o similari (nel caso solo per il back-end)
 4. <ins>Testing e valutazione sul campo dell’usabilità.</ins>
   - [ ] a. Codice xUnit per unit testing di quattro **(due, se si consegna prima del 31/03/2024)** metodi non banali, che abbiano almeno due parametri. In aggiunta al codice, una apposita sezione della documentazione deve descrivere le strategie adottate per la progettazione dei test dei due metodi (e.g.: classi di equivalenza individuate e coperte, criteri di copertura strutturale, etc.).
