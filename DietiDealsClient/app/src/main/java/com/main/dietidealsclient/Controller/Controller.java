@@ -19,5 +19,4 @@ public class Controller {
 //    public static Controller getInstance(){
 //        return INSTANCE;
 //    }
-
 }

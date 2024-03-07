@@ -27,7 +27,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHolder> {
-    private final RecyclerAsteInterface recyclerAsteInterface;
+    private RecyclerAsteInterface recyclerAsteInterface;
 
     public List<Asta> getData() {
         return data;
@@ -112,6 +112,11 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         return data.size();
     }
 
+    public void setClickListener(RecyclerAsteInterface context) {
+        this.recyclerAsteInterface = context;
+    }
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nome;
@@ -132,6 +137,13 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
                     int pos = getAbsoluteAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION)
                         recyclerAsteInterface.onItemClick(pos);
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recyclerAsteInterface.onItemClick(getAdapterPosition()); // passing click to interface
                 }
             });
         }

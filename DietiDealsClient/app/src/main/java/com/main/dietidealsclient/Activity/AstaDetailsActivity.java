@@ -1,7 +1,6 @@
 package com.main.dietidealsclient.Activity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -97,7 +96,7 @@ public class AstaDetailsActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Intent myIntent = new Intent(AstaDetailsActivity.this, HomeCompratoreActivity.class);
+        Intent myIntent = new Intent(AstaDetailsActivity.this, HomeActivity.class);
         AstaDetailsActivity.this.startActivity(myIntent);
         finish();
     }

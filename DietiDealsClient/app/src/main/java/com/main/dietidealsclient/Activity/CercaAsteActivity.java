@@ -2,14 +2,12 @@ package com.main.dietidealsclient.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
@@ -19,12 +17,9 @@ import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.R;
-import com.main.dietidealsclient.Requesters.AsteRequester;
-import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CercaAsteActivity extends ComponentActivity {
 
@@ -104,7 +99,7 @@ public class CercaAsteActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Intent myIntent = new Intent(CercaAsteActivity.this, HomeCompratoreActivity.class);
+        Intent myIntent = new Intent(CercaAsteActivity.this, HomeActivity.class);
         CercaAsteActivity.this.startActivity(myIntent);
         finish();
     }

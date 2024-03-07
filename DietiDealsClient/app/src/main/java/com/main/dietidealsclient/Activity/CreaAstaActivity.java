@@ -57,7 +57,7 @@ public class CreaAstaActivity extends ComponentActivity {
         btnCancel = findViewById(R.id.cancel_btn);
         registerResult();
 
-        if(userType.equals(TipoAccount.VENDITORE)) {
+        if(userType.equals(TipoAccount.COMPRATORE)) {
             findViewById(R.id.search_type).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_type).setVisibility(View.INVISIBLE);
             type = "AstaInversa";
@@ -82,7 +82,10 @@ public class CreaAstaActivity extends ComponentActivity {
         name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
         description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
         cat = ((Spinner)findViewById(R.id.search_categoria)).getSelectedItem().toString().replace(" ", "_");
-        type = ((Spinner)findViewById(R.id.search_type)).getSelectedItem().toString();
+        //TODO da errore con l asta inversa così o non la crea inversa
+        if (!type.equals("AstaInversa")){
+            type = ((Spinner)findViewById(R.id.search_type)).getSelectedItem().toString();
+        }
         //Prezzo minimo
         String tmpStr = ((EditText)findViewById(R.id.new_articolo_minPrice)).getText().toString();
         minPrice = Float.parseFloat(tmpStr);
@@ -145,13 +148,13 @@ public class CreaAstaActivity extends ComponentActivity {
     }
 
     private void gotoHomeCompratore() {
-        Intent myIntent = new Intent(CreaAstaActivity.this, HomeCompratoreActivity.class);
+        Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
         CreaAstaActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void goBack() {
-        Intent myIntent = new Intent(CreaAstaActivity.this, HomeCompratoreActivity.class);
+        Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
         CreaAstaActivity.this.startActivity(myIntent);
         finish();
     }

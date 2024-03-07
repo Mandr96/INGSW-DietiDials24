@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,30 +19,29 @@ import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
 import java.util.List;
-import java.util.Objects;
 
-public class HomeCompratoreActivity extends ComponentActivity {
+public class HomeActivity extends ComponentActivity {
 
     private RecyclerView recyclerViewPrimo, recyclerViewSecondo;
     private AsteAdapterList adapterPrimo, adapterSecondo;
     private AsteController asteController;
     private TipoAccount userType;
-    public HomeCompratoreActivity(){
+    public HomeActivity(){
         asteController = new AsteController();
     }
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_home_compratore);
+        setContentView(R.layout.activity_home);
 
         recyclerViewPrimo = findViewById(R.id.recycle_view_aste_normali);
         recyclerViewSecondo = findViewById(R.id.recycle_view_aste_inverse);
-
         setUserType();
 
         inizializeProfile();
         updateAsteLists();
+        updateTesti();
 
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
             gotoCercaAsteActivity();
@@ -50,12 +50,50 @@ public class HomeCompratoreActivity extends ComponentActivity {
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
             gotoCreaAstaActivity();
         });
+
+        findViewById(R.id.home_compratore_cambia_tipo).setOnClickListener(view -> {
+            gotoChageAccountType();
+        });
+
+
+        RecyclerAsteInterface recyclerAsteInterfacePrimo = new RecyclerAsteInterface() {
+            @Override
+            public void onItemClick(int position) {
+
+                Log.d("MyDebug" , "CLICCATO" + adapterPrimo.getData().get(position));
+            }
+        };
+        adapterPrimo.setClickListener(recyclerAsteInterfacePrimo);
+
+        RecyclerAsteInterface recyclerAsteInterfaceSecondo = new RecyclerAsteInterface() {
+            @Override
+            public void onItemClick(int position) {
+
+                Log.d("MyDebug" , "CLICCATO" + adapterSecondo.getData().get(position));
+            }
+        };
+        adapterSecondo.setClickListener(recyclerAsteInterfaceSecondo);
     }
+
+    private void updateTesti() {
+        if (userType.equals(TipoAccount.VENDITORE)) {
+            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le tue aste");
+            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le aste inverse a cui hai partecipato");
+        } else {
+            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le aste a cui hai partecipato");
+            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le tue aste Inverse");
+        }
+
+    }
+
 
     private void setUserType() {
         try{
-            userType = ((Objects.equals(Objects.requireNonNull(getIntent().getExtras()).getString("TIPO"), "VENDITORE")) ? TipoAccount.VENDITORE : TipoAccount.COMPRATORE);
+            userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
         } catch (NullPointerException e){
+            userType = TipoAccount.COMPRATORE;
+        }
+        if (userType == null){
             userType = TipoAccount.COMPRATORE;
         }
         Log.d("setUserType" , userType.toString());
@@ -117,22 +155,30 @@ public class HomeCompratoreActivity extends ComponentActivity {
     }
 
     private void goToEditProfileActivity() {
-        Intent myIntent = new Intent(HomeCompratoreActivity.this, EditProfileActivity.class);
-        HomeCompratoreActivity.this.startActivity(myIntent);
+        Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
+        HomeActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void gotoCercaAsteActivity() {
-        Intent myIntent = new Intent(HomeCompratoreActivity.this, CercaAsteActivity.class);
+        Intent myIntent = new Intent(HomeActivity.this, CercaAsteActivity.class);
         myIntent.putExtra("TIPO",userType);
-        HomeCompratoreActivity.this.startActivity(myIntent);
+        HomeActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void gotoCreaAstaActivity() {
-        Intent myIntent = new Intent(HomeCompratoreActivity.this, CreaAstaActivity.class);
+        Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
-        HomeCompratoreActivity.this.startActivity(myIntent);
+        HomeActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    private void gotoChageAccountType() {
+        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+        userType = userType.equals(TipoAccount.VENDITORE) ? TipoAccount.COMPRATORE : TipoAccount.VENDITORE;
+        myIntent.putExtra("TIPO",userType);
+        HomeActivity.this.startActivity(myIntent);
         finish();
     }
 
@@ -145,12 +191,12 @@ public class HomeCompratoreActivity extends ComponentActivity {
     }
 
     private void showAstaDetails(Asta asta) {
-        Intent myIntent = new Intent(HomeCompratoreActivity.this, AstaDetailsActivity.class);
+        Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
         myIntent.putExtra("PRICE", asta.getBestOffer().getValore());
         //TODO getYourOffer
         myIntent.putExtra("OFFER", 0);
-        HomeCompratoreActivity.this.startActivity(myIntent);
+        HomeActivity.this.startActivity(myIntent);
         finish();
     }
 }

@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.activity.ComponentActivity;
 
 import com.main.dietidealsclient.Controller.UserProfileController;
-import com.main.dietidealsclient.MainTest;
 import com.main.dietidealsclient.R;
 
 import javax.security.auth.login.LoginException;
@@ -71,7 +70,7 @@ public class LoginActivity extends ComponentActivity {
 
 
     private void goToHomeActivity(){
-        Intent myIntent = new Intent(LoginActivity.this, HomeCompratoreActivity.class);
+        Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
         LoginActivity.this.startActivity(myIntent);
         finish();
     }
