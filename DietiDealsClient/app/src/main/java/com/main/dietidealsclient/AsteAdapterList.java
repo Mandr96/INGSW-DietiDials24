@@ -91,12 +91,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 //                }
 //            }
 //        }
-
-        //CALCOLO DURATA
-        long secs = asta.getScadenza().toInstant().minusSeconds(Instant.now().getEpochSecond()).getEpochSecond();
-        long hours = secs/3600;
-        holder.det2.setText(Math.floorDiv(hours, 24)+"d "+hours%24+"h");
-
+        holder.det2.setText(asta.getDurata());
         holder.image.setOnClickListener(view -> {
             Log.d("MyDebug", "Ho cliccato sull immagine");
             holder.notify();

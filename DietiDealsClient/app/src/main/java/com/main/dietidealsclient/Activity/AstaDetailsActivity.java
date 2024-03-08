@@ -82,8 +82,7 @@ public class AstaDetailsActivity extends ComponentActivity {
         viewNomeVenditore.setText(owner.getNome()+" "+owner.getCognome());
         viewBestOffer.setText(Float.toString(getIntent().getFloatExtra("PRICE", 0f)));
         viewYourOffer.setText(Float.toString(getIntent().getFloatExtra("OFFER", 0f)));
-        //TODO get durata
-        viewScadenza.setText(selectedAsta.getScadenza().toString());
+        viewScadenza.setText("Scade tra: "+selectedAsta.getDurata());
         if(Float.parseFloat(viewYourOffer.getText().toString()) <= 0) {
             viewYourOffer.setVisibility(View.INVISIBLE);
             findViewById(R.id.offertText).setVisibility(View.INVISIBLE);

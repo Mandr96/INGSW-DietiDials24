@@ -13,6 +13,7 @@ import lombok.Setter;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -141,5 +142,11 @@ public abstract class Asta implements Serializable {
 
     public void setCreatore(Utente creatore) {
         this.creatore = creatore;
+    }
+
+    public String getDurata() {
+        long secs = scadenza.toInstant().minusSeconds(Instant.now().getEpochSecond()).getEpochSecond();
+        long hours = secs/3600;
+        return Math.floorDiv(hours, 24)+"d "+hours%24+"h";
     }
 }
