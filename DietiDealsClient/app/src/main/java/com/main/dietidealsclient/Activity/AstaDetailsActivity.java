@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -54,13 +55,15 @@ public class AstaDetailsActivity extends ComponentActivity {
 
         dialogSendOffer = new Dialog(AstaDetailsActivity.this);
         dialogSendOffer.setContentView(R.layout.dialog_invia_offerta);
-        dialogSendOffer.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //dialogSendOffer.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogSendOffer.setCancelable(false);
         setData();
 
-        if(btnSendOffer != null) {
-            setDialogEvent();
-        }
+
+        btnSendOffer.setOnClickListener(view -> {
+            dialogSendOffer.show();
+        });
+        setDialogEvent();
         viewNomeVenditore.setOnClickListener(view -> {
             goToUserDetails();
         });
@@ -95,21 +98,20 @@ public class AstaDetailsActivity extends ComponentActivity {
     }
 
     private void setDialogEvent() {
-        btnSendOffer.setOnClickListener(mainView -> {
-            dialogSendOffer.show();
-            findViewById(R.id.image_close).setOnClickListener(view -> {
-                dialogSendOffer.dismiss();
-            });
-            findViewById(R.id.btn_invia_offerta).setOnClickListener(view -> {
-                Float valore = Float.parseFloat(((EditText)findViewById(R.id.valore_offerta_edit_text)).getText().toString());
-                if(valore != Float.NaN) {
-                    new AsteController().createNewOffer(selectedAsta, valore);
-                    goBack();
-                }
-                else {
-                    Toast.makeText(AstaDetailsActivity.this, "Valore offerta non valido",Toast.LENGTH_LONG).show();
-                }
-            });
+        Button inviaOfferta = dialogSendOffer.findViewById(R.id.btn_invia_offerta);
+        ImageView imgClose = dialogSendOffer.findViewById(R.id.image_close);
+        inviaOfferta.setOnClickListener(view -> {
+            Float valore = Float.parseFloat(((EditText)findViewById(R.id.valore_offerta_edit_text)).getText().toString());
+            if(valore != Float.NaN) {
+                new AsteController().createNewOffer(selectedAsta, valore);
+                goBack();
+            }
+            else {
+                Toast.makeText(AstaDetailsActivity.this, "Valore offerta non valido",Toast.LENGTH_LONG).show();
+            }
+        });
+        imgClose.setOnClickListener(view -> {
+            dialogSendOffer.dismiss();
         });
     }
     private void goToUserDetails() {

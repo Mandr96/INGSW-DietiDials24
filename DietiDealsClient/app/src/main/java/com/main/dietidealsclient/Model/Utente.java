@@ -4,13 +4,14 @@ import lombok.*;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"authorities", "enabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked", "username"})
 //TODO MANCA IL LINK
-public class Utente {
+public class Utente implements Serializable {
 
     private String email;
     private String nome;

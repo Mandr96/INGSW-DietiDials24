@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.main.dietidealsclient.AsteAdapterList;
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
+import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
@@ -202,6 +203,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void showAstaDetails(Asta asta) {
+        asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
         myIntent.putExtra("PRICE", asta.getBestOffer().getValore());

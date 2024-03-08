@@ -98,8 +98,10 @@ public class AsteController {
 
     public void createNewOffer(Asta asta, Float valore) {
         try {
+            Log.d("myDebug", "OK3.5");
             Offerta offer = new Offerta(-1L, valore, null, true, LoggedUser.getInstance().getLoggedUser(), asta);
             offer.setId(asteRequester.inviaOfferta(offer));
+            Log.d("myDebug", "OK3.6");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

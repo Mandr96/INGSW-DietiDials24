@@ -126,7 +126,7 @@ public abstract class Asta implements Serializable {
 
     protected Offerta getBestOfferIn(boolean maggiore){
         if(offerte == null || offerte.isEmpty()){
-            return null;
+            return new Offerta(-1L, 0F,null, false, null, null);
         }
         Offerta bestOff = offerte.get(0);
         for (Offerta thisOff : offerte){
@@ -137,5 +137,9 @@ public abstract class Asta implements Serializable {
             }
         }
         return bestOff;
+    }
+
+    public void setCreatore(Utente creatore) {
+        this.creatore = creatore;
     }
 }
