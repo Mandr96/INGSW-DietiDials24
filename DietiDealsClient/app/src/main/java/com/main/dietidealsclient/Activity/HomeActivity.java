@@ -15,6 +15,7 @@ import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.Model.Asta;
+import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
@@ -101,11 +102,9 @@ public class HomeActivity extends ComponentActivity {
 
 
     private void setUserType() {
-        try{
-            userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
-        } catch (NullPointerException e){
-            userType = TipoAccount.COMPRATORE;
-        }
+
+        userType = (TipoAccount)getIntent().getSerializableExtra("TIPO");
+
         if (userType == null){
             userType = TipoAccount.COMPRATORE;
         }
@@ -184,6 +183,7 @@ public class HomeActivity extends ComponentActivity {
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
+        finish();
     }
 
     private void gotoChageAccountType() {
@@ -195,18 +195,23 @@ public class HomeActivity extends ComponentActivity {
     }
 
     public void onClickPrimoRecycler(int pos){
-        showAstaDetails(adapterPrimo.getData().get(pos));
+//        showAstaDetails(adapterPrimo.getData().get(pos));
     }
 
     public void onClickSecondoRecycler(int pos){
-        showAstaDetails(adapterSecondo.getData().get(pos));
+//        showAstaDetails(adapterSecondo.getData().get(pos));
     }
 
     private void showAstaDetails(Asta asta) {
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
-        myIntent.putExtra("PRICE", asta.getBestOffer().getValore());
+        Offerta bestOff = asta.getBestOffer();
+        if (bestOff != null){
+            myIntent.putExtra("PRICE", asta.getBestOffer().getValore());
+        } else {
+            myIntent.putExtra("PRICE", 0);
+        }
         //TODO getYourOffer
         myIntent.putExtra("OFFER", 0);
         HomeActivity.this.startActivity(myIntent);
