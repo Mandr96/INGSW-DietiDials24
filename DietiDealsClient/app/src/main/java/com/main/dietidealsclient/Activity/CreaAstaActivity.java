@@ -61,7 +61,7 @@ public class CreaAstaActivity extends ComponentActivity {
         if(userType.equals(TipoAccount.COMPRATORE)) {
             findViewById(R.id.search_type).setVisibility(View.INVISIBLE);
             findViewById(R.id.textView_type).setVisibility(View.INVISIBLE);
-            type = "AstaInversa";
+            type = "Inversa";
         }
 
         findViewById(R.id.crea_btn).setOnClickListener(view -> {
@@ -84,7 +84,7 @@ public class CreaAstaActivity extends ComponentActivity {
         description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
         cat = ((Spinner)findViewById(R.id.search_categoria)).getSelectedItem().toString().replace(" ", "_");
         //TODO da errore con l asta inversa così o non la crea inversa
-        if (!type.equals("AstaInversa")){
+        if (!type.equals("Inversa")){
             type = ((Spinner)findViewById(R.id.search_type)).getSelectedItem().toString();
         }
         //Prezzo minimo

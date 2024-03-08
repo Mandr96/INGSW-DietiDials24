@@ -39,8 +39,19 @@ public class UserProfileController {
         utente.setCognome(surname);
         utente.setShortbio(bio);
 
-        utentiRequester.updateUtente(utente);
-        LoggedUser.getInstance().setLoggedUser(utente);
+        utentiRequester.updateUtente(new Utente(
+                utente.getEmail(),
+                utente.getNome(),
+                utente.getCognome(),
+                utente.getPassword(),
+                utente.getShortbio(),
+                utente.getCity(),
+                utente.getProfilePic(),
+                null,
+                null,
+                null
+        ));
+        LoggedUser.update();
     }
 
 
