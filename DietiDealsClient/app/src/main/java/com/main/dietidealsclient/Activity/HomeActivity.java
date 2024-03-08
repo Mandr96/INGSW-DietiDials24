@@ -49,11 +49,9 @@ public class HomeActivity extends ComponentActivity {
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
             gotoCercaAsteActivity();
         });
-
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
             gotoCreaAstaActivity();
         });
-
         findViewById(R.id.home_compratore_cambia_tipo).setOnClickListener(view -> {
             gotoChageAccountType();
         });

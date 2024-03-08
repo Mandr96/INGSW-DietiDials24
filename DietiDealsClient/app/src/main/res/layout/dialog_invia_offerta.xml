@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    xmlns:tools2="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:cardElevation="10dp"
+    tools:cardCornerRadius="15dp"
+    tools:cardBackgroundColor="@color/appBackgroundColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/simpleBtnColor"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/dialog_text"
+            style="@style/subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="Inserisci il valore dell'offerta"
+            android:textStyle="bold"
+            tools:layout_constraintEnd_toEndOf="parent"
+            tools:layout_constraintStart_toStartOf="parent"
+            tools:layout_constraintTop_toBottomOf="@+id/image_close">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/valore_offerta_edit_text"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/profile_edit_text"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="0,00"
+            android:textAlignment="textEnd"
+            android:padding="5dp"
+            tools:layout_constraintEnd_toEndOf="parent"
+            tools:layout_constraintStart_toStartOf="parent"
+            tools:layout_constraintTop_toBottomOf="@+id/dialog_text"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="74dp" />
+
+        <Button
+            android:id="@+id/btn_invia_offerta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_confirm"
+            android:text="invia"
+            tools:layout_constraintEnd_toEndOf="parent"
+            tools:layout_constraintStart_toStartOf="parent"
+            tools:layout_constraintTop_toBottomOf="@+id/valore_offerta_edit_text"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="134dp" />
+
+        <TextView
+            android:id="@+id/euro_text"
+            style="@style/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€"
+            tools:layout_constraintBottom_toBottomOf="@+id/valore_offerta_edit_text"
+            tools:layout_constraintStart_toEndOf="@+id/valore_offerta_edit_text"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="77dp" />
+
+        <ImageView
+            android:id="@+id/image_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/image_cross"
+            tools:layout_constraintEnd_toEndOf="parent"
+            tools:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

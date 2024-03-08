@@ -12,36 +12,56 @@
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
+                <Button
+                    android:id="@+id/home_compartore_aste"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/icon_asta"
+                    android:text="Aste"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/home_compratore_edit_profile"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/home_compratore_edit_profile" />
+
 
                 <Button
-                    android:id="@+id/home_compratore_cambia_tipo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="cambioTmp"
-                    android:background="@drawable/btn_basic"
-                    android:drawableStart="@drawable/icon_seller"
-                    android:drawablePadding="10dp"
-                    android:padding="10dp"
+                    android:id="@+id/home_compratore_edit_profile"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/icon_user"
+                    android:text="Profilo"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/home_compratore_edit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="modTmp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/home_compratore_notifiche_btn"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/icon_bell"
+                    android:text="Notifiche"
+                    android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/home_compratore_cambia_tipo"
-                    app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/home_compratore_edit_profile"
+                    app:layout_constraintTop_toTopOf="@+id/home_compratore_edit_profile" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:id="@+id/home_scroll_view"
@@ -70,10 +90,25 @@
                             app:layout_constraintTop_toBottomOf="@+id/recycle_view_aste_normali" />
 
                         <Button
+                            android:id="@+id/home_compratore_cambia_tipo"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:background="@drawable/btn_basic"
+                            android:drawableStart="@drawable/icon_seller"
+                            android:drawablePadding="10dp"
+                            android:padding="10dp"
+                            android:text="Vendi"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/home_compratore_cerca_aste" />
+
+                        <Button
                             android:id="@+id/home_compratore_cerca_aste"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="64dp"
+                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="24dp"
                             android:background="@drawable/btn_basic"
                             android:drawableEnd="@drawable/icon_search"

@@ -96,6 +96,15 @@ public class AsteController {
         return aste;
     }
 
+    public void createNewOffer(Asta asta, Float valore) {
+        try {
+            Offerta offer = new Offerta(-1L, valore, null, true, LoggedUser.getInstance().getLoggedUser(), asta);
+            offer.setId(asteRequester.inviaOfferta(offer));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /*
     public List<Asta> getAstePartecipateDaCompratore() {
         List<Asta> aste = null;

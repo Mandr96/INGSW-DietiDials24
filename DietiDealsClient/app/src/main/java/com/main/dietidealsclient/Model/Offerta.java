@@ -70,4 +70,8 @@ public class Offerta implements Serializable {
     public Boolean getAttiva() {
         return attiva;
     }
+
+    public void setId(Long aLong) {
+        id = aLong;
+    }
 }
