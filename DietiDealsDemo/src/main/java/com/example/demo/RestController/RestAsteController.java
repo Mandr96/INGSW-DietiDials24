@@ -104,6 +104,7 @@ public class RestAsteController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public Long insertOfferta(@RequestBody String body) throws JsonProcessingException, JSONException {
+        System.out.println("Richiesta insertOfferta ricevuta");
         Offerta newOffer = new ObjectMapper().readValue(body, Offerta.class);
         newOffer.setOwner(userRep.findById(new JSONObject(body).getString("owner")).get());
         newOffer.setAsta(asteRep.findById(new JSONObject(body).getLong("asta")).get());

@@ -65,6 +65,7 @@ public class CercaAsteActivity extends ComponentActivity {
 
 
     private void search(){
+        //TODO debug
         String keyword = editTextKw.getText().toString();
         String categoria = spinnerCat.getSelectedItem().toString().replace(" ","_");
         String type = "Asta"+spinnerType.getSelectedItem().toString();

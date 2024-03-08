@@ -72,7 +72,7 @@ public class CreaAstaActivity extends ComponentActivity {
             }
         });
         imagePreview.setOnClickListener(view -> {
-                imageChooser();
+            imageChooser();
         });
         btnCancel.setOnClickListener(view -> {
             goBack();

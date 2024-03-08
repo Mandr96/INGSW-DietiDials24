@@ -100,10 +100,12 @@ public class AstaDetailsActivity extends ComponentActivity {
     private void setDialogEvent() {
         Button inviaOfferta = dialogSendOffer.findViewById(R.id.btn_invia_offerta);
         ImageView imgClose = dialogSendOffer.findViewById(R.id.image_close);
+        EditText editValore = dialogSendOffer.findViewById(R.id.valore_offerta_edit_text);
         inviaOfferta.setOnClickListener(view -> {
-            Float valore = Float.parseFloat(((EditText)findViewById(R.id.valore_offerta_edit_text)).getText().toString());
+            Float valore = Float.parseFloat(editValore.getText().toString());
             if(valore != Float.NaN) {
                 new AsteController().createNewOffer(selectedAsta, valore);
+                Toast.makeText(AstaDetailsActivity.this, "Offerta inviata",Toast.LENGTH_LONG).show();
                 goBack();
             }
             else {
