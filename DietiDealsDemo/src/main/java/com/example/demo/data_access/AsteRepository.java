@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface AsteRepository extends JpaRepository<Asta, Long> {
 
     @Query(value =

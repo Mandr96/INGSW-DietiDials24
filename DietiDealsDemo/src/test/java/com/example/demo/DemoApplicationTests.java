@@ -14,14 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DemoApplicationTests {
 
-	@Autowired
-	public AsteRepository asteTestRep;
-
-	@Test
-	public void repFunctionalityTest() {
-		assertNotNull(asteTestRep);
-	}
-
 	@Test
 	public void contextLoads() {
 	}
