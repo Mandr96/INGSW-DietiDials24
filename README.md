@@ -34,14 +34,14 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
     - [x] ii. Individuazione del target degli utenti
     - [x] iii. Descrizioni Testuali Strutturate per almeno quattro **(due, se si consegna prima del 15/04/2024)** casi d’uso significativi (autenticazione esclusa) a scelta dei contraenti tra quelli richiesti.
     - [x] iv. Prototipazione visuale via Mock-up dell’interfaccia utente per tutti i casi d’uso assegnati attraverso strumenti di rapid prototyping, come “Figma”.
-    - [ ] v. Valutazione dell’usabilità a priori.
+    - [x] v. Valutazione dell’usabilità a priori.
     - [x] vi. Glossario.
   - b. Specifica dei Requisiti.
     - [x] i. Classi, oggetti e relazioni di analisi.
     - [x] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
     - [x] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
 2. <ins>Documento di Design del sistema.</ins>
-  - [ ] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
+  - [x] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
   - [x] b. Descrizione/motivazione delle scelte tecnologiche adottate.
   - [x] c. Diagramma delle classi di design.
   - [ ] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
