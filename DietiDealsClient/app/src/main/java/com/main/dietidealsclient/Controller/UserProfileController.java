@@ -1,11 +1,18 @@
 package com.main.dietidealsclient.Controller;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import javax.security.auth.login.LoginException;
 
@@ -28,11 +35,10 @@ public class UserProfileController {
     public void Register(String email, String password) throws InterruptedException, LoginException {
         utentiRequester.jwtRegister(email,password);
         LoggedUser.getInstance().setLoggedUser(utentiRequester.getUtenteByEmail(email));
-//        loggedUser = utentiRequester.getUtenteByEmail(email);
     }
 
-    //TODO Da aggiungere link e FOTO
-    public void UpdateUserProfile(String name, String surname, String bio) throws JsonProcessingException, InterruptedException {
+
+    public void UpdateUserProfile(String name, String surname, String bio, Bitmap img) throws JsonProcessingException, InterruptedException {
         Utente utente = LoggedUser.getInstance().getLoggedUser();
 
         utente.setNome(name);
@@ -52,6 +58,7 @@ public class UserProfileController {
                 null
         ));
         LoggedUser.update();
+        //TODO dove aggiorna il profilo??
     }
 
 
@@ -62,6 +69,14 @@ public class UserProfileController {
     public Utente getAstaOwner(Long astaID){
         try {
             return utentiRequester.getAstaOwner(astaID);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setUserImg(String useremail, File img) {
+        try {
+            utentiRequester.setUserImg(useremail, img);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

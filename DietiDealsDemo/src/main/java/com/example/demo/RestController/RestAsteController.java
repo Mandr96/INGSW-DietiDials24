@@ -10,12 +10,18 @@ import com.example.demo.model.Offerta;
 import com.example.demo.model.Utente;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+import static org.apache.juli.FileHandler.DEFAULT_BUFFER_SIZE;
 
 @RestController
 @RequestMapping
@@ -129,5 +137,13 @@ public class RestAsteController {
         }
         System.out.println("ret" + result );
         return result;
+    }
+
+    @PostMapping("asta/setImg/{astaID}")
+    public void setAstaImg(@PathVariable("astaID") Long astaID, @RequestParam("file") MultipartFile file) {
+        Optional<Asta> result = asteRep.findById(astaID);
+        Asta asta = result.orElse(null);
+        asta.setImg((File) file);
+        asteRep.save(asta);
     }
 }

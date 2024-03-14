@@ -10,7 +10,7 @@ import androidx.activity.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.main.dietidealsclient.AsteAdapterList;
+import com.main.dietidealsclient.Adapters.AsteAdapterList;
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Controller.UserProfileController;

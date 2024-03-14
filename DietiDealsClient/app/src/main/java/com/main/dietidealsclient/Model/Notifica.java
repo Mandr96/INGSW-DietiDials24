@@ -55,4 +55,20 @@ public class Notifica {
     public void setUser(Utente user) {
         this.user = user;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getOggetto() {
+        return oggetto;
+    }
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public Boolean getLetto() {
+        return letto;
+    }
 }

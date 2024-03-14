@@ -13,6 +13,8 @@ import com.main.dietidealsclient.Utility.LoggedUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,5 +156,19 @@ public class AsteRequester {
         t.start();
         t.join();
         return offerID.get();
+    }
+
+    public void setAstaImg(Long astaID, File img) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendPostFileRequest("asta/setImg", true, img);
+                String responseBody = response.toString();
+                Log.d("myDebug", "Http response [ImgSet]: "+responseBody);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
     }
 }

@@ -1,5 +1,6 @@
 package com.main.dietidealsclient.Controller;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.main.dietidealsclient.Model.Asta;
@@ -10,6 +11,8 @@ import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Requesters.AsteRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,24 +30,24 @@ public class AsteController {
         return asteRequester.getAstaById(id);
     }
 
-    public Long createNewAsta(Timestamp scadenza, String name, String description, String cat, File img, String type, Float minPrice) throws InterruptedException {
+    public void createNewAsta(Timestamp scadenza, String name, String description, String cat, File fileImg, String type, Float minPrice) throws InterruptedException {
         Asta asta = null;
+        Long astaID = -1L;
         if(type.equals("Classica")){
-            asta = new AstaClassica(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser(), minPrice);
+            asta = new AstaClassica(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser(), minPrice);
         } else if(type.equals("Silenziosa")){
-            asta = new AstaSilenziosa(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser());
+            asta = new AstaSilenziosa(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser());
         } else if (type.equals("Inversa")){
-            //TODO il server esplode e dice JSONObject text must begin with '{' stranamente solo con l inversa
-            asta = new AstaInversa(scadenza, name, description, cat, img, LoggedUser.getInstance().getLoggedUser(), minPrice);
+            asta = new AstaInversa(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser(), minPrice);
         }
-
-        return asteRequester.inserisciAsta(asta);
+        astaID = asteRequester.inserisciAsta(asta);
+        if(astaID != -1L && fileImg != null) {
+            Log.d("myDebug", "Preparando l'immagine...");
+            //TODO buggato madonna
+            //asteRequester.setAstaImg(astaID, fileImg);
+        }
     }
 
-    /** Restituisce le aste dell utente loggato
-     * @param tipo (venditore - compratore)
-     * @return lista di aste
-     */
     public List<Asta> getAsteUtente(TipoAccount tipo){
         List<Asta> aste = new ArrayList<Asta>();
         for (Asta asta : LoggedUser.getInstance().getLoggedUser().getAste()){
@@ -70,12 +73,6 @@ public class AsteController {
         }
         return results;
     }
-
-//    public List<Offerta> getOfferteUtente() throws InterruptedException {
-////        asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
-////        LoggedUser.getInstance().getLoggedUser().getOfferte();
-//        return asteRequester.getOfferteByUser(LoggedUser.getInstance().getLoggedUser().getEmail());
-//    }
 
     public List<Asta> getAstePartecipate(TipoAccount userType){
         List<Asta> aste = null;
@@ -106,21 +103,4 @@ public class AsteController {
             throw new RuntimeException(e);
         }
     }
-
-    /*
-    public List<Asta> getAstePartecipateDaCompratore() {
-        List<Asta> aste = null;
-        try { aste = asteRequester.getAstePartecipate();} catch (InterruptedException e) {throw new RuntimeException(e);}
-        // RIMOZIONE ASTE INVERSE
-        for(Asta asta : aste) {
-            if(asta instanceof AstaInversa)
-                aste.remove(asta);
-        }
-        // RECUPERO OFFERTE
-        for (Asta asta : aste) {
-            try {asta.setOfferte(asteRequester.getOfferteByAsta(asta.getId()));} catch (InterruptedException e) {throw new RuntimeException(e);}
-        }
-        return aste;
-    }
-    */
 }

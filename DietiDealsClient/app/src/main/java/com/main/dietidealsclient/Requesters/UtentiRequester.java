@@ -13,6 +13,7 @@ import com.main.dietidealsclient.Model.Utente;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -160,5 +161,19 @@ public class UtentiRequester {
         t.start();
         t.join();
         return user.get();
+    }
+
+    public void setUserImg(String email, File file) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendPostFileRequest("utente/setImg/"+email, true, file);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received [ImgSet]: "+jsBody);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
     }
 }

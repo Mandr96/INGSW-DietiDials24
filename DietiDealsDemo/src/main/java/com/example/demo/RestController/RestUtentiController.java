@@ -11,7 +11,9 @@ import com.example.demo.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Optional;
 
 @RestController
@@ -54,7 +56,6 @@ public class RestUtentiController {
             user.setCity(requestBody.getCity());
             user.setNome(requestBody.getNome());
             user.setCognome(requestBody.getCognome());
-            user.setProfilePic(requestBody.getProfilePic());
             user.setShortbio(requestBody.getShortbio());
             userRep.save(user);
             return true;
@@ -66,6 +67,14 @@ public class RestUtentiController {
     public boolean setNewPassword(@RequestBody ChangePasswordRequest request, @RequestHeader(name = "Authorization") String authHeader){
         return userServices.changePassword(request,authHeader.replace("Bearer " , ""));
 
+    }
+
+    @PostMapping("/setImg/{email}")
+    public void handleImgUpload(@PathVariable("email") String email, @RequestParam("file") MultipartFile file) {
+        Optional<Utente> result = userRep.findById(email);
+        Utente user = result.orElse(null);
+        user.setProfilePic((File) file);
+        userRep.save(user);
     }
 
     @PostMapping(path = "/create",
