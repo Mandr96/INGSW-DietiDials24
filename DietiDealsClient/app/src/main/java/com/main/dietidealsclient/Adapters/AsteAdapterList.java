@@ -94,7 +94,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
             Log.d("MyDebug", "Ho cliccato sull immagine");
             holder.notify();
         });
-
+        //TODO WHY image.setOnClickListener?
         //TODO Gestione immagine
         holder.image.setImageResource(R.drawable.add_image);
 //        holder.image.setImageDrawable(asta.getImg());
@@ -102,7 +102,11 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if(data==null){
+            return 0;
+        }else {
+            return data.size();
+        }
     }
 
     public void setClickListener(RecyclerAsteInterface context) {

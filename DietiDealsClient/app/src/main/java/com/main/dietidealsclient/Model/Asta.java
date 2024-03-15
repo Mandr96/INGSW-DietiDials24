@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Model;
 import android.util.Log;
 
 import com.fasterxml.jackson.annotation.*;
+import com.main.dietidealsclient.Controller.AsteController;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -103,8 +104,9 @@ public abstract class Asta implements Serializable {
     }
 
     @JsonGetter("creatore")
-    public String getCreatore() {
-        return creatore.getEmail();
+    public String getCreatore() throws InterruptedException {
+        AsteController asteController = new AsteController();
+        return asteController.getAstaOwnerEmail(id);
     }
 
     @JsonIgnore
