@@ -89,10 +89,12 @@ public class CreaAstaActivity extends ComponentActivity {
         }
         //Prezzo minimo
         String tmpStr = ((EditText)findViewById(R.id.new_articolo_minPrice)).getText().toString();
-        minPrice = Float.parseFloat(tmpStr);
+        minPrice = Float.parseFloat(tmpStr.isEmpty() ? "0" : tmpStr);
         //Calcolo scadenza
-        int days = Integer.parseInt(((EditText)findViewById(R.id.new_articolo_days)).getText().toString());
-        int hours = Integer.parseInt(((EditText)findViewById(R.id.new_articolo_hours)).getText().toString());
+        EditText dayEditText = findViewById(R.id.new_articolo_days);
+        EditText hoursEditText = findViewById(R.id.new_articolo_hours);
+        int days = Integer.parseInt(dayEditText.getText().toString().isEmpty() ? "7" : dayEditText.getText().toString());
+        int hours = Integer.parseInt(hoursEditText.getText().toString().isEmpty() ? "0" : hoursEditText.getText().toString());
         scadenza = Timestamp.from(Instant.now().plusSeconds(days*24*60*60).plusSeconds(hours*60*60));
         //Image setting
         if(imagePreview.getTag() != null && !imagePreview.getTag().toString().isBlank()) {
@@ -107,7 +109,7 @@ public class CreaAstaActivity extends ComponentActivity {
             Toast.makeText(this, "Inserisci una descrizione", Toast.LENGTH_LONG).show();
             return;
         }
-        else if(minPrice == null || !(minPrice > 0)) {
+        else if(minPrice == null || !(minPrice >= 0)) {
             Toast.makeText(this, "Valore offerta minima non valido", Toast.LENGTH_LONG).show();
             return;
         }

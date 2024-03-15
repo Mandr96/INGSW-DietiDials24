@@ -60,7 +60,7 @@ public abstract class Asta implements Serializable {
     }
 
     public Asta(Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Utente creatore) {
-        this.id = 0L;
+        this.id = -1L;
         this.scadenza = scadenza;
         this.categoria = categoria;
         this.nomeProdotto = nomeProdotto;
@@ -105,6 +105,9 @@ public abstract class Asta implements Serializable {
 
     @JsonGetter("creatore")
     public String getCreatore() throws InterruptedException {
+        if (id == -1){
+            return creatore.getEmail();
+        }
         AsteController asteController = new AsteController();
         return asteController.getAstaOwnerEmail(id);
     }
