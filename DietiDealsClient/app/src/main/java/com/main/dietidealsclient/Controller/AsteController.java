@@ -1,6 +1,5 @@
 package com.main.dietidealsclient.Controller;
 
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.main.dietidealsclient.Model.Asta;
@@ -11,8 +10,6 @@ import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Requesters.AsteRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;

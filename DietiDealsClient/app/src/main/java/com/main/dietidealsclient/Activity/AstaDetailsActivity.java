@@ -23,6 +23,9 @@ import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class AstaDetailsActivity extends ComponentActivity {
 
     Utente owner;
@@ -75,17 +78,23 @@ public class AstaDetailsActivity extends ComponentActivity {
     private void setData() {
         selectedAsta = (Asta)getIntent().getSerializableExtra("ASTA");
         owner = new UserProfileController().getAstaOwner(selectedAsta.getId());
+        Float actualPrice = getIntent().getFloatExtra("PRICE", 0f);
+        Float yourOffer = getIntent().getFloatExtra("OFFER", 0f);
+
         viewNomeArticolo.setText(selectedAsta.getNomeProdotto());
         //TODO set immagine
         //viewArticoloImg = findViewById(R.id.image_articolo);
         viewDescription.setText(selectedAsta.getDescrizione());
         viewNomeVenditore.setText(owner.getNome()+" "+owner.getCognome());
-        viewBestOffer.setText(Float.toString(getIntent().getFloatExtra("PRICE", 0f)));
-        viewYourOffer.setText(Float.toString(getIntent().getFloatExtra("OFFER", 0f)));
+        viewBestOffer.setText(floatAsPriceString(actualPrice));
+        viewYourOffer.setText(floatAsPriceString(yourOffer));
         viewScadenza.setText("Scade tra: "+selectedAsta.getDurata());
-        if(Float.parseFloat(viewYourOffer.getText().toString()) <= 0) {
+        if(yourOffer <= 0) {
             viewYourOffer.setVisibility(View.INVISIBLE);
             findViewById(R.id.offertText).setVisibility(View.INVISIBLE);
+        }
+        if(actualPrice <= 0) {
+            viewBestOffer.setText(floatAsPriceString(selectedAsta.getActualPrice()));
         }
         if(selectedAsta instanceof AstaSilenziosa) {
             viewBestOffer.setVisibility(View.INVISIBLE);
@@ -130,5 +139,10 @@ public class AstaDetailsActivity extends ComponentActivity {
         Intent myIntent = new Intent(AstaDetailsActivity.this, HomeActivity.class);
         AstaDetailsActivity.this.startActivity(myIntent);
         finish();
+    }
+
+    private String floatAsPriceString(Float num) {
+        NumberFormat formatter = new DecimalFormat("0.00");
+        return formatter.format(num)+" €";
     }
 }

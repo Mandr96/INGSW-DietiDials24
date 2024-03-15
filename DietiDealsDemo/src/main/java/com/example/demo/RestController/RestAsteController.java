@@ -123,7 +123,10 @@ public class RestAsteController {
 
     @GetMapping(path = "offerta/accettazione/{id}")
     public boolean accettaOfferta(@PathVariable("id")Long offertaId){
-        //TODO Da fare
+        Offerta offer = offerteRep.findById(offertaId).get();
+        Asta asta = offer.getAsta();
+        Utente user = offer.getOwner();
+
         return true;
     }
 
@@ -136,7 +139,7 @@ public class RestAsteController {
             result.add(asteRep.getAstaByOffer(offerta.getId()));
         }
         System.out.println("ret" + result );
-        return result;
+        return CheckAsteScaduteAndRm(result);
     }
 
     @PostMapping("asta/setImg/{astaID}")

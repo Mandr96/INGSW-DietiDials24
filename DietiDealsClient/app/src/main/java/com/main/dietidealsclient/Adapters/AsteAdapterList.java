@@ -57,9 +57,9 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 
 
         if(asta instanceof AstaClassica classica) {
-            holder.det1.setText(classica.getMinPrice().toString()+"€");
+            holder.det1.setText(classica.getMinPriceAsString());
             if(bestOffer != null) {
-                holder.det1.setText(bestOffer.getValore().toString() + "€");
+                holder.det1.setText(bestOffer.getValoreAsString());
                 Log.d("MyDebug", "LOGGED USER pre" );
                 Log.d("MyDebug", "LOGGED USER" + LoggedUser.getInstance().getLoggedUser().getEmail());
                 //TODO bestOffer.getOwnerEmail() É NULL?

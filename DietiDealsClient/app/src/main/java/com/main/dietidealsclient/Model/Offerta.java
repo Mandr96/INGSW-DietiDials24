@@ -15,6 +15,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +46,11 @@ public class Offerta implements Serializable {
 
     public Float getValore() {
         return valore;
+    }
+
+    public String getValoreAsString() {
+        NumberFormat formatter = new DecimalFormat("0.00");
+        return formatter.format(valore)+" €";
     }
 
     public Utente getOwner() {

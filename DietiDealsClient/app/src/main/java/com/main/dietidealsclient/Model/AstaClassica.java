@@ -12,6 +12,8 @@ import lombok.Setter;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +58,17 @@ public class AstaClassica extends Asta {
         return minPrice;
     }
 
+    public String getMinPriceAsString() {
+        NumberFormat formatter = new DecimalFormat("0.00");
+        return formatter.format(minPrice)+" €";
+    }
+
     public String getTypeAsString() {
         return "Asta Classica";
+    }
+
+    @Override
+    public Float getActualPrice() {
+        return minPrice;
     }
 }

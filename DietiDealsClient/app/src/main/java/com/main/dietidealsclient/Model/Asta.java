@@ -110,6 +110,7 @@ public abstract class Asta implements Serializable {
     @JsonIgnore
     public abstract Offerta getBestOffer();
     public abstract String getTypeAsString();
+    public abstract Float getActualPrice();
 
 //    @JsonIgnore
 //    public Float getBestOfferVal(){

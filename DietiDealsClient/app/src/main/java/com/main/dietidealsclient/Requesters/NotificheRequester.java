@@ -23,7 +23,7 @@ public class NotificheRequester {
         notifiche.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("all/"+email, true);
+                Response response = RequestUtility.sendGetRequest("notifica/all/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
                 notifiche.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Notifica>>() {}));
@@ -42,7 +42,7 @@ public class NotificheRequester {
         notifiche.set(new ArrayList<>());
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("unread/"+email, true);
+                Response response = RequestUtility.sendGetRequest("notifica/unread/"+email, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received: "+jsBody);
                 notifiche.set(new ObjectMapper().readValue(jsBody, new TypeReference<ArrayList<Notifica>>() {}));
@@ -59,7 +59,7 @@ public class NotificheRequester {
     public void setRead(Long id) throws InterruptedException{
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("setRead/"+id, true);
+                Response response = RequestUtility.sendGetRequest("notifica/setRead/"+id, true);
                 String jsBody = response.body().string();
             } catch (IOException e) {
                 throw new RuntimeException(e);

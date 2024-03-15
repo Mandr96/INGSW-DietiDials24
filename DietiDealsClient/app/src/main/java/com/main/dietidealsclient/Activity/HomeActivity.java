@@ -60,6 +60,9 @@ public class HomeActivity extends ComponentActivity {
         findViewById(R.id.home_compratore_edit_profile).setOnClickListener(view -> {
             goToEditProfileActivity();
         });
+        findViewById(R.id.home_compratore_notifiche_btn).setOnClickListener(view -> {
+            gotoNotificheActivity();
+        });
 
         adapterPrimo.setClickListener(new RecyclerAsteInterface() {
             @Override
@@ -73,7 +76,6 @@ public class HomeActivity extends ComponentActivity {
         adapterSecondo.setClickListener(new RecyclerAsteInterface() {
             @Override
             public void onItemClick(int position) {
-                Log.d("MyDebug" , "CLICCATO" + adapterSecondo.getData().get(position));
                 showAstaDetails(adapterSecondo.getData().get(position));
             }
         });
@@ -195,11 +197,11 @@ public class HomeActivity extends ComponentActivity {
     }
 
     public void onClickPrimoRecycler(int pos){
-//        showAstaDetails(adapterPrimo.getData().get(pos));
+        showAstaDetails(adapterPrimo.getData().get(pos));
     }
 
     public void onClickSecondoRecycler(int pos){
-//        showAstaDetails(adapterSecondo.getData().get(pos));
+        showAstaDetails(adapterSecondo.getData().get(pos));
     }
 
     private void showAstaDetails(Asta asta) {
@@ -214,6 +216,12 @@ public class HomeActivity extends ComponentActivity {
         }
         //TODO getYourOffer
         myIntent.putExtra("OFFER", 0);
+        HomeActivity.this.startActivity(myIntent);
+    }
+
+    private void gotoNotificheActivity() {
+        Intent myIntent = new Intent(HomeActivity.this, NotificheActivity.class);
+        myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 }

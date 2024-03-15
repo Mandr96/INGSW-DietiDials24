@@ -28,8 +28,8 @@ public class NotificheAdapterList extends RecyclerView.Adapter<NotificheAdapterL
 
     private List<Notifica> list;
 
-    public NotificheAdapterList(List<Asta> data, RecyclerAsteInterface recyclerAsteInterface) {
-        this.list = list;
+    public NotificheAdapterList(List<Notifica> data, RecyclerAsteInterface recyclerAsteInterface) {
+        this.list = data;
         this.recyclerAsteInterface = recyclerAsteInterface;
     }
 
