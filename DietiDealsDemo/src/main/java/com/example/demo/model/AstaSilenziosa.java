@@ -23,7 +23,6 @@ public class AstaSilenziosa extends Asta{
             notifiche.add(new Notifica("La tua asta è terminata","Vieni a scegliere chi si aggiudicherà " + getNomeProdotto(), false , getCreatore()));
         }else {
             notifiche.add(new Notifica("La tua asta è terminata","Non hai ricevuto nessun offerta per " + getNomeProdotto(), false , getCreatore()));
-
         }
         return notifiche;
     }

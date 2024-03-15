@@ -10,27 +10,20 @@ import com.example.demo.model.Offerta;
 import com.example.demo.model.Utente;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
-import static org.apache.juli.FileHandler.DEFAULT_BUFFER_SIZE;
 
 @RestController
 @RequestMapping
@@ -50,7 +43,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/get/{id}")
     public Asta getAsta(@PathVariable("id") Long id) {
-        checkScadenza(id);
+        isAstaScadutaAndSave(id);
         Optional<Asta> result = asteRep.findById(id);
         return result.orElse(null);
     }
@@ -79,13 +72,11 @@ public class RestAsteController {
     }
 
     private List<Asta> CheckAsteScaduteAndRm(List<Asta> aste) {
-        aste.removeIf(asta -> checkScadenza(asta.getId()));
+        aste.removeIf(asta -> isAstaScadutaAndSave(asta.getId()));
         return aste;
     }
 
-    @GetMapping(value = "asta/checkScadenza/{id}")
-    public Boolean checkScadenza(@PathVariable("id")Long astaID) {
-        //TODO ha senso così? o meglio un exception / true
+    public Boolean isAstaScadutaAndSave(@PathVariable("id")Long astaID) {
         if(asteRep.findById(astaID).isPresent()){
             Asta asta = asteRep.findById(astaID).get();
             if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
@@ -126,7 +117,8 @@ public class RestAsteController {
         Offerta offer = offerteRep.findById(offertaId).get();
         Asta asta = offer.getAsta();
         Utente user = offer.getOwner();
-
+        notificheRep.save(new Notifica("Offerta accettata!", "La tua offerta del valore di "+offer.getValoreAsString()+
+                " è stata accettata. Ti sei aggiudicato "+asta.getNomeProdotto(), false, user));
         return true;
     }
 
@@ -152,7 +144,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/getcreatore/{id}")
     public String getCreatoreAsta(@PathVariable("id") Long id) {
-        checkScadenza(id);
+        isAstaScadutaAndSave(id);
         return asteRep.findById(id).get().getCreatore().getEmail();
     }
 }

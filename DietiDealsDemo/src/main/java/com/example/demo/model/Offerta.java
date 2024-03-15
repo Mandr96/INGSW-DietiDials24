@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -40,4 +43,8 @@ public class Offerta {
     @JsonIgnore
     private Asta asta;
 
+    public String getValoreAsString() {
+        NumberFormat formatter = new DecimalFormat("0.00");
+        return formatter.format(valore)+" €";
+    }
 }
