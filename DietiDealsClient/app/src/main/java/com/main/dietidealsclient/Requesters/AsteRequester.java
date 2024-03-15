@@ -2,18 +2,12 @@ package com.main.dietidealsclient.Requesters;
 
 import android.util.Log;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Offerta;
-import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,7 +72,7 @@ public class AsteRequester {
         return offerte.get();
     }
 
-    //TODO Può essere vuoto
+    //TODO KEYWORD PUO essere vuota!
     public List<Asta> cercaAsta(String tipo, String categoria, String kw, Integer pag) throws InterruptedException {
         Log.d("myDebug", "Ricerca[tipo: "+tipo+", cat: "+categoria+", kw: "+kw+", pag: "+pag+"]");
         AtomicReference<ArrayList<Asta>> result = new AtomicReference<>();
@@ -170,5 +164,22 @@ public class AsteRequester {
         });
         t.start();
         t.join();
+    }
+
+    public String getAstaOwnerEmail(Long id) throws InterruptedException {
+        AtomicReference<String> astaOwner = new AtomicReference<>("");
+        Thread t = new Thread(() -> {
+            try {
+                Response response = RequestUtility.sendGetRequest("asta/getcreatore/"+id, true);
+                String jsBody = response.body().string();
+                Log.d("myDebug", "Body received: "+jsBody);
+                astaOwner.set(jsBody);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t.start();
+        t.join();
+        return astaOwner.get();
     }
 }

@@ -146,4 +146,10 @@ public class RestAsteController {
         asta.setImg((File) file);
         asteRep.save(asta);
     }
+
+    @GetMapping(value = "asta/getcreatore/{id}")
+    public String getCreatoreAsta(@PathVariable("id") Long id) {
+        checkScadenza(id);
+        return asteRep.findById(id).get().getCreatore().getEmail();
+    }
 }

@@ -71,6 +71,15 @@ public class AsteController {
         if(userType.equals(TipoAccount.COMPRATORE)){
             results.removeIf(asta -> asta instanceof AstaInversa);
         }
+        //TODO DIOBASTARDOMALEDETTODIOCANE creatore non esiste perchè la mamma è puttana
+        results.removeIf(asta -> {
+            try {
+                return asta.getCreatore().equals(LoggedUser.getInstance().getLoggedUser().getEmail());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        //TODO ??
         return results;
     }
 
@@ -102,5 +111,9 @@ public class AsteController {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getAstaOwnerEmail(Long id) throws InterruptedException {
+        return asteRequester.getAstaOwnerEmail(id);
     }
 }
