@@ -20,7 +20,7 @@ public class UserDetailsActivity extends ComponentActivity {
     TextView viewBio;
     TextView viewIg;
     TextView viewFb;
-    
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

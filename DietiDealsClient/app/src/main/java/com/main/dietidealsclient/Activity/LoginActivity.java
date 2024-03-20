@@ -67,7 +67,7 @@ public class LoginActivity extends ComponentActivity {
             throw new RuntimeException(e);
         } catch (LoginException e) {
             Logger.log("LoginPage","LoginException");
-            errorText.setText("Email o Password sbagliata");
+            errorText.setText(R.string.email_o_password_sbagliata);
         }
         return false;
 }

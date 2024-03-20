@@ -92,13 +92,15 @@ public class HomeActivity extends ComponentActivity {
 
     private void updateTesti() {
         if (userType.equals(TipoAccount.VENDITORE)) {
-            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le tue aste");
-            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le aste inverse a cui hai partecipato");
-            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Compra");
+            ((TextView)findViewById(R.id.aste_title_text1)).setText(R.string.le_tue_aste);
+            ((TextView)findViewById(R.id.aste_title_text2)).setText(R.string.le_aste_inverse_a_cui_hai_partecipato);
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText(R.string.compra);
+            ((Button)findViewById(R.id.home_compratore_crea_asta_inversa)).setText(R.string.crea_asta);
         } else {
-            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le aste a cui hai partecipato");
-            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le tue aste Inverse");
-            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Vendi");
+            ((TextView)findViewById(R.id.aste_title_text1)).setText(R.string.le_aste_a_cui_hai_partecipato);
+            ((TextView)findViewById(R.id.aste_title_text2)).setText(R.string.le_tue_aste_inverse);
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText(R.string.vendi);
+            ((Button)findViewById(R.id.home_compratore_crea_asta_inversa)).setText(R.string.crea_asta_inversa);
         }
 
     }
@@ -133,8 +135,8 @@ public class HomeActivity extends ComponentActivity {
             adapterPrimo = updateAsteListCreate(recyclerViewPrimo, this::onClickPrimoRecycler);
             adapterSecondo = updateAsteListpartecipate(recyclerViewSecondo, this::onClickSecondoRecycler);
         }
-        Log.d("myDebug", "Primo: "+adapterPrimo.toString());
-        Log.d("myDebug", "Secondo: "+adapterSecondo.toString());
+        Log.d("myDebug", "Primo: " + adapterPrimo.toString());
+        Log.d("myDebug", "Secondo: " + adapterSecondo.toString());
 
         //TODO findViewById con recycle_view_aste_normali e l altro
     }

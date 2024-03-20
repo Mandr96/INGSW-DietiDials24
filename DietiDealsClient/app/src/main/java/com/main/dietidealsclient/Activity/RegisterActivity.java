@@ -35,7 +35,7 @@ public class RegisterActivity extends ComponentActivity {
             if(TryRegistration()){
                 goToHomeActivity();
             }else {
-                Toast.makeText(RegisterActivity.this, "Registrazione non riuscita",Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, getString(R.string.registrazione_non_riuscita) ,Toast.LENGTH_LONG).show();
             }
         });
 
@@ -55,7 +55,7 @@ public class RegisterActivity extends ComponentActivity {
                 return true;
             } catch (LoginException e) {
                 Logger.log("RegisterPage","RegistrationError");
-                errorTxt.setText("Errore E-Mail già registrata");
+                errorTxt.setText(R.string.errore_e_mail_gi_registrata);
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);

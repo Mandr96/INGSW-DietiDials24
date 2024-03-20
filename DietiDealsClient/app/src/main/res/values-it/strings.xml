@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DietiDealsClient</string>
+    <string name="le_tue_aste">Le tue aste</string>
     <string name="le_aste_inverse_a_cui_hai_partecipato">Le aste inverse a cui hai partecipato</string>
     <string name="compra">Compra</string>
     <string name="le_aste_a_cui_hai_partecipato">Le aste a cui hai partecipato</string>
@@ -29,28 +31,10 @@
     <string name="accedi">Accedi</string>
     <string name="registrati">Registrati</string>
     <string name="ripeti_password">Ripeti password</string>
-    <string-array name="aste_types">
-        <item>Classica</item>
-        <item>Silenziosa</item>
-    </string-array>
-    <string-array name="categories">
-        <item>Libri</item>
-        <item>Musica e Film</item>
-        <item>Elettronica</item>
-        <item>Videogiochi</item>
-        <item>Casa e Fai da te</item>
-        <item>Bellezza e salute</item>
-        <item>Vestiti e scarpe</item>
-        <item>Sport</item>
-        <item>Auto e moto</item>
-        <item>Collezionismo</item>
-    </string-array>
-    <string name="le_tue_aste">Le tue aste</string>
     <string name="cerca_aste">Cerca Aste</string>
     <string name="notifiche">Notifiche</string>
     <string name="profilo">Profilo</string>
     <string name="aste">Aste</string>
     <string name="crea_asta">Crea Asta</string>
     <string name="crea_asta_inversa">Crea Asta Inversa</string>
-
 </resources>
