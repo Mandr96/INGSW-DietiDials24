@@ -22,7 +22,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.R;
-import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.Logger;
+
 
 import java.io.File;
 
@@ -69,6 +70,7 @@ public class EditProfileActivity extends ComponentActivity {
     }
 
     private void goToHomeActivity() {
+        Logger.log("EditProfilePage","goToHomeActivity");
         Intent myIntent = new Intent(EditProfileActivity.this, HomeActivity.class);
         if(userType != null){
             myIntent.putExtra("TIPO",userType);

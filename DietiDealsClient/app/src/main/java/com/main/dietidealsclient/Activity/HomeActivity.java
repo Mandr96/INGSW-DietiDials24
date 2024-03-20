@@ -20,6 +20,7 @@ import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.util.List;
 
@@ -170,18 +171,21 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void goToEditProfileActivity() {
+        Logger.log("HomePage","goToEditProfileActivity");
         Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCercaAsteActivity() {
+        Logger.log("HomePage","gotoCercaAsteActivity");
         Intent myIntent = new Intent(HomeActivity.this, CercaAsteActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCreaAstaActivity() {
+        Logger.log("HomePage","gotoCreaAstaActivity");
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
@@ -189,6 +193,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoChageAccountType() {
+        Logger.log("HomePage","gotoChageAccountType");
         Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
         userType = userType.equals(TipoAccount.VENDITORE) ? TipoAccount.COMPRATORE : TipoAccount.VENDITORE;
         myIntent.putExtra("TIPO",userType);
@@ -205,6 +210,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void showAstaDetails(Asta asta) {
+        Logger.log("HomePage","showAstaDetails " + asta.toString());
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
@@ -220,6 +226,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoNotificheActivity() {
+        Logger.log("HomePage","gotoNotificheActivity");
         Intent myIntent = new Intent(HomeActivity.this, NotificheActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);

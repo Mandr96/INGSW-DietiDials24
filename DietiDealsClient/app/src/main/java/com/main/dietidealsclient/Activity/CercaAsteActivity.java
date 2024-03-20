@@ -17,6 +17,7 @@ import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class CercaAsteActivity extends ComponentActivity {
 
 
     private void search(){
+        Logger.log("CercaAstePage","search");
         //TODO debug
         String keyword = editTextKw.getText().toString();
         keyword = keyword.isBlank() ? " " : keyword;
@@ -72,6 +74,7 @@ public class CercaAsteActivity extends ComponentActivity {
         String type = "Asta"+spinnerType.getSelectedItem().toString();
         ArrayList<Asta> results = (ArrayList<Asta>) asteController.ricerca(keyword, categoria, type, 0, userType);
         if(results.isEmpty()) {
+            Logger.log("CercaAstePage","Nessun risultato trovato");
             Toast.makeText(this, "Nessun risultato trovato", Toast.LENGTH_LONG).show();
             return;
         }
@@ -81,6 +84,8 @@ public class CercaAsteActivity extends ComponentActivity {
         myIntent.putExtra("CATEGORIA", categoria);
         myIntent.putExtra("ASTA_TIPO", type);
         myIntent.putExtra("RESULTS", results);
+        Logger.log("CercaAstePage","Trovate " + results.size() + " aste");
+        Logger.log("CercaAstePage","gotoRisultatiRicercaActivity");
         CercaAsteActivity.this.startActivity(myIntent);
         finish();
     }
@@ -101,6 +106,7 @@ public class CercaAsteActivity extends ComponentActivity {
     }
 
     private void goBack() {
+        Logger.log("CercaAstePage","goBack");
         Intent myIntent = new Intent(CercaAsteActivity.this, HomeActivity.class);
         CercaAsteActivity.this.startActivity(myIntent);
         finish();

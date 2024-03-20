@@ -103,7 +103,6 @@
             android:layout_marginTop="29dp"
             android:layout_marginEnd="177dp"
             android:layout_marginBottom="31dp"
-            android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/gotoRegisterButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

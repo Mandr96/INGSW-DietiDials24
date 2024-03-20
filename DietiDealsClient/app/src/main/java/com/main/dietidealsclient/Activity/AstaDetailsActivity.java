@@ -22,6 +22,7 @@ import com.main.dietidealsclient.Model.AstaSilenziosa;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -125,6 +126,7 @@ public class AstaDetailsActivity extends ComponentActivity {
         });
     }
     private void goToUserDetails() {
+        Logger.log("AstaDetailPage","goToUserDetails");
         Intent myIntent = new Intent(AstaDetailsActivity.this, UserDetailsActivity.class);
         //TODO IMG
         myIntent.putExtra("NAME", viewNomeVenditore.getText().toString());
@@ -136,6 +138,7 @@ public class AstaDetailsActivity extends ComponentActivity {
     }
 
     private void goBack() {
+        Logger.log("AstaDetailPage","goBack");
         Intent myIntent = new Intent(AstaDetailsActivity.this, HomeActivity.class);
         AstaDetailsActivity.this.startActivity(myIntent);
         finish();

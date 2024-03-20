@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -68,6 +69,7 @@ public class CreaAstaActivity extends ComponentActivity {
             try {
                 InserisciAsta();
             } catch (InterruptedException e) {
+                Logger.log("CreateAstaPage","Impossibile inserire asta");
                 Toast.makeText(this, "Impossibile inserire asta",Toast.LENGTH_LONG).show();
             }
         });
@@ -80,6 +82,7 @@ public class CreaAstaActivity extends ComponentActivity {
     }
 
     private void InserisciAsta() throws InterruptedException {
+        Logger.log("CreateAstaPage","InserisciAsta");
         name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
         description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
         cat = ((Spinner)findViewById(R.id.search_categoria)).getSelectedItem().toString().replace(" ", "_");
@@ -123,11 +126,13 @@ public class CreaAstaActivity extends ComponentActivity {
         }
 
         asteController.createNewAsta(new Timestamp(scadenza.getTime()),name,description,cat,imageFile,type,minPrice);
-        gotoHomeCompratore();
+        Logger.log("CreateAstaPage","Asta creata");
         Toast.makeText(this, "Asta creata", Toast.LENGTH_SHORT).show();
+        gotoHomeCompratore();
     }
 
     void imageChooser() {
+        Logger.log("CreateAstaPage","imageChooser");
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         resultLauncher.launch(intent);
     }
@@ -151,6 +156,7 @@ public class CreaAstaActivity extends ComponentActivity {
     }
 
     private void gotoHomeCompratore() {
+        Logger.log("CreateAstaPage","gotoHomeCompratore");
         Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
         myIntent.putExtra("TIPO",userType);
         CreaAstaActivity.this.startActivity(myIntent);
@@ -158,6 +164,7 @@ public class CreaAstaActivity extends ComponentActivity {
     }
 
     private void goBack() {
+        Logger.log("CreateAstaPage","goBack");
         Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
         myIntent.putExtra("TIPO",userType);
         CreaAstaActivity.this.startActivity(myIntent);
