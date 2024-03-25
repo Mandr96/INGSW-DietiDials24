@@ -30,6 +30,7 @@ public class LoggedUser {
     }
 
     public void setLoggedUser(Utente user){
+        Log.d("MyDebug","Settato loggedUSer : " + user.getEmail());
         loggedUser = user;
     }
 

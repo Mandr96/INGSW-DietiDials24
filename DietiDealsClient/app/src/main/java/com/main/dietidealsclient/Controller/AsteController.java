@@ -30,6 +30,7 @@ public class AsteController {
     public void createNewAsta(Timestamp scadenza, String name, String description, String cat, File fileImg, String type, Float minPrice) throws InterruptedException {
         Asta asta = null;
         Long astaID = -1L;
+        Log.d("MyDebug","LoggedUser.getInstance().getLoggedUser()" + LoggedUser.getInstance().getLoggedUser().toString());
         if(type.equals("Classica")){
             asta = new AstaClassica(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser(), minPrice);
         } else if(type.equals("Silenziosa")){
@@ -37,6 +38,7 @@ public class AsteController {
         } else if (type.equals("Inversa")){
             asta = new AstaInversa(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser(), minPrice);
         }
+        Log.d("MyDebug","asta creatore" + asta.getCreatore().toString());
         astaID = asteRequester.inserisciAsta(asta);
         if(astaID != -1L && fileImg != null) {
             Log.d("myDebug", "Preparando l'immagine...");

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DietiDealsClient</string>
+    <string name="le_tue_aste">Your Auctions</string>
+    <string name="le_aste_inverse_a_cui_hai_partecipato">Inverse Auctions You Participated In</string>
+    <string name="compra">Buy</string>
+    <string name="le_aste_a_cui_hai_partecipato">Auctions You Participated In</string>
+    <string name="le_tue_aste_inverse">Your Inverse Auctions</string>
+    <string name="vendi">Sell</string>
+    <string name="email_o_password_sbagliata">Email or Password Incorrect</string>
+    <string name="errore_e_mail_gi_registrata">Email Already Registered Error</string>
+    <string name="registrazione_non_riuscita">Registration Failed</string>
+    <string name="descrizione">Description</string>
+    <string name="prezzo_attuale">Current Price</string>
+    <string name="la_tua_ultima_offerta">Your Last Offer</string>
+    <string name="articolo_in_vendita">Item for Sale</string>
+    <string name="fai_un_offerta">Make an Offer</string>
+    <string name="articolo">Item</string>
+    <string name="tipo_di_asta">Auction Type</string>
+    <string name="categoria">Category</string>
+    <string name="durata">Duration</string>
+    <string name="prezzo_di_partenza">Starting Price</string>
+    <string name="crea">Create</string>
+    <string name="annulla">Cancel</string>
+    <string name="ore">Hours</string>
+    <string name="giorn">Days</string>
+    <string name="nome">Name</string>
+    <string name="cognome">Surname</string>
+    <string name="bio">Bio</string>
+    <string name="conferma">Confirm</string>
+    <string name="accedi">Login</string>
+    <string name="registrati">Register</string>
+    <string name="ripeti_password">Repeat Password</string>
+    <string name="cerca_aste">Search Auctions</string>
+    <string name="notifiche">Notifications</string>
+    <string name="profilo">Profile</string>
+    <string name="aste">Auctions</string>
+    <string name="crea_asta">Create Auction</string>
+    <string name="crea_asta_inversa">Create Reverse Auction</string>
+</resources>

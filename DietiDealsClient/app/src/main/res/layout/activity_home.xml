@@ -25,7 +25,7 @@
                     android:layout_marginTop="1dp"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/icon_asta"
-                    android:text="Aste"
+                    android:text="@string/aste"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toStartOf="@+id/home_compratore_edit_profile"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -39,7 +39,7 @@
                     android:layout_height="50dp"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/icon_user"
-                    android:text="Profilo"
+                    android:text="@string/profilo"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
                     android:layout_marginEnd="24dp"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/icon_bell"
-                    android:text="Notifiche"
+                    android:text="@string/notifiche"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -114,7 +114,7 @@
                             android:drawableEnd="@drawable/icon_search"
                             android:drawablePadding="10dp"
                             android:padding="10dp"
-                            android:text="Cerca Aste"
+                            android:text="@string/cerca_aste"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

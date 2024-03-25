@@ -3,7 +3,6 @@ package com.main.dietidealsclient.Requesters;
 
 import android.util.Log;
 
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.entity.InputStreamEntity;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

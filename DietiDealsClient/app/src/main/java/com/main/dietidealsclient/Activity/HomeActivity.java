@@ -20,6 +20,7 @@ import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.util.List;
 
@@ -91,13 +92,15 @@ public class HomeActivity extends ComponentActivity {
 
     private void updateTesti() {
         if (userType.equals(TipoAccount.VENDITORE)) {
-            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le tue aste");
-            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le aste inverse a cui hai partecipato");
-            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Compra");
+            ((TextView)findViewById(R.id.aste_title_text1)).setText(R.string.le_tue_aste);
+            ((TextView)findViewById(R.id.aste_title_text2)).setText(R.string.le_aste_inverse_a_cui_hai_partecipato);
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText(R.string.compra);
+            ((Button)findViewById(R.id.home_compratore_crea_asta_inversa)).setText(R.string.crea_asta);
         } else {
-            ((TextView)findViewById(R.id.aste_title_text1)).setText("Le aste a cui hai partecipato");
-            ((TextView)findViewById(R.id.aste_title_text2)).setText("Le tue aste Inverse");
-            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText("Vendi");
+            ((TextView)findViewById(R.id.aste_title_text1)).setText(R.string.le_aste_a_cui_hai_partecipato);
+            ((TextView)findViewById(R.id.aste_title_text2)).setText(R.string.le_tue_aste_inverse);
+            ((Button)findViewById(R.id.home_compratore_cambia_tipo)).setText(R.string.vendi);
+            ((Button)findViewById(R.id.home_compratore_crea_asta_inversa)).setText(R.string.crea_asta_inversa);
         }
 
     }
@@ -132,8 +135,8 @@ public class HomeActivity extends ComponentActivity {
             adapterPrimo = updateAsteListCreate(recyclerViewPrimo, this::onClickPrimoRecycler);
             adapterSecondo = updateAsteListpartecipate(recyclerViewSecondo, this::onClickSecondoRecycler);
         }
-        Log.d("myDebug", "Primo: "+adapterPrimo.toString());
-        Log.d("myDebug", "Secondo: "+adapterSecondo.toString());
+        Log.d("myDebug", "Primo: " + adapterPrimo.toString());
+        Log.d("myDebug", "Secondo: " + adapterSecondo.toString());
 
         //TODO findViewById con recycle_view_aste_normali e l altro
     }
@@ -170,18 +173,21 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void goToEditProfileActivity() {
+        Logger.log("HomePage","goToEditProfileActivity");
         Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCercaAsteActivity() {
+        Logger.log("HomePage","gotoCercaAsteActivity");
         Intent myIntent = new Intent(HomeActivity.this, CercaAsteActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCreaAstaActivity() {
+        Logger.log("HomePage","gotoCreaAstaActivity");
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
@@ -189,6 +195,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoChageAccountType() {
+        Logger.log("HomePage","gotoChageAccountType");
         Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
         userType = userType.equals(TipoAccount.VENDITORE) ? TipoAccount.COMPRATORE : TipoAccount.VENDITORE;
         myIntent.putExtra("TIPO",userType);
@@ -205,6 +212,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void showAstaDetails(Asta asta) {
+        Logger.log("HomePage","showAstaDetails " + asta.toString());
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
@@ -220,6 +228,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoNotificheActivity() {
+        Logger.log("HomePage","gotoNotificheActivity");
         Intent myIntent = new Intent(HomeActivity.this, NotificheActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);

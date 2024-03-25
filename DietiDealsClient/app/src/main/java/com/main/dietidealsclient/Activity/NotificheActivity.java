@@ -13,6 +13,7 @@ import com.main.dietidealsclient.Adapters.NotificheAdapterList;
 import com.main.dietidealsclient.Controller.NotificheController;
 import com.main.dietidealsclient.Model.Notifica;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class NotificheActivity extends ComponentActivity {
     }
 
     private void goBack() {
+        Logger.log("NotfichePage","goBack");
         Intent myIntent = new Intent(NotificheActivity.this, HomeActivity.class);
         NotificheActivity.this.startActivity(myIntent);
         finish();

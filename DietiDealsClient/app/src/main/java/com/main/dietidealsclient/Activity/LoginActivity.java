@@ -12,6 +12,7 @@ import androidx.activity.ComponentActivity;
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.MainTest;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 import javax.security.auth.login.LoginException;
 
@@ -31,6 +32,8 @@ public class LoginActivity extends ComponentActivity {
         setContentView(R.layout.activity_login);
 
         //MainTest.start();
+
+        Logger.log("LoginPage","started");
 
         EditText em = findViewById(R.id.login_editTextEmail);
         EditText pw = findViewById(R.id.login_editTextPassword);
@@ -52,16 +55,19 @@ public class LoginActivity extends ComponentActivity {
     }
 
     private boolean TryLogin() {
+        Logger.log("LoginPage","TryLogin");
         String email = ((EditText)findViewById(R.id.login_editTextEmail)).getText().toString();
         String password = ((EditText)findViewById(R.id.login_editTextPassword)).getText().toString();
 
         try {
             userProfileController.Login(email,password);
+            Logger.log("LoginPage","LoginSuccess");
             return true;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (LoginException e) {
-            errorText.setText("Email o Password sbagliata");
+            Logger.log("LoginPage","LoginException");
+            errorText.setText(R.string.email_o_password_sbagliata);
         }
         return false;
 }
@@ -74,6 +80,7 @@ public class LoginActivity extends ComponentActivity {
     }
 
     private void goToRegisterActivity(){
+        Logger.log("LoginPage","goToRegisterActivity");
         Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         LoginActivity.this.startActivity(myIntent);
         finish();

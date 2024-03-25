@@ -17,6 +17,7 @@ import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
+import com.main.dietidealsclient.Utility.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,6 @@ public class RisultatiRicercaActivity extends ComponentActivity {
         recyclerView = findViewById(R.id.risultati_recycler_view);
         ricercaSuValori();
 
-
-
-
         adapter.setClickListener(new RecyclerAsteInterface() {
             @Override
             public void onItemClick(int position) {
@@ -71,6 +69,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
     }
 
     private void ricercaSuValori() {
+        Logger.log("RisultatiRicercaPage","ricercaSuValori");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Asta> data = results;
         Log.d("MyDebug userType", userType.toString());
@@ -82,6 +81,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
 
     //COPIATO
     private void showAstaDetails(Asta asta) {
+        Logger.log("RisultatiRicercaPage","showAstaDetails");
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(RisultatiRicercaActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
