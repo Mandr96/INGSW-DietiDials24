@@ -43,7 +43,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/get/{id}")
     public Asta getAsta(@PathVariable("id") Long id) {
-        isAstaScadutaAndSave(id);
+        checkIfScadutaAndSave(id);
         Optional<Asta> result = asteRep.findById(id);
         return result.orElse(null);
     }
@@ -72,11 +72,11 @@ public class RestAsteController {
     }
 
     private List<Asta> CheckAsteScaduteAndRm(List<Asta> aste) {
-        aste.removeIf(asta -> isAstaScadutaAndSave(asta.getId()));
+        aste.removeIf(asta -> checkIfScadutaAndSave(asta.getId()));
         return aste;
     }
 
-    public Boolean isAstaScadutaAndSave(@PathVariable("id")Long astaID) {
+    public Boolean checkIfScadutaAndSave(@PathVariable("id")Long astaID) {
         if(asteRep.findById(astaID).isPresent()){
             Asta asta = asteRep.findById(astaID).get();
             if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
@@ -104,9 +104,13 @@ public class RestAsteController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public Long insertOfferta(@RequestBody String body) throws JsonProcessingException, JSONException {
         System.out.println("Richiesta insertOfferta ricevuta");
+        Asta asta = asteRep.findById(new JSONObject(body).getLong("asta")).get();
+        if (checkIfScadutaAndSave(asta.getId())) {
+            return -1L;
+        }
         Offerta newOffer = new ObjectMapper().readValue(body, Offerta.class);
+        newOffer.setAsta(asta);
         newOffer.setOwner(userRep.findById(new JSONObject(body).getString("owner")).get());
-        newOffer.setAsta(asteRep.findById(new JSONObject(body).getLong("asta")).get());
         newOffer.setData(Timestamp.from(Instant.now().truncatedTo(ChronoUnit.MINUTES)));
         offerteRep.save(newOffer);
         return newOffer.getId();
@@ -144,7 +148,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/getcreatore/{id}")
     public String getCreatoreAsta(@PathVariable("id") Long id) {
-        isAstaScadutaAndSave(id);
+        checkIfScadutaAndSave(id);
         return asteRep.findById(id).get().getCreatore().getEmail();
     }
 }
