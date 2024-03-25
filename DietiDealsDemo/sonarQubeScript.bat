@@ -1,0 +1,1 @@
+./gradlew sonar -Dsonar.projectKey=IngSw -Dsonar.projectName='IngSw' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_84801fa14818c78cde60fa2a5e4c904004f33e5f

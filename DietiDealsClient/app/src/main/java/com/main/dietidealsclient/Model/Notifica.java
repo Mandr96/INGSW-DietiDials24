@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notifica {
+public class Notifica implements Serializable {
 
     private Long id;
     private String oggetto;
@@ -54,5 +56,21 @@ public class Notifica {
 
     public void setUser(Utente user) {
         this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getOggetto() {
+        return oggetto;
+    }
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public Boolean getLetto() {
+        return letto;
     }
 }

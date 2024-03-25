@@ -53,4 +53,9 @@ public class AstaInversa extends Asta {
     public String getTypeAsString() {
         return "Asta Inversa";
     }
+
+    @Override
+    public Float getActualPrice() {
+        return minOffer;
+    }
 }

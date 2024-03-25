@@ -1,5 +1,34 @@
 <resources>
     <string name="app_name">DietiDealsClient</string>
+    <string name="le_aste_inverse_a_cui_hai_partecipato">Le aste inverse a cui hai partecipato</string>
+    <string name="compra">Compra</string>
+    <string name="le_aste_a_cui_hai_partecipato">Le aste a cui hai partecipato</string>
+    <string name="le_tue_aste_inverse">Le tue aste Inverse</string>
+    <string name="vendi">Vendi</string>
+    <string name="email_o_password_sbagliata">Email o Password sbagliata</string>
+    <string name="errore_e_mail_gi_registrata">Errore E-Mail già registrata</string>
+    <string name="registrazione_non_riuscita">Registrazione non riuscita</string>
+    <string name="descrizione">Descrizione</string>
+    <string name="prezzo_attuale">Prezzo attuale</string>
+    <string name="la_tua_ultima_offerta">La tua ultima offerta</string>
+    <string name="articolo_in_vendita">Articolo in vendita</string>
+    <string name="fai_un_offerta">Fai un offerta</string>
+    <string name="articolo">Articolo</string>
+    <string name="tipo_di_asta">Tipo di asta</string>
+    <string name="categoria">Categoria</string>
+    <string name="durata">Durata</string>
+    <string name="prezzo_di_partenza">Prezzo di partenza</string>
+    <string name="crea">Crea</string>
+    <string name="annulla">Annulla</string>
+    <string name="ore">Ore</string>
+    <string name="giorn">Giorni</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
+    <string name="bio">Bio</string>
+    <string name="conferma">Conferma</string>
+    <string name="accedi">Accedi</string>
+    <string name="registrati">Registrati</string>
+    <string name="ripeti_password">Ripeti password</string>
     <string-array name="aste_types">
         <item>Classica</item>
         <item>Silenziosa</item>
@@ -16,5 +45,12 @@
         <item>Auto e moto</item>
         <item>Collezionismo</item>
     </string-array>
+    <string name="le_tue_aste">Le tue aste</string>
+    <string name="cerca_aste">Cerca Aste</string>
+    <string name="notifiche">Notifiche</string>
+    <string name="profilo">Profilo</string>
+    <string name="aste">Aste</string>
+    <string name="crea_asta">Crea Asta</string>
+    <string name="crea_asta_inversa">Crea Asta Inversa</string>
 
 </resources>

@@ -4,6 +4,7 @@
 - [Documentazione](https://docs.google.com/document/d/1RsQidtjSTPhYe3Ey9_Cw3eW2-G1b8wFRj1dlncF0adk/edit?usp=sharing)<br><br>
 - [Visual Mock-up](https://www.figma.com/file/iimReJ74pR4pt6gtbAfBEX/Untitled?type=design&node-id=0-1&mode=design&t=WJEIZAHNa4xHd86D-0)<br><br>
 - [Richiesta Committente](https://drive.google.com/file/d/18-4Ei41kSqKNXnX6328ErXayJdJWP5qW/view?usp=sharing)
+- [Presentazione](https://docs.google.com/presentation/d/1rsTvH447deQf3MNrqX2f458q2MOmftGfo2Y8-XmFr4g/edit?usp=sharing)
 ****
 ### Funzionalità assegnate
 1. Un utente può registrare un nuovo account ed utilizzarlo per accedere al sistema. Un account può essere di due tipi: venditore o acquirente. La stessa e-mail può essere utilizzata per al più un account venditore e un account compratore. È apprezzata la possibilità di effettuare la registrazione utilizzando credenziali di terze parti (e.g.: Google, Facebook, GitHub, etc…). Gli utenti possono personalizzare il proprio profilo con una short bio, link al proprio sito web / ai propri social, area geografica, etc. <br>
@@ -34,14 +35,14 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
     - [x] ii. Individuazione del target degli utenti
     - [x] iii. Descrizioni Testuali Strutturate per almeno quattro **(due, se si consegna prima del 15/04/2024)** casi d’uso significativi (autenticazione esclusa) a scelta dei contraenti tra quelli richiesti.
     - [x] iv. Prototipazione visuale via Mock-up dell’interfaccia utente per tutti i casi d’uso assegnati attraverso strumenti di rapid prototyping, come “Figma”.
-    - [ ] v. Valutazione dell’usabilità a priori.
+    - [x] v. Valutazione dell’usabilità a priori.
     - [x] vi. Glossario.
   - b. Specifica dei Requisiti.
     - [x] i. Classi, oggetti e relazioni di analisi.
     - [x] ii. Diagrammi di sequenza di analisi per due casi d’uso significativi a scelta dei contraenti tra quelli assegnati.
     - [x] iii. Prototipazione funzionale e progettazione degli event-based statechart dell’interfaccia grafica, relativamente ai casi d’uso individuati al punto 1.a.iii;
 2. <ins>Documento di Design del sistema.</ins>
-  - [ ] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
+  - [x] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
   - [x] b. Descrizione/motivazione delle scelte tecnologiche adottate.
   - [x] c. Diagramma delle classi di design.
   - [ ] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.

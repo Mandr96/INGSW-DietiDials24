@@ -24,22 +24,31 @@ public class AstaClassica extends Asta{
         this.minPrice = minPrice;
     }
 
-    //TODO Sistemare
     public List<Notifica> chiudi() {
         List<Notifica> notifiche = new ArrayList<Notifica>();
         if(!offerte.isEmpty()){
             Offerta bestOffer = offerte.get(0);
             for(Offerta offer : offerte) {
                 if(offer.getValore().compareTo(bestOffer.getValore()) > 0) {
+                    //Notifica vincitore asta
                     bestOffer = offer;
+                    Utente winner = offer.getOwner();
                     notifiche.add(new Notifica("Asta scaduta!", "L'asta per "+getNomeProdotto()+
-                            " a cui partecipi è scaduta, ti sei aggiudicato l'articolo!", false, offer.getOwner()));
+                            " a cui partecipi è scaduta, ti sei aggiudicato l'articolo!", false, winner));
+                    //Notifica creatore asta
+                    notifiche.add(new Notifica("La tua asta è scaduta", winner.getNome()+" "+winner.getCognome()+ " si è aggiudicato "+
+                            nomeProdotto, false, creatore));
                 }
                 else {
+                    //Notifiche altri utenti
                     notifiche.add(new Notifica("Asta scaduta!", "L'asta per "+getNomeProdotto()+
-                            " a cui partecipi è scaduta. La tua offerta non è stata la migliore!", false, offer.getOwner()));
+                            " a cui partecipi è scaduta. La tua offerta non è stata la migliore", false, offer.getOwner()));
                 }
             }
+        }
+        else {
+            //Notifica creatore asta in caso di nessuna offerta
+            notifiche.add(new Notifica("La tua asta è scaduta!", "Non hai ricevuto nessuna offerta per "+nomeProdotto, false, creatore));
         }
         return notifiche;
     }

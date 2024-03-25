@@ -9,18 +9,17 @@ import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
 
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 public class UserDetailsActivity extends ComponentActivity {
 
     ImageView btnBack;
-
     ImageView imgProfile;
     TextView viewName;
     TextView viewEmail;
     TextView viewBio;
     TextView viewIg;
     TextView viewFb;
-
 
 
     @Override
@@ -53,6 +52,7 @@ public class UserDetailsActivity extends ComponentActivity {
     }
 
     private void goBack() {
+        Logger.log("UserDetailPage","goBack");
         //TODO BUG NEL TORNARE INDIETRO
         Intent myIntent = new Intent(UserDetailsActivity.this, AstaDetailsActivity.class);
         UserDetailsActivity.this.startActivity(myIntent);

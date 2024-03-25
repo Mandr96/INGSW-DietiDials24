@@ -48,4 +48,9 @@ public class AstaSilenziosa extends Asta{
     public String getTypeAsString() {
         return "Asta Silenziosa";
     }
+
+    @Override
+    public Float getActualPrice() {
+        return -1F;
+    }
 }

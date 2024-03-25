@@ -1,10 +1,8 @@
-package com.main.dietidealsclient;
+package com.main.dietidealsclient.Adapters;
 
 
 
 import android.annotation.SuppressLint;
-
-import android.graphics.Color;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
-import com.main.dietidealsclient.Model.AstaSilenziosa;
 import com.main.dietidealsclient.Model.Offerta;
+import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
 
-import java.time.Instant;
 import java.util.List;
 
 public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHolder> {
@@ -59,9 +57,9 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 
 
         if(asta instanceof AstaClassica classica) {
-            holder.det1.setText(classica.getMinPrice().toString()+"€");
+            holder.det1.setText(classica.getMinPriceAsString());
             if(bestOffer != null) {
-                holder.det1.setText(bestOffer.getValore().toString() + "€");
+                holder.det1.setText(bestOffer.getValoreAsString());
                 Log.d("MyDebug", "LOGGED USER pre" );
                 Log.d("MyDebug", "LOGGED USER" + LoggedUser.getInstance().getLoggedUser().getEmail());
                 //TODO bestOffer.getOwnerEmail() É NULL?
@@ -96,7 +94,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
             Log.d("MyDebug", "Ho cliccato sull immagine");
             holder.notify();
         });
-
+        //TODO WHY image.setOnClickListener?
         //TODO Gestione immagine
         holder.image.setImageResource(R.drawable.add_image);
 //        holder.image.setImageDrawable(asta.getImg());
@@ -104,7 +102,11 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if(data==null){
+            return 0;
+        }else {
+            return data.size();
+        }
     }
 
     public void setClickListener(RecyclerAsteInterface context) {

@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Model;
 import android.util.Log;
 
 import com.fasterxml.jackson.annotation.*;
+import com.main.dietidealsclient.Controller.AsteController;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -59,7 +60,7 @@ public abstract class Asta implements Serializable {
     }
 
     public Asta(Timestamp scadenza, String nomeProdotto, String descrizione, String categoria, File img, Utente creatore) {
-        this.id = 0L;
+        this.id = -1L;
         this.scadenza = scadenza;
         this.categoria = categoria;
         this.nomeProdotto = nomeProdotto;
@@ -103,13 +104,18 @@ public abstract class Asta implements Serializable {
     }
 
     @JsonGetter("creatore")
-    public String getCreatore() {
-        return creatore.getEmail();
+    public String getCreatore() throws InterruptedException {
+        if (id == -1){
+            return creatore.getEmail();
+        }
+        AsteController asteController = new AsteController();
+        return asteController.getAstaOwnerEmail(id);
     }
 
     @JsonIgnore
     public abstract Offerta getBestOffer();
     public abstract String getTypeAsString();
+    public abstract Float getActualPrice();
 
 //    @JsonIgnore
 //    public Float getBestOfferVal(){

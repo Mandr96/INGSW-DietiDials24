@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +30,11 @@ public class Notifica {
     @JsonIgnore
     private Utente user;
 
-    public Notifica(String oggetto, String testo, Boolean letto, Utente utente) {
+    @JsonCreator
+    public Notifica(@JsonProperty("oggetto") String oggetto,
+                    @JsonProperty("testo") String testo,
+                    @JsonProperty("letto") Boolean letto,
+                    Utente utente) {
         this.oggetto = oggetto;
         this.testo = testo;
         this.letto = letto;

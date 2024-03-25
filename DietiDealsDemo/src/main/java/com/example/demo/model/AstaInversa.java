@@ -32,13 +32,23 @@ public class AstaInversa extends Asta {
             for(Offerta offer : offerte) {
                 if (offer.getValore().compareTo(bestOffer.getValore()) < 0) {
                     bestOffer = offer;
-                    notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
-                            " a cui partecipi è scaduta, ti sei aggiudicato l'articolo!", false, offer.getOwner()));
+                    Utente winner = offer.getOwner();
+                    //Notifica vincitore
+                    notifiche.add(new Notifica("Asta inversa scaduta!", "L'asta per " + getNomeProdotto() +
+                            " a cui partecipi è scaduta, ti sei aggiudicato la vendita!", false, winner));
+                    //Notifica creatore asta
+                    notifiche.add(new Notifica("La tua asta inversa è scaduta", winner.getNome()+" "+winner.getCognome()+
+                            " si è aggiudicato la vendita di "+nomeProdotto, false, creatore));
                 } else {
-                    notifiche.add(new Notifica("Asta scaduta!", "L'asta per " + getNomeProdotto() +
-                            " a cui partecipi è scaduta. La tua offerta non è stata la migliore!", false, offer.getOwner()));
+                    //Notifiche altri utenti
+                    notifiche.add(new Notifica("Asta inversa scaduta!", "L'asta per " + getNomeProdotto() +
+                            " a cui partecipi è scaduta. La tua offerta non è stata la migliore", false, offer.getOwner()));
                 }
             }
+        }
+        else {
+            //Notifica creatore asta in caso di nessuna offerta
+            notifiche.add(new Notifica("La tua asta inversa è scaduta!", "Non hai ricevuto nessuna offerta per "+nomeProdotto, false, creatore));
         }
         return notifiche;
     }

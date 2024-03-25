@@ -4,6 +4,7 @@ services:
     image: postgres
     container_name: local_postgresdb
     restart: always
+#    PORTA ESTERNA 54320 INTERNA 5432
     ports:
       - "54320:5432"
     environment:
@@ -18,6 +19,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin_container
     restart: always
+#    PORTA ESTERNA 5050 INTERNA 80
     ports:
       - "5050:80"
     environment:
@@ -26,7 +28,8 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 
-  
+
+#  COMMENTA QUESTO PER CARICARE SOLO IL DB
   java_app:
      build:
        context: .

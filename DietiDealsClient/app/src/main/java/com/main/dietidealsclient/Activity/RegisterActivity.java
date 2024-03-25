@@ -12,6 +12,7 @@ import androidx.activity.ComponentActivity;
 
 import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.R;
+import com.main.dietidealsclient.Utility.Logger;
 
 import javax.security.auth.login.LoginException;
 
@@ -34,7 +35,7 @@ public class RegisterActivity extends ComponentActivity {
             if(TryRegistration()){
                 goToHomeActivity();
             }else {
-                Toast.makeText(RegisterActivity.this, "Registrazione non riuscita",Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, getString(R.string.registrazione_non_riuscita) ,Toast.LENGTH_LONG).show();
             }
         });
 
@@ -42,6 +43,7 @@ public class RegisterActivity extends ComponentActivity {
     }
 
     private boolean TryRegistration() {
+        Logger.log("RegisterPage","TryRegistration");
         String email = ((EditText)findViewById(R.id.register_editTextEmail)).getText().toString();
         String passw = ((EditText)findViewById(R.id.register_editTextPassword)).getText().toString();
         String passwR = ((EditText)findViewById(R.id.register_editTextPasswordRe)).getText().toString();
@@ -49,14 +51,17 @@ public class RegisterActivity extends ComponentActivity {
         if(isValidCred(email,passw,passwR)){
             try {
                 userProfileController.Register(email,passw);
+                Logger.log("RegisterPage","RegistrationSuccess");
                 return true;
             } catch (LoginException e) {
-                errorTxt.setText("Errore E-Mail già registrata");
+                Logger.log("RegisterPage","RegistrationError");
+                errorTxt.setText(R.string.errore_e_mail_gi_registrata);
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+        Logger.log("RegisterPage","RegistrationError");
         return false;
     }
 
@@ -72,12 +77,14 @@ public class RegisterActivity extends ComponentActivity {
     }
 
     private void goToHomeActivity(){
+        Logger.log("RegisterPage","goToHomeActivity");
         Intent myIntent = new Intent(RegisterActivity.this, HomeActivity.class);
         RegisterActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void goToLoginActivity(){
+        Logger.log("RegisterPage","goToLoginActivity");
         Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         RegisterActivity.this.startActivity(myIntent);
         finish();

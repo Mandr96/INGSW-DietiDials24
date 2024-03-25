@@ -53,7 +53,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/profile_edit_text"
         android:padding="5dp"
-        android:text="Description"
+        android:text="@string/descrizione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_articolo" />
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Prezzo attuale"
+        android:text="@string/prezzo_attuale"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/venditore_name" />
 
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="La tua ultima offerta"
+        android:text="@string/la_tua_ultima_offerta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Articolo in vendita"
+        android:text="@string/articolo_in_vendita"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_btton_back" />
 
@@ -132,7 +132,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/btn_confirm"
-        android:text="Fai un offerta"
+        android:text="@string/fai_un_offerta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

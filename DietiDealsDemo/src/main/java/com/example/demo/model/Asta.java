@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -66,5 +67,19 @@ public abstract class Asta {
     @Override
     public String toString() {
         return nomeProdotto;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Asta asta = (Asta) o;
+        return Objects.equals(getId(), asta.getId()) && Objects.equals(getScadenza(), asta.getScadenza()) && Objects.equals(getCategoria(), asta.getCategoria()) && Objects.equals(getNomeProdotto(), asta.getNomeProdotto()) && Objects.equals(getDescrizione(), asta.getDescrizione()) && Objects.equals(getImg(), asta.getImg()) && Objects.equals(getScaduta(), asta.getScaduta()) && Objects.equals(getCreatore(), asta.getCreatore()) && Objects.equals(getOfferte(), asta.getOfferte());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getScadenza(), getCategoria(), getNomeProdotto(), getScaduta(), getCreatore());
     }
 }

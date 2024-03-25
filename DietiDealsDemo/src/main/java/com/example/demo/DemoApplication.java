@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.data_access.AsteRepository;
+import com.example.demo.data_access.NotificheRepository;
 import com.example.demo.data_access.OfferteRepository;
 import com.example.demo.data_access.UtentiRepository;
 import com.example.demo.model.*;
@@ -35,7 +36,7 @@ public class DemoApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(UtentiRepository userRep, AsteRepository asteRep, OfferteRepository offerteRep) {
+	CommandLineRunner commandLineRunner(UtentiRepository userRep, AsteRepository asteRep, OfferteRepository offerteRep, NotificheRepository notificheRep) {
 		return args -> {
 			Utente venditore = new Utente(
 					"prova",
@@ -78,6 +79,9 @@ public class DemoApplication {
 			offerteRep.save(new Offerta(-1L,40f,null,true, compratore, silenziosa));
 			offerteRep.save(new Offerta(-1L,75f,null,true, venditore, inversa));
 //			//System.out.println(asteRep.searchAste("AstaClassica", "cat1", "cosa", 0));
+
+			notificheRep.save(new Notifica("Notifica prova", "...", false, venditore));
+			notificheRep.save(new Notifica("Notifica prova 2", "...", false, venditore));
 		};
 	}
 }
