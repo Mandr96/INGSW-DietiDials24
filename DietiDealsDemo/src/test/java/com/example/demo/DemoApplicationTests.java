@@ -13,11 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 class DemoApplicationTests {
-
 	@Test
 	public void contextLoads() {
 	}
-
-
-
 }

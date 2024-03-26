@@ -47,4 +47,6 @@ public class Offerta {
         NumberFormat formatter = new DecimalFormat("0.00");
         return formatter.format(valore)+" €";
     }
+
+
 }

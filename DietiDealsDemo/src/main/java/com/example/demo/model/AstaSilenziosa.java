@@ -28,4 +28,9 @@ public class AstaSilenziosa extends Asta{
     }
 
     public List<Notifica> accetta() { return new ArrayList<Notifica>(); }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(true);
+    }
+
 }

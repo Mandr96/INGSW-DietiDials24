@@ -23,7 +23,7 @@ public class Notifica {
             generator = "notifica_sequence"
     )
     private Long id;
-    private String oggetto;
+    protected String oggetto;
     private String testo;
     private Boolean letto;
     @ManyToOne

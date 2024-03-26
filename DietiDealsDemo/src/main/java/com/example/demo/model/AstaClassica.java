@@ -27,7 +27,7 @@ public class AstaClassica extends Asta{
     public List<Notifica> chiudi() {
         List<Notifica> notifiche = new ArrayList<Notifica>();
         if(!offerte.isEmpty()){
-            Offerta bestOffer = offerte.get(0);
+            Offerta bestOffer = getBestOffer();
             for(Offerta offer : offerte) {
                 if(offer.getValore().compareTo(bestOffer.getValore()) > 0) {
                     //Notifica vincitore asta
@@ -52,4 +52,9 @@ public class AstaClassica extends Asta{
         }
         return notifiche;
     }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(true);
+    }
+
 }

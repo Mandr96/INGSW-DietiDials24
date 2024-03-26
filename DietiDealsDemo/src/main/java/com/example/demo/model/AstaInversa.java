@@ -28,7 +28,7 @@ public class AstaInversa extends Asta {
     public List<Notifica> chiudi() {
         List<Notifica> notifiche = new ArrayList<Notifica>();
         if(!offerte.isEmpty()){
-            Offerta bestOffer = offerte.get(0);
+            Offerta bestOffer = getBestOffer();
             for(Offerta offer : offerte) {
                 if (offer.getValore().compareTo(bestOffer.getValore()) < 0) {
                     bestOffer = offer;
@@ -51,5 +51,9 @@ public class AstaInversa extends Asta {
             notifiche.add(new Notifica("La tua asta inversa è scaduta!", "Non hai ricevuto nessuna offerta per "+nomeProdotto, false, creatore));
         }
         return notifiche;
+    }
+
+    public Offerta getBestOffer(){
+        return getBestOfferIn(false);
     }
 }

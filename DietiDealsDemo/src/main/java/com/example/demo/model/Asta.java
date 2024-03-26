@@ -82,4 +82,19 @@ public abstract class Asta {
     public int hashCode() {
         return Objects.hash(getId(), getScadenza(), getCategoria(), getNomeProdotto(), getScaduta(), getCreatore());
     }
+
+    protected Offerta getBestOfferIn(boolean maggiore){
+        if(offerte == null || offerte.isEmpty()){
+            return new Offerta(-1L, 0F,null, false, null, null);
+        }
+        Offerta bestOff = offerte.get(0);
+        for (Offerta thisOff : offerte){
+            if ( maggiore && (bestOff.getValore() < thisOff.getValore())){
+                bestOff = thisOff;
+            } else if (!maggiore && (bestOff.getValore() < thisOff.getValore())){
+                bestOff = thisOff;
+            }
+        }
+        return bestOff;
+    }
 }
