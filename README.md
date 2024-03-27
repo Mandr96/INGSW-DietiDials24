@@ -3,7 +3,7 @@
 #### DietiDeals24 è una piattaforma per la gestione di aste online. Il sistema consiste in un’applicazione mobile, desktop o web-based, performante e affidabile, attraverso cui gli utenti possono fruire delle funzionalità del sistema in modo intuitivo, rapido e piacevole.
 - [Documentazione](https://docs.google.com/document/d/1RsQidtjSTPhYe3Ey9_Cw3eW2-G1b8wFRj1dlncF0adk/edit?usp=sharing)<br><br>
 - [Visual Mock-up](https://www.figma.com/file/iimReJ74pR4pt6gtbAfBEX/Untitled?type=design&node-id=0-1&mode=design&t=WJEIZAHNa4xHd86D-0)<br><br>
-- [Richiesta Committente](https://drive.google.com/file/d/18-4Ei41kSqKNXnX6328ErXayJdJWP5qW/view?usp=sharing)
+- [Richiesta Committente](https://drive.google.com/file/d/18-4Ei41kSqKNXnX6328ErXayJdJWP5qW/view?usp=sharing)<br><br>
 - [Presentazione](https://docs.google.com/presentation/d/1rsTvH447deQf3MNrqX2f458q2MOmftGfo2Y8-XmFr4g/edit?usp=sharing)
 ****
 ### Funzionalità assegnate
@@ -45,11 +45,11 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
   - [x] a. Descrizione dell’architettura proposta, con esplicita definizione dei criteri di design adottati e delle motivazioni dietro tale scelta.
   - [x] b. Descrizione/motivazione delle scelte tecnologiche adottate.
   - [x] c. Diagramma delle classi di design.
-  - [ ] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
+  - [x] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
 3. <ins>Codice Sorgente sviluppato, comprensivo di eventuale Dockerfile.</ins>
   - [ ] a. File di build automatica
   - [x] b. Evidenza dell’uso di strumenti di versioning
-  - [ ] c. Report di qualità del codice, generati da SonarQube o similari (nel caso solo per il back-end)
+  - [x] c. Report di qualità del codice, generati da SonarQube o similari (nel caso solo per il back-end)
 4. <ins>Testing e valutazione sul campo dell’usabilità.</ins>
   - [ ] a. Codice xUnit per unit testing di quattro **(due, se si consegna prima del 31/03/2024)** metodi non banali, che abbiano almeno due parametri. In aggiunta al codice, una apposita sezione della documentazione deve descrivere le strategie adottate per la progettazione dei test dei due metodi (e.g.: classi di equivalenza individuate e coperte, criteri di copertura strutturale, etc.).
   - [ ] b. Valutazione dell’usabilità sul campo, realizzata sul prodotto finito sia con tecniche simili a quelle messe in atto al punto 1.a.v, sia mediante analisi di file di log. È necessario allegare anche i file di log utilizzati nell’analisi.
