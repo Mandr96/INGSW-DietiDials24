@@ -15,12 +15,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class RestAsteController {
 
     @GetMapping(value = "asta/get/{id}")
     public Asta getAsta(@PathVariable("id") Long id) {
-        checkScadenza(id);
+        checkIfScadutaAndSave(id);
         Optional<Asta> result = asteRep.findById(id);
         return result.orElse(null);
     }
@@ -71,13 +72,11 @@ public class RestAsteController {
     }
 
     private List<Asta> CheckAsteScaduteAndRm(List<Asta> aste) {
-        aste.removeIf(asta -> checkScadenza(asta.getId()));
+        aste.removeIf(asta -> checkIfScadutaAndSave(asta.getId()));
         return aste;
     }
 
-    @GetMapping(value = "asta/checkScadenza/{id}")
-    public Boolean checkScadenza(@PathVariable("id")Long astaID) {
-        //TODO ha senso così? o meglio un exception / true
+    public Boolean checkIfScadutaAndSave(@PathVariable("id")Long astaID) {
         if(asteRep.findById(astaID).isPresent()){
             Asta asta = asteRep.findById(astaID).get();
             if(asta.getScadenza().before(Timestamp.from(Instant.now()))) {
@@ -104,9 +103,14 @@ public class RestAsteController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public Long insertOfferta(@RequestBody String body) throws JsonProcessingException, JSONException {
+        System.out.println("Richiesta insertOfferta ricevuta");
+        Asta asta = asteRep.findById(new JSONObject(body).getLong("asta")).get();
+        if (checkIfScadutaAndSave(asta.getId())) {
+            return -1L;
+        }
         Offerta newOffer = new ObjectMapper().readValue(body, Offerta.class);
+        newOffer.setAsta(asta);
         newOffer.setOwner(userRep.findById(new JSONObject(body).getString("owner")).get());
-        newOffer.setAsta(asteRep.findById(new JSONObject(body).getLong("asta")).get());
         newOffer.setData(Timestamp.from(Instant.now().truncatedTo(ChronoUnit.MINUTES)));
         offerteRep.save(newOffer);
         return newOffer.getId();
@@ -114,7 +118,11 @@ public class RestAsteController {
 
     @GetMapping(path = "offerta/accettazione/{id}")
     public boolean accettaOfferta(@PathVariable("id")Long offertaId){
-        //TODO Da fare
+        Offerta offer = offerteRep.findById(offertaId).get();
+        Asta asta = offer.getAsta();
+        Utente user = offer.getOwner();
+        notificheRep.save(new Notifica("Offerta accettata!", "La tua offerta del valore di "+offer.getValoreAsString()+
+                " è stata accettata. Ti sei aggiudicato "+asta.getNomeProdotto(), false, user));
         return true;
     }
 
@@ -127,6 +135,20 @@ public class RestAsteController {
             result.add(asteRep.getAstaByOffer(offerta.getId()));
         }
         System.out.println("ret" + result );
-        return result;
+        return CheckAsteScaduteAndRm(result);
+    }
+
+    @PostMapping("asta/setImg/{astaID}")
+    public void setAstaImg(@PathVariable("astaID") Long astaID, @RequestParam("file") MultipartFile file) {
+        Optional<Asta> result = asteRep.findById(astaID);
+        Asta asta = result.orElse(null);
+        asta.setImg((File) file);
+        asteRep.save(asta);
+    }
+
+    @GetMapping(value = "asta/getcreatore/{id}")
+    public String getCreatoreAsta(@PathVariable("id") Long id) {
+        checkIfScadutaAndSave(id);
+        return asteRep.findById(id).get().getCreatore().getEmail();
     }
 }

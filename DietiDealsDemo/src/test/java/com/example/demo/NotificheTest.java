@@ -27,10 +27,10 @@ public class NotificheTest {
     }
 
     void offerteBase(){
+        creaOfferta(2F, userA, astaA);
         creaOfferta(5F, userB, astaA);
         creaOfferta(10F, userA, astaA);
     }
-
 
     @BeforeEach
     public void setup(){
@@ -74,7 +74,7 @@ public class NotificheTest {
     }
 
     @Test
-    public void UtenteVincitore() {
+    void utenteVincitore() {
         offerteBase();
 //        astaA = creaAsta(userVend);
         Notifica not = creaNot("a1",userA);
@@ -84,48 +84,46 @@ public class NotificheTest {
     }
 
     @Test
-    public void UtentePerdente() {
+    void ctentePerdente() {
         offerteBase();
         Notifica not = creaNot("a3",userB);
         assertTrue(astaA.inviaNotifiche(userB).equals(not));
     }
 
     @Test
-    public void CreatoreVenditaOk() {
+    void creatoreVenditaOk() {
         offerteBase();
         Notifica not = creaNot("a2",userVend);
         assertTrue(astaA.inviaNotifiche(userVend).equals(not));
     }
 
     @Test
-    public void CreatoreVenditaNo() {
+    void creatoreVenditaNo() {
         Notifica not = creaNot("a4",userVend);
         assertTrue(astaA.inviaNotifiche(userVend).equals(not));
     }
 
     @Test
-    public void UtenteNonOfferente() {
+    void utenteNonOfferente() {
 //        Notifica not = creaNot("a4",userVend);
         assertThrows(IllegalArgumentException.class , () -> astaA.inviaNotifiche(userA));
     }
 
     @Test
-    public void CreatoreHaOfferta() {
+    void creatoreHaOfferta() {
         assertThrows(IllegalArgumentException.class , () -> astaA.inviaNotifiche(userVend));
     }
 
     @Test
-    public void AstaNull() {
+    void astaNull() {
         astaA = null;
         assertThrows(NullPointerException.class , () -> astaA.inviaNotifiche(userVend));
     }
 
     @Test
-    public void UtenteNull() {
+    void utenteNull() {
         offerteBase();
         userB = null;
         assertThrows(IllegalArgumentException.class , () -> astaA.inviaNotifiche(userB));
     }
-
-
 }

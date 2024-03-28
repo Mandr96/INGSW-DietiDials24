@@ -48,4 +48,5 @@ services:
 volumes:
   local_pgdata:
   pgadmin-data:
+  java_app:
 
