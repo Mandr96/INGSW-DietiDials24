@@ -20,6 +20,10 @@ public class RegisterActivity extends ComponentActivity {
     UserProfileController userProfileController;
     TextView errorTxt;
 
+    EditText email;
+    EditText passw;
+    EditText passwR;
+
     public RegisterActivity() {
         userProfileController = new UserProfileController();
     }
@@ -29,8 +33,11 @@ public class RegisterActivity extends ComponentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        errorTxt = findViewById(R.id.register_errorTxt);
+        email = findViewById(R.id.register_editTextEmail);
+        passw = findViewById(R.id.register_editTextPassword);
+        passwR = findViewById(R.id.register_editTextPasswordRe);
 
+        errorTxt = findViewById(R.id.register_errorTxt);
         findViewById(R.id.register_button).setOnClickListener(view -> {
             if(TryRegistration()){
                 goToHomeActivity();
@@ -38,30 +45,48 @@ public class RegisterActivity extends ComponentActivity {
                 Toast.makeText(RegisterActivity.this, getString(R.string.registrazione_non_riuscita) ,Toast.LENGTH_LONG).show();
             }
         });
-
         findViewById(R.id.login_cancelButton).setOnClickListener(view -> goToLoginActivity());
+
+        email.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("RegisterPage", "Inizio inserimento email");
+            else
+                Logger.log("RegisterPage", "Fine inserimento email");
+        });
+        passw.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("RegisterPage", "Inizio inserimento password");
+            else
+                Logger.log("RegisterPage", "Fine inserimento password");
+        });
+        passwR.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("RegisterPage", "Inizio reinserimento password");
+            else
+                Logger.log("RegisterPage", "Fine reinserimento password");
+        });
     }
 
     private boolean TryRegistration() {
-        Logger.log("RegisterPage","TryRegistration");
-        String email = ((EditText)findViewById(R.id.register_editTextEmail)).getText().toString();
-        String passw = ((EditText)findViewById(R.id.register_editTextPassword)).getText().toString();
-        String passwR = ((EditText)findViewById(R.id.register_editTextPasswordRe)).getText().toString();
+        Logger.log("RegisterPage","Invio richiesta di registrazione inviata");
+        String emailText = email.getText().toString();
+        String passwText = passw.getText().toString();
+        String passwRText = passwR.getText().toString();
 
-        if(isValidCred(email,passw,passwR)){
+        if(isValidCred(emailText,passwText,passwRText)){
             try {
-                userProfileController.Register(email,passw);
-                Logger.log("RegisterPage","RegistrationSuccess");
+                userProfileController.Register(emailText,passwText);
+                Logger.log("RegisterPage","Registrazione effettuata");
                 return true;
             } catch (LoginException e) {
-                Logger.log("RegisterPage","RegistrationError");
+                Logger.log("RegisterPage","Errore di registrazione");
                 errorTxt.setText(R.string.errore_e_mail_gi_registrata);
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-        Logger.log("RegisterPage","RegistrationError");
+        Logger.log("RegisterPage","Errore di login");
         return false;
     }
 
@@ -77,14 +102,14 @@ public class RegisterActivity extends ComponentActivity {
     }
 
     private void goToHomeActivity(){
-        Logger.log("RegisterPage","goToHomeActivity");
+        Logger.log("RegisterPage","Cambio Activity -> HomePage");
         Intent myIntent = new Intent(RegisterActivity.this, HomeActivity.class);
         RegisterActivity.this.startActivity(myIntent);
         finish();
     }
 
     private void goToLoginActivity(){
-        Logger.log("RegisterPage","goToLoginActivity");
+        Logger.log("RegisterPage","'Indietro' premuto -> LoginPage");
         Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         RegisterActivity.this.startActivity(myIntent);
         finish();

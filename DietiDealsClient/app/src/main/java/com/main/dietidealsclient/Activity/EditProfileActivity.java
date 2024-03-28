@@ -55,7 +55,9 @@ public class EditProfileActivity extends ComponentActivity {
 
         updateButton.setOnClickListener(view -> {
             try {
+                Logger.log("EditProfilePage","Invio richiesta di aggiornamento profilo");
                 UpdateProfile();
+                Logger.log("EditProfilePage","Cambio Activity -> HomePage");
                 goToHomeActivity();
             } catch (JsonProcessingException | InterruptedException e) {
                 Toast.makeText(this, "Impossible aggiornare il Profilo",Toast.LENGTH_LONG).show();
@@ -65,12 +67,12 @@ public class EditProfileActivity extends ComponentActivity {
             }
         });
         imagePreview.setOnClickListener(view -> {
+            Logger.log("EditProfilePage","Selezione immagine profilo");
             imageChooser();
         });
     }
 
     private void goToHomeActivity() {
-        Logger.log("EditProfilePage","goToHomeActivity");
         Intent myIntent = new Intent(EditProfileActivity.this, HomeActivity.class);
         if(userType != null){
             myIntent.putExtra("TIPO",userType);
@@ -100,11 +102,29 @@ public class EditProfileActivity extends ComponentActivity {
     private void LoadProfile(){
         EditText name = findViewById(R.id.profileEdit_name);
         name.setText(userProfileController.getLoggedUser().getNome());
+        name.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("EditProfilePage","Inizio inserimento nome");
+            else
+                Logger.log("EditProfilePage","Fine inserimento nome");
+        });
 
         EditText surname = findViewById(R.id.profileEdit_surname);
         surname.setText(userProfileController.getLoggedUser().getCognome());
+        surname.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("EditProfilePage","Inizio inserimento cognome");
+            else
+                Logger.log("EditProfilePage","Fine inserimento cognome");
+        });
 
         EditText bio = findViewById(R.id.profileEdit_bio);
+        bio.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("EditProfilePage","Inizio inserimento bio");
+            else
+                Logger.log("EditProfilePage","Fine inserimento bio");
+        });
         bio.setText(userProfileController.getLoggedUser().getShortbio());
     }
 

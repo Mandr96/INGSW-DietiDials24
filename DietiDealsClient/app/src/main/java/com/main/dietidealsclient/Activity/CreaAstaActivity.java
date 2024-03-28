@@ -38,7 +38,6 @@ public class CreaAstaActivity extends ComponentActivity {
     Float minPrice = null;
     Date scadenza = null;
     File imageFile = null;
-    //TODO set default image
     ImageView imagePreview;
     ActivityResultLauncher<Intent> resultLauncher;
     AsteController asteController;
@@ -74,15 +73,18 @@ public class CreaAstaActivity extends ComponentActivity {
             }
         });
         imagePreview.setOnClickListener(view -> {
+            Logger.log("CreateAstaPage","Selezione dell'immagine");
             imageChooser();
         });
         btnCancel.setOnClickListener(view -> {
+            Logger.log("CreaAstaPage","'Indietro' premuto");
             goBack();
         });
+        setLogger();
     }
 
     private void InserisciAsta() throws InterruptedException {
-        Logger.log("CreateAstaPage","InserisciAsta");
+        Logger.log("CreaAstaPage","Tentativo di creazione asta");
         name = ((EditText)findViewById(R.id.new_articolo_name)).getText().toString();
         description = ((EditText)findViewById(R.id.new_articolo_description)).getText().toString();
         cat = ((Spinner)findViewById(R.id.search_categoria)).getSelectedItem().toString().replace(" ", "_");
@@ -125,14 +127,14 @@ public class CreaAstaActivity extends ComponentActivity {
             return;
         }
 
+        Logger.log("CreaAstaPage","Invio richiesta di creazione asta");
         asteController.createNewAsta(new Timestamp(scadenza.getTime()),name,description,cat,imageFile,type,minPrice);
-        Logger.log("CreateAstaPage","Asta creata");
+        Logger.log("CreateAstaPage","Asta creata con successo");
         Toast.makeText(this, "Asta creata", Toast.LENGTH_SHORT).show();
-        gotoHomeCompratore();
+        goBack();
     }
 
     void imageChooser() {
-        Logger.log("CreateAstaPage","imageChooser");
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         resultLauncher.launch(intent);
     }
@@ -155,19 +157,57 @@ public class CreaAstaActivity extends ComponentActivity {
                 });
     }
 
-    private void gotoHomeCompratore() {
-        Logger.log("CreateAstaPage","gotoHomeCompratore");
-        Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
-        myIntent.putExtra("TIPO",userType);
-        CreaAstaActivity.this.startActivity(myIntent);
+    private void goBack() {
         finish();
     }
 
-    private void goBack() {
-        Logger.log("CreateAstaPage","goBack");
-        Intent myIntent = new Intent(CreaAstaActivity.this, HomeActivity.class);
-        myIntent.putExtra("TIPO",userType);
-        CreaAstaActivity.this.startActivity(myIntent);
-        finish();
+    private void setLogger() {
+        EditText nameEdit = findViewById(R.id.new_articolo_name);
+        EditText descriptionEdit = findViewById(R.id.new_articolo_description);
+        EditText minPriceEdit = findViewById(R.id.new_articolo_minPrice);
+        EditText scadEdit = findViewById(R.id.new_articolo_days);
+        EditText scadHours = findViewById(R.id.new_articolo_hours);
+        nameEdit.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CreaAstaPage","Inizio inserimento nome articolo");
+            else
+                Logger.log("CreaAstaPage","Fine inserimento descrizione articolo");
+        });
+        descriptionEdit.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CreaAstaPage","Inizio inserimento descrizione articolo");
+            else
+                Logger.log("CreaAstaPage","Fine inserimento descrizione articolo");
+        });
+        minPriceEdit.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CreaAstaPage","Inizio inserimento prezzo minimo");
+            else
+                Logger.log("CreaAstaPage","Fine inserimento prezzo minimo");
+        });
+        scadEdit.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CreaAstaPage","Inizio inserimento durata giorni");
+            else
+                Logger.log("CreaAstaPage","Fine inserimento durata giorni");
+        });
+        scadHours.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CreaAstaPage","Inizio inserimento durata ore");
+            else
+                Logger.log("CreaAstaPage","Fine inserimento durata ore");
+        });
+        Spinner catSelector = findViewById(R.id.search_categoria);
+        catSelector.setOnFocusChangeListener((view, isFocused) -> {
+            if(!isFocused)
+                Logger.log("CreaAstePage","Categoria selezionata");
+        });
+        Spinner typeSelector = findViewById(R.id.search_type);
+        typeSelector.setOnFocusChangeListener((view, isFocused) -> {
+            if(!isFocused)
+                Logger.log("CreaAstePage","Tipo asta selezionato");
+        });
+
+
     }
 }

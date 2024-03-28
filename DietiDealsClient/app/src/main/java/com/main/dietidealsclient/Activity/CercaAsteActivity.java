@@ -55,19 +55,32 @@ public class CercaAsteActivity extends ComponentActivity {
             spinnerType.setVisibility(View.INVISIBLE);
             findViewById(R.id.type_text).setVisibility(View.INVISIBLE);
         }
-
         findViewById(R.id.search_btn).setOnClickListener(view -> {
+            Logger.log("CercaAstePage","Invio richiesta di ricerca aste");
             search();
         });
         findViewById(R.id.search_btton_back).setOnClickListener(view -> {
             goBack();
         });
+
+        editTextKw.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("CercaAstePage","Inizio inserimento parola chiave");
+            else
+                Logger.log("CercaAstePage","Fine inserimento parola chiave");
+        });
+        spinnerCat.setOnFocusChangeListener((view, isFocused) -> {
+            if(!isFocused)
+                Logger.log("CercaAstePage","Categoria selezionata");
+        });
+        spinnerType.setOnFocusChangeListener((view, isFocused) -> {
+            if(!isFocused)
+                Logger.log("CercaAstePage","Tipo di asta selezionata");
+        });
     }
 
 
     private void search(){
-        Logger.log("CercaAstePage","search");
-        //TODO debug
         String keyword = editTextKw.getText().toString();
         keyword = keyword.isBlank() ? " " : keyword;
         String categoria = spinnerCat.getSelectedItem().toString().replace(" ","_");
@@ -85,7 +98,7 @@ public class CercaAsteActivity extends ComponentActivity {
         myIntent.putExtra("ASTA_TIPO", type);
         myIntent.putExtra("RESULTS", results);
         Logger.log("CercaAstePage","Trovate " + results.size() + " aste");
-        Logger.log("CercaAstePage","gotoRisultatiRicercaActivity");
+        Logger.log("CercaAstePage","Cambio activity -> RisultatiRicercaPage");
         CercaAsteActivity.this.startActivity(myIntent);
         finish();
     }
@@ -106,7 +119,7 @@ public class CercaAsteActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Logger.log("CercaAstePage","goBack");
+        Logger.log("CercaAstePage","'Indietro' premuto -> HomePage");
         Intent myIntent = new Intent(CercaAsteActivity.this, HomeActivity.class);
         CercaAsteActivity.this.startActivity(myIntent);
         finish();

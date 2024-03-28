@@ -65,13 +65,16 @@ public class AstaDetailsActivity extends ComponentActivity {
 
 
         btnSendOffer.setOnClickListener(view -> {
+            Logger.log("AstaDetailsPage","Apertura schermata di dialogo 'Invia Offerta'");
             dialogSendOffer.show();
         });
         setDialogEvent();
         viewNomeVenditore.setOnClickListener(view -> {
+            Logger.log("AstaDetailsPage","Cambio Activity -> UserDetailsPage");
             goToUserDetails();
         });
         btnBack.setOnClickListener(view -> {
+            Logger.log("AstaDetailsPage","'Indietro' premuto");
             goBack();
         });
     }
@@ -110,11 +113,18 @@ public class AstaDetailsActivity extends ComponentActivity {
         Button inviaOfferta = dialogSendOffer.findViewById(R.id.btn_invia_offerta);
         ImageView imgClose = dialogSendOffer.findViewById(R.id.image_close);
         EditText editValore = dialogSendOffer.findViewById(R.id.valore_offerta_edit_text);
+        editValore.setOnFocusChangeListener((view, isFocused) -> {
+            if(isFocused)
+                Logger.log("AstaDetailsPage","Inizio inserimento valore offerta");
+            else
+                Logger.log("AstaDetailsPage","Fine inserimento valore offerta");
+        });
         inviaOfferta.setOnClickListener(view -> {
             Float valore = Float.parseFloat(editValore.getText().toString());
             if(valore != Float.NaN) {
                 new AsteController().createNewOffer(selectedAsta, valore);
                 Toast.makeText(AstaDetailsActivity.this, "Offerta inviata",Toast.LENGTH_LONG).show();
+                Logger.log("AstaDetailsPage","'Indietro premuto' ->");
                 goBack();
             }
             else {
@@ -122,11 +132,11 @@ public class AstaDetailsActivity extends ComponentActivity {
             }
         });
         imgClose.setOnClickListener(view -> {
+            Logger.log("AstaDetailsPage","Chiusura schermata di dialogo 'Invia Offerta'");
             dialogSendOffer.dismiss();
         });
     }
     private void goToUserDetails() {
-        Logger.log("AstaDetailPage","goToUserDetails");
         Intent myIntent = new Intent(AstaDetailsActivity.this, UserDetailsActivity.class);
         //TODO IMG
         myIntent.putExtra("NAME", viewNomeVenditore.getText().toString());
@@ -138,9 +148,6 @@ public class AstaDetailsActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Logger.log("AstaDetailPage","goBack");
-        Intent myIntent = new Intent(AstaDetailsActivity.this, HomeActivity.class);
-        AstaDetailsActivity.this.startActivity(myIntent);
         finish();
     }
 

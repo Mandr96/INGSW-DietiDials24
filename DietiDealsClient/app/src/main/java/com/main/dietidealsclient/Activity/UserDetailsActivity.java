@@ -52,10 +52,7 @@ public class UserDetailsActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Logger.log("UserDetailPage","goBack");
-        //TODO BUG NEL TORNARE INDIETRO
-        Intent myIntent = new Intent(UserDetailsActivity.this, AstaDetailsActivity.class);
-        UserDetailsActivity.this.startActivity(myIntent);
+        Logger.log("UserDetailPage","'Indietro' premuto -> AstaDetailsActivity");
         finish();
     }
 }

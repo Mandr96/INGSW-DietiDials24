@@ -64,6 +64,7 @@ public class RestAsteController {
                                 @PathVariable("categoria") String categoria,
                                 @PathVariable("keyword") String kw,
                                 @PathVariable("pag") int pag) {
+        System.out.println(tipo+categoria+kw+pag);
         String cat = categoria;
         if(tipo.toLowerCase().contains("tutte")) tipo = "%";
         if(categoria.toLowerCase().contains("tutte")) cat = "%";

@@ -47,7 +47,7 @@ public class Offerta implements Serializable {
     public Float getValore() {
         return valore;
     }
-
+    @JsonIgnore
     public String getValoreAsString() {
         NumberFormat formatter = new DecimalFormat("0.00");
         return formatter.format(valore)+" €";

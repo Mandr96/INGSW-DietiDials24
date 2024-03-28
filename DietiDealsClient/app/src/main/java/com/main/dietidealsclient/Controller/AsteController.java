@@ -60,9 +60,6 @@ public class AsteController {
         return aste;
     }
 
-    //TODO Da sistemare (page)
-    //Senno possiamo fare che tipo dici da che id mandare? e tipo ne manda 15? (brutto)
-    //PU♫O fare due richieste e mettrle insieme
     public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, TipoAccount userType)
     {
         List<Asta> results = null;
@@ -70,7 +67,8 @@ public class AsteController {
         if(userType.equals(TipoAccount.COMPRATORE)){
             results.removeIf(asta -> asta instanceof AstaInversa);
         }
-        //TODO DIOBASTARDOMALEDETTODIOCANE creatore non esiste perchè la mamma è puttana
+        //TODO Decommentare:
+        /*
         results.removeIf(asta -> {
             try {
                 return asta.getCreatore().equals(LoggedUser.getInstance().getLoggedUser().getEmail());
@@ -78,7 +76,7 @@ public class AsteController {
                 throw new RuntimeException(e);
             }
         });
-        //TODO ??
+        */
         return results;
     }
 
@@ -114,5 +112,13 @@ public class AsteController {
 
     public String getAstaOwnerEmail(Long id) throws InterruptedException {
         return asteRequester.getAstaOwnerEmail(id);
+    }
+
+    public List<Offerta> getOfferteByAsta(Long astaID) {
+        try {
+            return asteRequester.getOfferteByAsta(astaID);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

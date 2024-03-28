@@ -50,18 +50,22 @@ public class HomeActivity extends ComponentActivity {
         updateTesti();
 
         findViewById(R.id.home_compratore_cerca_aste).setOnClickListener(view -> {
+            Logger.log("HomePage","Cambio Activity -> CercaAstePage");
             gotoCercaAsteActivity();
         });
         findViewById(R.id.home_compratore_crea_asta_inversa).setOnClickListener(view -> {
+            Logger.log("HomePage","Cambio Activity -> CreaAstaPage");
             gotoCreaAstaActivity();
         });
         findViewById(R.id.home_compratore_cambia_tipo).setOnClickListener(view -> {
             gotoChageAccountType();
         });
         findViewById(R.id.home_compratore_edit_profile).setOnClickListener(view -> {
+            Logger.log("HomePage","Cambio Activity -> ProfilePage");
             goToEditProfileActivity();
         });
         findViewById(R.id.home_compratore_notifiche_btn).setOnClickListener(view -> {
+            Logger.log("HomePage","Cambio Activity -> NotifichePage");
             gotoNotificheActivity();
         });
 
@@ -166,6 +170,7 @@ public class HomeActivity extends ComponentActivity {
 
     /** Se il profilo non contiene Nome manda alla pagina modifica profilo */
     private void inizializeProfile() {
+        Logger.log("HomePage","Primo accesso utente. Cambio activity -> ProfilePage");
         Utente loggedUser = LoggedUser.getInstance().getLoggedUser();
         if(loggedUser.getNome() == null){
             goToEditProfileActivity();
@@ -173,21 +178,18 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void goToEditProfileActivity() {
-        Logger.log("HomePage","goToEditProfileActivity");
         Intent myIntent = new Intent(HomeActivity.this, EditProfileActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCercaAsteActivity() {
-        Logger.log("HomePage","gotoCercaAsteActivity");
         Intent myIntent = new Intent(HomeActivity.this, CercaAsteActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
     }
 
     private void gotoCreaAstaActivity() {
-        Logger.log("HomePage","gotoCreaAstaActivity");
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
@@ -195,9 +197,15 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoChageAccountType() {
-        Logger.log("HomePage","gotoChageAccountType");
         Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
-        userType = userType.equals(TipoAccount.VENDITORE) ? TipoAccount.COMPRATORE : TipoAccount.VENDITORE;
+        if(userType.equals(TipoAccount.VENDITORE)) {
+            Logger.log("HomePage","Passaggio a modalità Compratore");
+            userType = TipoAccount.COMPRATORE;
+        }
+        else {
+            Logger.log("HomePage","Passaggio a modalità Venditore");
+            userType = TipoAccount.VENDITORE;
+        }
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
         finish();
@@ -212,7 +220,7 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void showAstaDetails(Asta asta) {
-        Logger.log("HomePage","showAstaDetails " + asta.toString());
+        Logger.log("HomePage","Mostra dettagli asta -> " + asta.getNomeProdotto());
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
@@ -228,7 +236,6 @@ public class HomeActivity extends ComponentActivity {
     }
 
     private void gotoNotificheActivity() {
-        Logger.log("HomePage","gotoNotificheActivity");
         Intent myIntent = new Intent(HomeActivity.this, NotificheActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);

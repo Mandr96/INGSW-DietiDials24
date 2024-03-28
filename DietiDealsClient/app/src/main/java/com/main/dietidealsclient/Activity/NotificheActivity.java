@@ -35,6 +35,7 @@ public class NotificheActivity extends ComponentActivity {
         updateNotifiche();
 
         findViewById(R.id.search_btton_back).setOnClickListener(view -> {
+            Logger.log("NotfichePage","'Indietro premuto'");
             goBack();
         });
     }
@@ -46,9 +47,6 @@ public class NotificheActivity extends ComponentActivity {
     }
 
     private void goBack() {
-        Logger.log("NotfichePage","goBack");
-        Intent myIntent = new Intent(NotificheActivity.this, HomeActivity.class);
-        NotificheActivity.this.startActivity(myIntent);
         finish();
     }
 }
