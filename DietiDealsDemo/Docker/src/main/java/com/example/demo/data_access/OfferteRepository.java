@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OfferteRepository extends JpaRepository<Offerta, Long> {
 
-    @Query(value = "SELECT * FROM Offerta WHERE owner_email = ?1",
+    @Query(value = "SELECT DISTINCT on(asta_id) * FROM Offerta WHERE owner_email = ?1",
             nativeQuery = true)
     public List<Offerta> findByUser(String email);
 
