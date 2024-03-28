@@ -18,6 +18,7 @@ import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.Logger;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
 
         adapter.setClickListener(new RecyclerAsteInterface() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position) throws MyException {
                 Log.d("MyDebug" , "CLICCATO" + adapter.getData().get(position));
                 showAstaDetails(adapter.getData().get(position));
             }
@@ -80,7 +81,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
     }
 
     //COPIATO
-    private void showAstaDetails(Asta asta) {
+    private void showAstaDetails(Asta asta) throws MyException {
         Logger.log("RisultatiRicercaPage","showAstaDetails");
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(RisultatiRicercaActivity.this, AstaDetailsActivity.class);

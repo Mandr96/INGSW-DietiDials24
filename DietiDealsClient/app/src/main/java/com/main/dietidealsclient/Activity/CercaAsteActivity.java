@@ -18,6 +18,7 @@ import com.main.dietidealsclient.Controller.TipoAccount;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Utility.Logger;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,12 @@ public class CercaAsteActivity extends ComponentActivity {
             findViewById(R.id.type_text).setVisibility(View.INVISIBLE);
         }
         findViewById(R.id.search_btn).setOnClickListener(view -> {
-            Logger.log("CercaAstePage","Invio richiesta di ricerca aste");
-            search();
+            try {
+                search();
+                Logger.log("CercaAstePage","Invio richiesta di ricerca aste");
+            } catch (MyException e) {
+                Toast.makeText(this, "ERRORE", Toast.LENGTH_LONG).show();
+            }
         });
         findViewById(R.id.search_btton_back).setOnClickListener(view -> {
             goBack();
@@ -80,7 +85,8 @@ public class CercaAsteActivity extends ComponentActivity {
     }
 
 
-    private void search(){
+    private void search() throws MyException {
+
         String keyword = editTextKw.getText().toString();
         keyword = keyword.isBlank() ? " " : keyword;
         String categoria = spinnerCat.getSelectedItem().toString().replace(" ","_");

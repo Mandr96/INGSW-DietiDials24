@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/JpaTests
-    username: postgres
-    password: progettoDB
+    url: jdbc:postgresql://local_postgresdb:5432/postgres
+    username: ingsw
+    password: administrator
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,7 +11,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    database: postgresql
+    database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 application:
