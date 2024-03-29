@@ -51,11 +51,12 @@ public class DemoApplication {
 					new ArrayList<Asta>(),
 					new ArrayList<Offerta>()
 			);
+			// Primo scenario
 			userRep.save(venditore);
-			Utente compratore = new Utente(
-					"prova2",
-					"Fabio",
-					"Sicignano",
+			Utente enrico = new Utente(
+					"enrico.f@gmail.com",
+					"Enrico",
+					"Fausti",
 					passwordEncoder.encode("5678"),
 					"Sono una persona semplice",
 					"Napoli",
@@ -64,24 +65,58 @@ public class DemoApplication {
 					new ArrayList<Asta>(),
 					new ArrayList<Offerta>()
 			);
-			userRep.save(compratore);
+			userRep.save(enrico);
+			Utente fabio = new Utente(
+					"fabbio.sic@gmail.com",
+					"Enrico",
+					"Fausti",
+					passwordEncoder.encode("pass"),
+					"Super venditore super affidabile",
+					"Napoli",
+					null,
+					new ArrayList<Notifica>(),
+					new ArrayList<Asta>(),
+					new ArrayList<Offerta>()
+			);
+			userRep.save(fabio);
+			Utente franc = new Utente(
+					"francipo@gmail.com",
+					"Francesco",
+					"Pollio",
+					passwordEncoder.encode("pass2"),
+					"Qui per comprare",
+					"Napoli",
+					null,
+					new ArrayList<Notifica>(),
+					new ArrayList<Asta>(),
+					new ArrayList<Offerta>()
+			);
+			userRep.save(franc);
 //
-			Asta classica = new AstaClassica(-1L, Timestamp.from(Instant.now().plusSeconds(5L)), "cosa", "una cosa classica", "Sport", null, false, venditore, new ArrayList<Offerta>(), 10f);
+			Asta classica = new AstaClassica(-1L, Timestamp.from(Instant.now().plusSeconds(10000L)), "Controller PS5 come nuovo", "Vendo per inutilizzo. Il controller è come nuovo.", "Elettronica", null, false, fabio, new ArrayList<Offerta>(), 30f);
 			asteRep.save(classica);
-
-			Asta silenziosa = new AstaSilenziosa(-1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa prova", "una cosa silenziosa", "Libri", null, false, venditore, new ArrayList<Offerta>());
+			Asta silenziosa = new AstaSilenziosa(-1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "Controller PS5 usato", "Vendo controller usato per PS5. Non accetto al di sotto dei 35 euro", "Libri", null, false, venditore, new ArrayList<Offerta>());
 			asteRep.save(silenziosa);
 
-			Asta inversa  = new AstaInversa(-1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa inversa", "una cosa inversa", "Collezionismo", null, false, compratore, new ArrayList<Offerta>(), 50F);
-			asteRep.save(inversa);
+			offerteRep.save(new Offerta(-1L,39f,null,true, franc, classica));
+			offerteRep.save(new Offerta(-1L,40f,null,true, franc, silenziosa));
 
-			offerteRep.save(new Offerta(-1L,15f,null,true, compratore, classica));
-			offerteRep.save(new Offerta(-1L,40f,null,true, compratore, silenziosa));
-			offerteRep.save(new Offerta(-1L,75f,null,true, venditore, inversa));
-//			//System.out.println(asteRep.searchAste("AstaClassica", "cat1", "cosa", 0));
-
-			notificheRep.save(new Notifica("Notifica prova", "...", false, venditore));
-			notificheRep.save(new Notifica("Notifica prova 2", "...", false, venditore));
+			// Secondo scenario
+			userRep.save(venditore);
+			Utente ale = new Utente(
+					"tiziocaio@libero.it",
+					"Tizio",
+					"Caio",
+					passwordEncoder.encode("pwSicura1234"),
+					"Sono una persona semplice",
+					"Napoli",
+					null,
+					new ArrayList<Notifica>(),
+					new ArrayList<Asta>(),
+					new ArrayList<Offerta>()
+			);
+			userRep.save(ale);
+			offerteRep.save(new Offerta(-1L,35f,null,true, ale, silenziosa));
 		};
 	}
 }

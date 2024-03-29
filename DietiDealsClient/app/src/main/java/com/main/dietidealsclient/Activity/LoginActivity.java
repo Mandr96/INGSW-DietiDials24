@@ -37,8 +37,8 @@ public class LoginActivity extends ComponentActivity {
 
         EditText em = findViewById(R.id.login_editTextEmail);
         EditText pw = findViewById(R.id.login_editTextPassword);
-        em.setText("prova");
-        pw.setText("1234");
+        //em.setText("");
+        //pw.setText("");
         buttonLogin = findViewById(R.id.loginButton);
         buttonRegister = findViewById(R.id.gotoRegisterButton);
         errorText = findViewById(R.id.login_errorText);
