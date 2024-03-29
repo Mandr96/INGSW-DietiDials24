@@ -73,7 +73,6 @@ public class HomeActivity extends ComponentActivity {
         adapterPrimo.setClickListener(new RecyclerAsteInterface() {
             @Override
             public void onItemClick(int position) throws MyException {
-                Log.d("MyDebug" , "CLICCATO" + adapterPrimo.getData().get(position));
                 showAstaDetails(adapterPrimo.getData().get(position));
             }
         });
@@ -118,7 +117,6 @@ public class HomeActivity extends ComponentActivity {
         if (userType == null){
             userType = TipoAccount.COMPRATORE;
         }
-        Log.d("setUserType" , userType.toString());
     }
 
     /**
@@ -140,10 +138,6 @@ public class HomeActivity extends ComponentActivity {
             adapterPrimo = updateAsteListCreate(recyclerViewPrimo, this::onClickPrimoRecycler);
             adapterSecondo = updateAsteListpartecipate(recyclerViewSecondo, this::onClickSecondoRecycler);
         }
-        Log.d("myDebug", "Primo: " + adapterPrimo.toString());
-        Log.d("myDebug", "Secondo: " + adapterSecondo.toString());
-
-        //TODO findViewById con recycle_view_aste_normali e l altro
     }
 
     //Aste a cui hai partecipato
