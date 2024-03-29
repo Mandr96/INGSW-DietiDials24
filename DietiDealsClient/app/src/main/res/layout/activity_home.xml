@@ -84,10 +84,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="32dp"
                             android:text="Le tue aste inverse"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/home_compratore_crea_asta_inversa" />
+                            app:layout_constraintTop_toBottomOf="@+id/recycle_view_aste_normali" />
 
                         <Button
                             android:id="@+id/home_compratore_cambia_tipo"
@@ -130,19 +130,15 @@
 
                         <Button
                             android:id="@+id/home_compratore_crea_asta_inversa"
-                            android:layout_width="185dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/btn_basic"
-                            android:drawableEnd="@drawable/icon_add"
                             android:layout_marginStart="24dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="24dp"
-                            android:drawablePadding="10dp"
-                            android:padding="10dp"
                             android:text="Crea asta inversa"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/recycle_view_aste_normali" />
+                            app:layout_constraintTop_toBottomOf="@+id/recycle_view_aste_inverse" />
 
                         <TextView
                             android:id="@+id/aste_title_text1"
@@ -160,9 +156,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="380dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginBottom="32dp"
                             android:background="@color/textBackgroundColor"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"

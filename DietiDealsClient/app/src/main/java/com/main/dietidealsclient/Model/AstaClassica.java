@@ -57,7 +57,7 @@ public class AstaClassica extends Asta {
     public Float getMinPrice() {
         return minPrice;
     }
-    @JsonIgnore
+
     public String getMinPriceAsString() {
         NumberFormat formatter = new DecimalFormat("0.00");
         return formatter.format(minPrice)+" €";

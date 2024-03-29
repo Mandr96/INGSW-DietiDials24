@@ -31,6 +31,7 @@ public class AsteController {
     public void createNewAsta(Timestamp scadenza, String name, String description, String cat, File fileImg, String type, Float minPrice) throws InterruptedException {
         Asta asta = null;
         Long astaID = -1L;
+        Log.d("MyDebug","LoggedUser.getInstance().getLoggedUser()" + LoggedUser.getInstance().getLoggedUser().toString());
         if(type.equals("Classica")){
             asta = new AstaClassica(scadenza, name, description, cat, null, LoggedUser.getInstance().getLoggedUser(), minPrice);
         } else if(type.equals("Silenziosa")){
@@ -91,13 +92,20 @@ public class AsteController {
             // RIMOZIONE ASTE INVERSE
             aste.removeIf(asta -> asta instanceof AstaInversa);
         }
+        // RECUPERO OFFERTE
+        for (Asta asta : aste) {
+            try {asta.setOfferte(asteRequester.getOfferteByAsta(asta.getId()));} catch (InterruptedException e) {throw new RuntimeException(e);}
+            Log.d("MyDebug getAstePartecipate" , "l asta " + asta.getId() + " ha le offerte " + asta.getOfferte().toString());
+        }
         return aste;
     }
 
     public void createNewOffer(Asta asta, Float valore) {
         try {
+            Log.d("myDebug", "OK3.5");
             Offerta offer = new Offerta(-1L, valore, null, true, LoggedUser.getInstance().getLoggedUser(), asta);
             offer.setId(asteRequester.inviaOfferta(offer));
+            Log.d("myDebug", "OK3.6");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

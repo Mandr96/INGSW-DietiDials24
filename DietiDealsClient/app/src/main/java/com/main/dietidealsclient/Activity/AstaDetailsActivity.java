@@ -110,8 +110,7 @@ public class AstaDetailsActivity extends ComponentActivity {
             viewBestOffer.setVisibility(View.INVISIBLE);
             findViewById(R.id.priceText).setVisibility(View.INVISIBLE);
         }
-        if(owner.getEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())
-                || selectedAsta.getScaduta()) {
+        if(owner.getEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())) {
             btnSendOffer.setVisibility(View.INVISIBLE);
         }
     }

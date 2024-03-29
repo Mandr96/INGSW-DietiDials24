@@ -56,14 +56,13 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
     @Override
     public void onBindViewHolder(AsteAdapterList.ViewHolder holder, int position) {
         Asta asta = data.get(position);
-        asta.setOfferte(new AsteController().getOfferteByAsta(asta.getId()));
         Offerta bestOffer = asta.getBestOffer();
         bestOffer.setOwner(new UserProfileController().getOfferOwner(bestOffer.getId()));
         Log.e("list", "onBindViewHolder" + position);
         holder.nome.setText(asta.getNomeProdotto());
         holder.tipo.setText(asta.getTypeAsString());
 
-        //Gestione det1
+        //TODO reucperare offerte
         if (asta instanceof AstaSilenziosa silenziosa) {
             holder.det1.setText("");
             if(silenziosa.getScaduta())

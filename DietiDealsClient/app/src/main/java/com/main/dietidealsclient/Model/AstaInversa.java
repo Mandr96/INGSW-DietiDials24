@@ -1,7 +1,6 @@
 package com.main.dietidealsclient.Model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -12,8 +11,6 @@ import lombok.Setter;
 
 import java.io.File;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +45,7 @@ public class AstaInversa extends Asta {
         super(scadenza, nomeProdotto, descrizione, cat, img, creatore);
         this.minOffer = minOffer;
     }
-    @JsonIgnore
-    public String getMinPriceAsString() {
-        NumberFormat formatter = new DecimalFormat("0.00");
-        return formatter.format(minOffer)+" €";
-    }
+
     public Offerta getBestOffer(){
         return getBestOfferIn(false);
     }
