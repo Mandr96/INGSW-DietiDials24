@@ -3,6 +3,7 @@ package com.main.dietidealsclient.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
     String keyword;
     String categoria;
     String tipoAsta;
+    ImageView backBtn;
     int page;
     List<Asta> results;
     AsteController asteController;
@@ -50,6 +52,7 @@ public class RisultatiRicercaActivity extends ComponentActivity {
         results =  (ArrayList<Asta>)getIntent().getSerializableExtra("RESULTS");
 
         setUserType();
+        backBtn = findViewById(R.id.search_btton_back);
         recyclerView = findViewById(R.id.risultati_recycler_view);
         ricercaSuValori();
 
@@ -60,6 +63,10 @@ public class RisultatiRicercaActivity extends ComponentActivity {
                 showAstaDetails(adapter.getData().get(position));
             }
         });
+        backBtn.setOnClickListener(view -> {
+            Logger.log("RisultatiRicercaPage","'Indietro' premuto");
+            goBack();
+        });
 
         Log.d("myDebug", "RESULTS: "+results);
     }
@@ -69,19 +76,15 @@ public class RisultatiRicercaActivity extends ComponentActivity {
     }
 
     private void ricercaSuValori() {
-        Logger.log("RisultatiRicercaPage","ricercaSuValori");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Asta> data = results;
-        Log.d("MyDebug userType", userType.toString());
-//        Log.d("MyDebug updateAsteListCreate", data.toString());
-
         adapter = new AsteAdapterList(data, this::onClickRecycler);
         recyclerView.setAdapter(adapter);
     }
 
     //COPIATO
     private void showAstaDetails(Asta asta) {
-        Logger.log("RisultatiRicercaPage","showAstaDetails");
+        Logger.log("RisultatiRicercaPage","Visualizza dettagli asta -> "+asta.getNomeProdotto());
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(RisultatiRicercaActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
@@ -98,5 +101,9 @@ public class RisultatiRicercaActivity extends ComponentActivity {
 
     public void onClickRecycler(int pos){
 //        showAstaDetails(adapterPrimo.getData().get(pos));
+    }
+
+    public void goBack() {
+        finish();
     }
 }

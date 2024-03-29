@@ -10,7 +10,9 @@
         android:id="@+id/search_btton_back"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/image_back_icon" />
+        android:src="@drawable/image_back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
