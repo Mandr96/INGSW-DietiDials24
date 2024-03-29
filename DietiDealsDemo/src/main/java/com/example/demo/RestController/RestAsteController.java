@@ -136,7 +136,7 @@ public class RestAsteController {
             result.add(asteRep.getAstaByOffer(offerta.getId()));
         }
         System.out.println("ret" + result );
-        return CheckAsteScaduteAndRm(result);
+        return result;
     }
 
     @PostMapping("asta/setImg/{astaID}")

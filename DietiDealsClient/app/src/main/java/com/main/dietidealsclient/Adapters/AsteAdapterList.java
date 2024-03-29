@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.main.dietidealsclient.Controller.AsteController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
@@ -53,23 +54,36 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
     @Override
     public void onBindViewHolder(AsteAdapterList.ViewHolder holder, int position) {
         Asta asta = data.get(position);
+        asta.setOfferte(new AsteController().getOfferteByAsta(asta.getId()));
         Offerta bestOffer = asta.getBestOffer();
         Log.e("list", "onBindViewHolder" + position);
         holder.nome.setText(asta.getNomeProdotto());
         holder.tipo.setText(asta.getTypeAsString());
 
-        //TODO reucperare offerte
+        //Gestione det1
         if (asta instanceof AstaSilenziosa silenziosa) {
             holder.det1.setText("");
             if(silenziosa.getScaduta())
                 holder.det1.setText("Da accettare");
         }
-        else {
-            Offerta bestOff = asta.getBestOffer();
-            if (bestOff != null && bestOff.getValore() > 0) {
-                holder.det1.setText(bestOff.getValoreAsString());
+        else if (asta instanceof AstaClassica classica){
+            if (classica.getScaduta()) {
+                holder.det1.setText("Scaduta!");
             } else {
-                holder.det1.setText("");
+                if(bestOffer.getValore() > 0)
+                    holder.det1.setText(bestOffer.getValoreAsString());
+                else
+                    holder.det1.setText(classica.getMinPriceAsString());
+            }
+        }
+        else if (asta instanceof AstaInversa inversa) {
+            if (inversa.getScaduta()) {
+                holder.det1.setText("Scaduta!");
+            } else {
+                if(bestOffer.getValore() > 0)
+                    holder.det1.setText(bestOffer.getValoreAsString());
+                else
+                    holder.det1.setText(inversa.getMinPriceAsString());
             }
         }
 
