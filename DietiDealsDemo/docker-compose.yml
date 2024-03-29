@@ -33,7 +33,7 @@ services:
   java_app:
      build:
        context: .
-       dockerfile: Dockerfile.txt
+       dockerfile: Dockerfile
      container_name: java_app_container
      restart: always
      ports:
