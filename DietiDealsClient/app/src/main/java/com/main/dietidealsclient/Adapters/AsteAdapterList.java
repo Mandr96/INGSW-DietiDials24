@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.util.List;
 
@@ -132,15 +134,25 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
             itemView.setOnClickListener(view -> {
                 if(recyclerAsteInterface != null) {
                     int pos = getAbsoluteAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION)
-                        recyclerAsteInterface.onItemClick(pos);
+                    if(pos != RecyclerView.NO_POSITION) {
+                        try {
+                            recyclerAsteInterface.onItemClick(pos);
+                        } catch (MyException e) {
+                            Toast.makeText(view.getContext(), "ERROR", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
                 }
             });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    recyclerAsteInterface.onItemClick(getAdapterPosition()); // passing click to interface
+                    try {
+                        recyclerAsteInterface.onItemClick(getAdapterPosition()); // passing click to interface
+                    } catch (MyException e) {
+                        Toast.makeText(view.getContext(), "ERROR", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }

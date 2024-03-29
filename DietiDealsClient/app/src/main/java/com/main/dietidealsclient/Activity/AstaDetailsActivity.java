@@ -23,6 +23,7 @@ import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.Utility.LoggedUser;
 import com.main.dietidealsclient.Utility.Logger;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -61,7 +62,12 @@ public class AstaDetailsActivity extends ComponentActivity {
         dialogSendOffer.setContentView(R.layout.dialog_invia_offerta);
         //dialogSendOffer.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogSendOffer.setCancelable(false);
-        setData();
+        try {
+            setData();
+        } catch (MyException e) {
+            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+            goBack();
+        }
 
 
         btnSendOffer.setOnClickListener(view -> {
@@ -79,7 +85,7 @@ public class AstaDetailsActivity extends ComponentActivity {
         });
     }
 
-    private void setData() {
+    private void setData() throws MyException {
         selectedAsta = (Asta)getIntent().getSerializableExtra("ASTA");
         owner = new UserProfileController().getAstaOwner(selectedAsta.getId());
         Float actualPrice = getIntent().getFloatExtra("PRICE", 0f);

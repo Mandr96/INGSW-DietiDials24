@@ -9,6 +9,7 @@ import com.main.dietidealsclient.Model.AstaSilenziosa;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.Requesters.AsteRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -60,10 +61,10 @@ public class AsteController {
         return aste;
     }
 
-    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, TipoAccount userType)
+    public List<Asta> ricerca(String keyword, String categoria, String tipoAsta, int page, TipoAccount userType) throws MyException
     {
         List<Asta> results = null;
-        try {results = asteRequester.cercaAsta(tipoAsta,categoria,keyword,page);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        try {results = asteRequester.cercaAsta(tipoAsta,categoria,keyword,page);} catch (InterruptedException e) {throw new MyException(e);}
         if(userType.equals(TipoAccount.COMPRATORE)){
             results.removeIf(asta -> asta instanceof AstaInversa);
         }

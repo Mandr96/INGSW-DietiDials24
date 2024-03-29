@@ -21,6 +21,7 @@ import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
 import com.main.dietidealsclient.Utility.LoggedUser;
 import com.main.dietidealsclient.Utility.Logger;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class HomeActivity extends ComponentActivity {
 
         adapterPrimo.setClickListener(new RecyclerAsteInterface() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position) throws MyException {
                 Log.d("MyDebug" , "CLICCATO" + adapterPrimo.getData().get(position));
                 showAstaDetails(adapterPrimo.getData().get(position));
             }
@@ -80,7 +81,7 @@ public class HomeActivity extends ComponentActivity {
 
         adapterSecondo.setClickListener(new RecyclerAsteInterface() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position) throws MyException {
                 showAstaDetails(adapterSecondo.getData().get(position));
             }
         });
@@ -211,15 +212,15 @@ public class HomeActivity extends ComponentActivity {
         finish();
     }
 
-    public void onClickPrimoRecycler(int pos){
+    public void onClickPrimoRecycler(int pos) throws MyException {
         showAstaDetails(adapterPrimo.getData().get(pos));
     }
 
-    public void onClickSecondoRecycler(int pos){
+    public void onClickSecondoRecycler(int pos) throws MyException {
         showAstaDetails(adapterSecondo.getData().get(pos));
     }
 
-    private void showAstaDetails(Asta asta) {
+    private void showAstaDetails(Asta asta) throws MyException {
         Logger.log("HomePage","Mostra dettagli asta -> " + asta.getNomeProdotto());
         asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
         Intent myIntent = new Intent(HomeActivity.this, AstaDetailsActivity.class);

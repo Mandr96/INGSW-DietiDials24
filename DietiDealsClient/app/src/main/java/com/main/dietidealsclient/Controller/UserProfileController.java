@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.dietidealsclient.Model.Utente;
 import com.main.dietidealsclient.Requesters.UtentiRequester;
 import com.main.dietidealsclient.Utility.LoggedUser;
+import com.main.dietidealsclient.Utility.MyException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -58,7 +59,6 @@ public class UserProfileController {
                 null
         ));
         LoggedUser.update();
-        //TODO dove aggiorna il profilo??
     }
 
 
@@ -66,19 +66,19 @@ public class UserProfileController {
         return LoggedUser.getInstance().getLoggedUser();
     }
 
-    public Utente getAstaOwner(Long astaID){
+    public Utente getAstaOwner(Long astaID) throws MyException {
         try {
             return utentiRequester.getAstaOwner(astaID);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new MyException(e);
         }
     }
 
-    public void setUserImg(String useremail, File img) {
+    public void setUserImg(String useremail, File img) throws MyException {
         try {
             utentiRequester.setUserImg(useremail, img);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new MyException(e);
         }
     }
 }
