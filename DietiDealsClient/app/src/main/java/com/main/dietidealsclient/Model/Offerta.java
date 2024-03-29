@@ -82,4 +82,9 @@ public class Offerta implements Serializable {
     public void setId(Long aLong) {
         id = aLong;
     }
+
+    @JsonIgnore
+    public void setOwner(Utente owner) {
+        this.owner = owner;
+    }
 }

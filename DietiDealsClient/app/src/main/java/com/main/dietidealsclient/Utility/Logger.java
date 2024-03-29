@@ -6,6 +6,8 @@ import android.util.Log;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 public class Logger {
 
@@ -24,7 +26,7 @@ public class Logger {
             append = true;
         }
 
-        message = LocalTime.now() + " - " + context + " :- " + message;
+        message = LocalTime.now().truncatedTo(ChronoUnit.SECONDS) + " - " + context + " : " + message;
 
         // Check storage state and permission (implement permission request logic)
         if (isExternalStorageWritable()) {

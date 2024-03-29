@@ -4,6 +4,7 @@ package com.main.dietidealsclient.Adapters;
 
 import android.annotation.SuppressLint;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.dietidealsclient.Controller.AsteController;
+import com.main.dietidealsclient.Controller.UserProfileController;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
@@ -56,6 +58,7 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         Asta asta = data.get(position);
         asta.setOfferte(new AsteController().getOfferteByAsta(asta.getId()));
         Offerta bestOffer = asta.getBestOffer();
+        bestOffer.setOwner(new UserProfileController().getOfferOwner(bestOffer.getId()));
         Log.e("list", "onBindViewHolder" + position);
         holder.nome.setText(asta.getNomeProdotto());
         holder.tipo.setText(asta.getTypeAsString());
@@ -67,27 +70,51 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
                 holder.det1.setText("Da accettare");
         }
         else if (asta instanceof AstaClassica classica){
-            if (classica.getScaduta()) {
-                holder.det1.setText("Scaduta!");
-            } else {
-                if(bestOffer.getValore() > 0)
-                    holder.det1.setText(bestOffer.getValoreAsString());
-                else
-                    holder.det1.setText(classica.getMinPriceAsString());
+            if(bestOffer.getValore() > 0) {
+                holder.det1.setText(bestOffer.getValoreAsString());
+                if(LoggedUser.getInstance().getLoggedUser().getEmail().equals(classica.getCreatore())) {
+                    holder.det1.setTextColor(Color.BLACK);
+                }
+                else if(LoggedUser.getInstance().getLoggedUser().getEmail().equals(bestOffer.getOwnerEmail())) {
+                    holder.det1.setTextColor(Color.GREEN);
+                }
+                else {
+                    holder.det1.setTextColor(Color.RED);
+                }
             }
+            else {
+                holder.det1.setText(classica.getMinPriceAsString());
+                holder.det1.setTextColor(Color.BLUE);
+            }
+
         }
         else if (asta instanceof AstaInversa inversa) {
-            if (inversa.getScaduta()) {
-                holder.det1.setText("Scaduta!");
-            } else {
-                if(bestOffer.getValore() > 0)
-                    holder.det1.setText(bestOffer.getValoreAsString());
-                else
-                    holder.det1.setText(inversa.getMinPriceAsString());
+            if(bestOffer.getValore() > 0) {
+                holder.det1.setText(bestOffer.getValoreAsString());
+                if(LoggedUser.getInstance().getLoggedUser().getEmail().equals(inversa.getCreatore())) {
+                    holder.det1.setTextColor(Color.BLACK);
+                }
+                else if(LoggedUser.getInstance().getLoggedUser().getEmail().equals(bestOffer.getOwnerEmail())) {
+                    holder.det1.setTextColor(Color.GREEN);
+                }
+                else {
+                    holder.det1.setTextColor(Color.RED);
+                }
+            }
+            else {
+                holder.det1.setText(inversa.getMinPriceAsString());
+                holder.det1.setTextColor(Color.BLUE);
             }
         }
 
-        holder.det2.setText(asta.getDurata());
+        // Gestione det2
+        if(asta.getScaduta()) {
+            holder.det2.setText("Scaduta!");
+            holder.det2.setTextColor(Color.RED);
+        }
+        else {
+            holder.det2.setText(asta.getDurata());
+        }
         holder.image.setOnClickListener(view -> {
             holder.notify();
         });

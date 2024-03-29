@@ -150,7 +150,7 @@ public class UtentiRequester {
         user.set(null);
         Thread t = new Thread(() -> {
             try {
-                Response response = RequestUtility.sendGetRequest("offerta/getOwner/"+offerID, true);
+                Response response = RequestUtility.sendGetRequest("utente/owner/offerta/"+offerID, true);
                 String jsBody = response.body().string();
                 Log.d("myDebug", "Body received [OffertaOwner]:"+jsBody);
                 user.set(new ObjectMapper().readValue(jsBody, Utente.class));

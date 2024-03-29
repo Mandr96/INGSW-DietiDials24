@@ -103,8 +103,12 @@ public class AsteController {
         }
     }
 
-    public String getAstaOwnerEmail(Long id) throws InterruptedException {
-        return asteRequester.getAstaOwnerEmail(id);
+    public String getAstaOwnerEmail(Long id) {
+        try {
+            return asteRequester.getAstaOwnerEmail(id);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Offerta> getOfferteByAsta(Long astaID) {

@@ -74,6 +74,14 @@ public class UserProfileController {
         }
     }
 
+    public Utente getOfferOwner(Long id) {
+        try {
+            return utentiRequester.getOfferOwner(id);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void setUserImg(String useremail, File img) throws MyException {
         try {
             utentiRequester.setUserImg(useremail, img);

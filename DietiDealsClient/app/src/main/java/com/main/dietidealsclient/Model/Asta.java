@@ -104,7 +104,7 @@ public abstract class Asta implements Serializable {
     }
 
     @JsonGetter("creatore")
-    public String getCreatore() throws InterruptedException {
+    public String getCreatore() {
         if (id == -1){
             return creatore.getEmail();
         }
