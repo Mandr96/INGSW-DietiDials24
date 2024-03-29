@@ -98,9 +98,6 @@ public class DemoApplication {
 			Asta silenziosa = new AstaSilenziosa(-1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "Controller PS5 usato", "Vendo controller usato per PS5. Non accetto al di sotto dei 35 euro", "Libri", null, false, venditore, new ArrayList<Offerta>());
 			asteRep.save(silenziosa);
 
-			Asta inversa  = new AstaInversa(-1L, Timestamp.from(Instant.now().plusSeconds(100000L)), "cosa inversa", "una cosa inversa", "Collezionismo", null, false, compratore, new ArrayList<Offerta>(), 50F);
-			asteRep.save(inversa);
-
 			offerteRep.save(new Offerta(-1L,39f,null,true, franc, classica));
 			offerteRep.save(new Offerta(-1L,40f,null,true, franc, silenziosa));
 
