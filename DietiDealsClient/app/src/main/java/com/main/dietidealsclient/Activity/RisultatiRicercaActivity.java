@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
@@ -86,7 +87,11 @@ public class RisultatiRicercaActivity extends ComponentActivity {
     //COPIATO
     private void showAstaDetails(Asta asta) {
         Logger.log("RisultatiRicercaPage","Visualizza dettagli asta -> "+asta.getNomeProdotto());
-        asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
+        try {
+            asta.setCreatore(new UserProfileController().getAstaOwner(asta.getId()));
+        } catch (MyException e) {
+            Toast.makeText(this, "ERRORE", Toast.LENGTH_LONG).show();
+        }
         Intent myIntent = new Intent(RisultatiRicercaActivity.this, AstaDetailsActivity.class);
         myIntent.putExtra("ASTA", asta);
         Offerta bestOff = asta.getBestOffer();

@@ -7,7 +7,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="-80dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,11 +86,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/spinner_bg"
-                android:entries="@array/aste_types"
+                android:entries="@array/categories"
                 android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_type" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_cat" />
 
             <TextView
                 android:id="@+id/textView_type"
@@ -97,7 +99,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/tipo_di_asta"
                 app:layout_constraintStart_toStartOf="@+id/search_categoria"
-                app:layout_constraintTop_toBottomOf="@+id/search_type" />
+                app:layout_constraintTop_toBottomOf="@+id/search_categoria" />
 
             <Spinner
                 android:id="@+id/search_type"
@@ -106,11 +108,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/spinner_bg"
-                android:entries="@array/categories"
+                android:entries="@array/aste_types"
                 android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_cat" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_type" />
 
             <TextView
                 android:id="@+id/textView_cat"
@@ -122,17 +124,17 @@
                 app:layout_constraintStart_toStartOf="@+id/search_type"
                 app:layout_constraintTop_toBottomOf="@+id/new_articolo_description" />
 
+
             <TextView
                 android:id="@+id/textView_scadenza"
                 style="@style/midText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/durata"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_categoria" />
-
+                app:layout_constraintTop_toBottomOf="@+id/search_type" />
 
             <EditText
                 android:id="@+id/new_articolo_minPrice"
@@ -141,11 +143,11 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/profile_edit_text"
-                android:padding="5dp"
-                android:textAlignment="textEnd"
                 android:ems="10"
                 android:hint="0,00"
                 android:inputType="numberDecimal"
+                android:padding="5dp"
+                android:textAlignment="textEnd"
                 app:layout_constraintStart_toEndOf="@+id/textView_minPrice"
                 app:layout_constraintTop_toBottomOf="@+id/hour_down_btn" />
 
@@ -249,7 +251,7 @@
                 android:id="@+id/day_up_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:scaleY="-1"
                 android:src="@drawable/icon_caret_down"
                 app:layout_constraintEnd_toEndOf="@+id/new_articolo_days"

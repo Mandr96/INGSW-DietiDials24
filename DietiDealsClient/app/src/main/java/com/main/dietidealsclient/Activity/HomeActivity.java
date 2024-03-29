@@ -171,9 +171,9 @@ public class HomeActivity extends ComponentActivity {
 
     /** Se il profilo non contiene Nome manda alla pagina modifica profilo */
     private void inizializeProfile() {
-        Logger.log("HomePage","Primo accesso utente. Cambio activity -> ProfilePage");
         Utente loggedUser = LoggedUser.getInstance().getLoggedUser();
-        if(loggedUser.getNome() == null){
+        if(loggedUser.getNome() == null || loggedUser.getNome().isBlank()){
+            Logger.log("HomePage","Primo accesso utente. Cambio activity -> ProfilePage");
             goToEditProfileActivity();
         }
     }
@@ -194,7 +194,6 @@ public class HomeActivity extends ComponentActivity {
         Intent myIntent = new Intent(HomeActivity.this, CreaAstaActivity.class);
         myIntent.putExtra("TIPO",userType);
         HomeActivity.this.startActivity(myIntent);
-        finish();
     }
 
     private void gotoChageAccountType() {

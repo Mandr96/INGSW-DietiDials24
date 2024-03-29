@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.main.dietidealsclient.Model.Asta;
 import com.main.dietidealsclient.Model.AstaClassica;
 import com.main.dietidealsclient.Model.AstaInversa;
+import com.main.dietidealsclient.Model.AstaSilenziosa;
 import com.main.dietidealsclient.Model.Offerta;
 import com.main.dietidealsclient.R;
 import com.main.dietidealsclient.RecyclerAsteInterface;
@@ -57,49 +58,28 @@ public class AsteAdapterList extends RecyclerView.Adapter<AsteAdapterList.ViewHo
         holder.nome.setText(asta.getNomeProdotto());
         holder.tipo.setText(asta.getTypeAsString());
 
-
-        if(asta instanceof AstaClassica classica) {
-            holder.det1.setText(classica.getMinPriceAsString());
-            if(bestOffer != null) {
-                holder.det1.setText(bestOffer.getValoreAsString());
-                Log.d("MyDebug", "LOGGED USER pre" );
-                Log.d("MyDebug", "LOGGED USER" + LoggedUser.getInstance().getLoggedUser().getEmail());
-                //TODO bestOffer.getOwnerEmail() É NULL?
-//                if (bestOffer.getOwnerEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())){
-//                    holder.det1.setTextColor(Color.red(1));
-//                } else {
-//                    holder.det1.setTextColor(Color.red(1));
-//                }
+        //TODO reucperare offerte
+        if (asta instanceof AstaSilenziosa silenziosa) {
+            holder.det1.setText("");
+            if(silenziosa.getScaduta())
+                holder.det1.setText("Da accettare");
+        }
+        else {
+            Offerta bestOff = asta.getBestOffer();
+            if (bestOff != null && bestOff.getValore() > 0) {
+                holder.det1.setText(bestOff.getValoreAsString());
+            } else {
+                holder.det1.setText("");
             }
         }
 
-        if (asta.getScaduta() && asta instanceof AstaInversa){
-            holder.det1.setText("Da accettare");
-        }
-
-//        if (asta.getScaduta() && asta instanceof AstaInversa){
-//            holder.det1.setText("Da accettare");
-//        } else {
-//            Offerta bestOff = asta.getBestOffer();
-//            if (bestOff != null){
-//                //TODO vari tipi di account e test colori
-//                holder.det1.setText(String.valueOf(bestOff.getValore()));
-//                if(bestOff.getOwnerEmail().equals(LoggedUser.getInstance().getLoggedUser().getEmail())){
-//                    holder.det1.setTextColor(Color.red(1));
-//                }else {
-//                    holder.det1.setTextColor(Color.green(1));
-//                }
-//            }
-//        }
         holder.det2.setText(asta.getDurata());
         holder.image.setOnClickListener(view -> {
-            Log.d("MyDebug", "Ho cliccato sull immagine");
             holder.notify();
         });
-        //TODO WHY image.setOnClickListener?
         //TODO Gestione immagine
         holder.image.setImageResource(R.drawable.add_image);
-//        holder.image.setImageDrawable(asta.getImg());
+//      holder.image.setImageDrawable(asta.getImg());
     }
 
     @Override
