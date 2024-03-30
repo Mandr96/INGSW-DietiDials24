@@ -17,14 +17,14 @@
         <EditText
             android:id="@+id/profileEdit_name"
             style="@style/login"
-            android:layout_width="175dp"
-            android:layout_height="30dp"
+            android:layout_width="177dp"
+            android:layout_height="35dp"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:background="@drawable/profile_edit_text"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/nome"
+            android:hint="@string/nome"
             app:layout_constraintBottom_toTopOf="@+id/profileEdit_surname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.872"
@@ -35,12 +35,12 @@
         <EditText
             android:id="@+id/profileEdit_surname"
             style="@style/login"
-            android:layout_width="175dp"
-            android:layout_height="30dp"
+            android:layout_width="178dp"
+            android:layout_height="34dp"
             android:background="@drawable/profile_edit_text"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/cognome"
+            android:hint="@string/cognome"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="@+id/profileEdit_name"
             app:layout_constraintStart_toStartOf="@+id/profileEdit_name"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.348" />
 
-        <TextView
+        <EditText
             android:id="@+id/profileEdit_link1"
             style="@style/login"
             android:layout_width="350dp"
@@ -74,13 +74,13 @@
             android:drawableStart="@drawable/icon_facebook"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="TextView"
+            android:text=""
             app:layout_constraintEnd_toEndOf="@+id/profileEdit_bio"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="@+id/profileEdit_bio"
             app:layout_constraintTop_toBottomOf="@+id/profileEdit_bio" />
 
-        <TextView
+        <EditText
             android:id="@+id/profileEdit_link2"
             style="@style/login"
             android:layout_width="350dp"
@@ -90,7 +90,7 @@
             android:drawableStart="@drawable/icon_instagram"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="TextView"
+            android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/profileEdit_link1"
             app:layout_constraintHorizontal_bias="0.508"

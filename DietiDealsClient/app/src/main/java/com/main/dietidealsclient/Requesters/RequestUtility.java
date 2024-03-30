@@ -30,7 +30,7 @@ import okio.Source;
 
 public class RequestUtility {
 
-    private static String baseUrl = "http://34.16.130.160:8080/";
+    private static String baseUrl = "http://34.105.133.232:8080/";
     private static String token = "";
 
     public static  Response sendGetRequest(String path, Boolean authRequired) throws IOException {
