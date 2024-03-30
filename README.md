@@ -47,12 +47,12 @@ Si sottolinea, inoltre, che le fasi di analisi e progettazione object-oriented d
   - [x] c. Diagramma delle classi di design.
   - [x] d. Diagrammi di sequenza di design per i casi d’uso identificati al punto 1.a.iii.
 3. <ins>Codice Sorgente sviluppato, comprensivo di eventuale Dockerfile.</ins>
-  - [ ] a. File di build automatica
+  - [x] a. File di build automatica
   - [x] b. Evidenza dell’uso di strumenti di versioning
   - [x] c. Report di qualità del codice, generati da SonarQube o similari (nel caso solo per il back-end)
 4. <ins>Testing e valutazione sul campo dell’usabilità.</ins>
-  - [ ] a. Codice xUnit per unit testing di quattro **(due, se si consegna prima del 31/03/2024)** metodi non banali, che abbiano almeno due parametri. In aggiunta al codice, una apposita sezione della documentazione deve descrivere le strategie adottate per la progettazione dei test dei due metodi (e.g.: classi di equivalenza individuate e coperte, criteri di copertura strutturale, etc.).
-  - [ ] b. Valutazione dell’usabilità sul campo, realizzata sul prodotto finito sia con tecniche simili a quelle messe in atto al punto 1.a.v, sia mediante analisi di file di log. È necessario allegare anche i file di log utilizzati nell’analisi.
+  - [x] a. Codice xUnit per unit testing di quattro **(due, se si consegna prima del 31/03/2024)** metodi non banali, che abbiano almeno due parametri. In aggiunta al codice, una apposita sezione della documentazione deve descrivere le strategie adottate per la progettazione dei test dei due metodi (e.g.: classi di equivalenza individuate e coperte, criteri di copertura strutturale, etc.).
+  - [x] b. Valutazione dell’usabilità sul campo, realizzata sul prodotto finito sia con tecniche simili a quelle messe in atto al punto 1.a.v, sia mediante analisi di file di log. È necessario allegare anche i file di log utilizzati nell’analisi.
 > [!NOTE]
 > Si noti che i Punti 1, 2 e 4 vanno realizzati come un unico documento, di seguito indicato come “documentazione”.
 
